@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="index" />
+    <meta name="description" content="UR5_DualArm_Driver_ROS2" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -110,6 +110,10 @@
         
         
             
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
 
@@ -182,36 +186,96 @@
     
 
     
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    UR5_DualArm_Driver_ROS2
+                </div>
+            
+        
+      
+    
 
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-10</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：169</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：1分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
         
-        <div class=".article-gallery"><p><span class="github-emoji"><span> </span><img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Github:<a target="_blank" rel="noopener" href="https://github.com/stocks-yuan">stocks-yuan</a>
-<br></p>
-<p>🎯项目(In Development):</p>
+        <div class=".article-gallery"><p><span class="github-emoji"><span> </span><img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>：<a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/UR5_DualArm_Driver_ROS2/tree/main">UR5_DualArm_Driver_ROS2</a></p>
+<h3 id="environmental-requirements">Environmental requirements</h3>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/ipa_coverage_planning">ipa_coverage_planning</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/Yhs_Chassis_Driver_ROS2">Yhs_Chassis_Driver_ROS2</a>
-<br></p></li>
+<li>ROS2-Humble</li>
+<li>Docker</li>
 </ul>
-<p>💪年度任务：</p>
-<ul>
-<li><p>完成项目(0/1)</p></li>
-<li><p>代码随想录(0/1)
-<br></p></li>
-</ul>
-<p>🤖Support:</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></p></li>
-<li><p>主题:<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4?tab=readme-ov-file">hexo-theme-A4</a></p></li>
-<li><p>github-emojis语法:<a target="_blank" rel="noopener" href="https://www.webfx.com/tools/emoji-cheat-sheet/">hexo-filter-github-emojis</a></p></li>
-</ul>
+<h3 id="quick-start">Quick Start</h3>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash start_sim_dual_ur5.sh</span><br></pre></td></tr></tbody></table></figure>
+<p>此指令分为三步：
+- 第一步：调用<code>bash ./src/ursim_script/docker_dual_ur5.sh</code>，启动双臂UR_SIM仿真
+- 第二步：调用 <code>ros2 launch dual_ur5_arm_driver start_dual_arm_driver.launch.py</code>命令，启动双臂驱动程序
+- 第三步：调用<code>ros2 launch dual_arm_moveit_config dual_moveit.launch.py</code>命令，启动Moveit功能包</p>
+<blockquote>
+<p>若不想调用<code>bash start_sim_dual_ur5.sh</code>，可以按照顺序分别调用</p>
+</blockquote>
+<h3 id="project-architecture">Project architecture</h3>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">src	#程序源码</span><br><span class="line">├── dual_arm_demo	#双臂demo程序</span><br><span class="line">├── dual_arm_moveit_config	#Moveit2程序</span><br><span class="line">├── dual_description	#双臂硬件描述文件</span><br><span class="line">├── dual_ur5_arm_driver	#双臂驱动文件，基于Universal_Robots_ROS2_Driver</span><br><span class="line">├── libs	#库文件</span><br><span class="line">├── Universal_Robots_ROS2_Driver	#UR机械臂官方驱动（单臂）</span><br><span class="line">└── ursim_script	#双臂UR_SIM仿真文件</span><br><span class="line">doc</span><br><span class="line">├── dual_ur5_ft_gripper_base.gv</span><br><span class="line">├── dual_ur5_ft_gripper_base.pdf	#URDF文件输出的pdf</span><br><span class="line">└── output.urdf	#双臂URDF架构</span><br></pre></td></tr></tbody></table></figure>
 </div>
     </div>
 
     <div class="post-meta">
         <i>
+        
+            <span>2025-11-10</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/Universal-Robots-ROS2-Driver/'>
+                            Universal_Robots_ROS2_Driver
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E6%9C%BA%E6%A2%B0%E8%87%82/'>
+                            机械臂
+                        </a>
+                    
+                </span>
+            
         
         </i>
     </div>
@@ -225,10 +289,16 @@
                 
 
                 
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/Machine-Model-of-Wheelbot/">Machine-Model-of-Wheelbot</a>
+                    </span>
+                
             </div>
     
         
     
+
+    
+        
 
      
 </div>

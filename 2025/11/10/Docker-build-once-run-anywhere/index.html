@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="Docker(build once, run anywhere)" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    Docker(build once, run anywhere)
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-10</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：2.4k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：8分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h2 id="docker容器技术解决了什么问题">1.Docker容器技术解决了什么问题</h2>
+<p>Docker 解决了<strong>程序部署运行</strong>的问题。传统方式是直接将程序部署到物理服务器，而 <strong>Docker 则利用容器技术，将程序及其依赖环境打包成镜像，作为独立单元进行管理</strong>。Docker 提供了用户友好的界面，简化了操作，实现了“一次构建，随处运行”（<strong>build once, run anywhere</strong>）。<strong>它通过容器镜像标准化了软件交付，将软件部署的复杂性封装在镜像中，使用者无需关注内部细节</strong>，从而彻底改变了软件部署和分发模式</p>
+<h3 id="传统部署">🐳传统部署</h3>
+<p>直接管理业务程序的启停方便，但忽略了<strong>依赖管理</strong>。<strong>多台机器部署时，依赖复杂且易变，而且不同程序版本依赖冲突，导致部署繁琐且易出错</strong>。 解决思路是将程序及其所有依赖打包成一个独立单元，例如每个程序版本独占一台机器，这个机器完全为这个程序服务， 从而简化部署和管理。</p>
+<h3 id="虚拟机部署">🚀虚拟机部署</h3>
+<p>为解决程序版本和依赖冲突，最初采用虚拟机部署方案，将程序及其依赖打包到虚拟机镜像中。但<strong>虚拟机镜像庞大、启动慢、性能损耗大，成本和效率低</strong>。因此，未来的目标是在解决依赖问题的同时，克服虚拟机部署的缺点，寻求更优的方案。</p>
+<h5 id="解决第一个问题储存过大镜像过大">解决第一个问题——储存过大(镜像过大)</h5>
+<p>容器技术源于轻量级虚拟机的思路，旨在解决虚拟机镜像过大的问题。其核心是利用多个虚拟机或虚拟机与宿主机操作系统间大量重复文件的特性，通过<strong>Copy-on-Write机制</strong>，即<strong>只保存一份共享文件，修改时再复制给做出修改的虚拟机，从而节省存储空间</strong>。</p>
+<h5 id="解决第二个问题启停过慢">解决第二个问题——启停过慢</h5>
+<p>虚拟机之所以启停速度慢，是因为<strong>虚拟机的启动和停止速度比容器技术慢的原因主要在于：虚拟机启停包含了整个操作系统的启动流程；容器启停相当于进程级别的启停</strong>。每次启动或停止虚拟机时，都需要经历操作系统的启动和关闭过程，这增加了额外的时间开销。</p>
+<p>相比之下，容器技术在保持隔离的前提下，只需要启动程序进程本身，不需要启动整个操作系统，因此启停速度明显更快。容器技术利用了namespace和c groups等隔离技术，这些技术在2008年已经基本发展成型，早于Docker等容器技术的出现。通过这些轻量化的隔离手段，容器技术能够解耦操作系统本身冗余的部分，只关注进程本身的启动和停止，从而提高了启停速度。</p>
+<p>此外，容器内的进程共用内核，不需要维护独立的内核，减少了重复和冗余的开销，进一步降低了性能损耗。而虚拟机技术在硬件层面的损耗也较大，早期的虚拟机技术在这方面的损耗尤为明显。</p>
+<p><strong>总结来说，虚拟机的启停速度慢主要是因为包含了操作系统的启动和关闭过程，而容器技术通过轻量化的隔离手段和共用OS内核的方式，显著提高了启停速度。</strong></p>
+<h4 id="解决第三个问题性能损耗">🚀解决第三个问题——性能损耗</h4>
+<p><strong>容器技术通过共用宿主机的内核来解决性能损耗问题。具体来说，容器内的所有进程共享宿主机的操作系统内核，不需要为每个容器维护独立的内核，从而消除了重复和冗余的开销。这种轻量化的方式减少了操作系统层面上的行为重复和冗余，降低了硬件资源的使用损耗，进而提高了程序的性能，这是软件虚拟化损耗，而对于硬件虚拟化损耗，</strong>虽然早期硬件虚拟化存在损耗，但随着技术发展，这些损耗已大幅降低，最终可望完全消除，标志着容器技术的成熟。</p>
+<h2 id="容器与虚拟机vm">2.容器与虚拟机(VM)</h2>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">技术</th>
+<th style="text-align: left;">虚拟化对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Docker容器</td>
+<td style="text-align: left;"><strong>操作系统级别的虚拟化</strong>：容器虚拟化的是操作系统内的用户空间，直接共享宿主机的内核。</td>
+</tr>
+<tr>
+<td style="text-align: left;">虚拟机</td>
+<td style="text-align: left;"><strong>硬件级别的虚拟化</strong>：虚拟化的是整个硬件资源，运行自己的完整操作系统，包括内核和应用。</td>
+</tr>
+</tbody>
+</table>
+<!-- ![image-20241208190638512](docker.assets/image-20241208190638512.png) -->
+<a href="/2025/11/10/Docker-build-once-run-anywhere/image-20241208190638512.png" class="gallery-item" style="box-shadow: none;"> <img src="/2025/11/10/Docker-build-once-run-anywhere/image-20241208190638512.png" class=""></a>
+<p>容器和虚拟机具有类似的资源隔离和分配优势，但功能不同，<strong>因为容器虚拟化的是操作系统而不是硬件</strong>。</p>
+<h4 id="containers">CONTAINERS</h4>
+<p><strong>容器是应用程序层的抽象</strong>，它将代码和依赖关系打包在一起。多个容器可以在同一台机器上运行，并与其他容器共享操作系统内核，每个容器在用户空间中作为独立进程运行。容器比虚拟机占用更少的空间（容器映像的大小通常为几十Mb），可以处理更多的应用程序，并且需要更少的虚拟机和操作系统。</p>
+<h4 id="virtual-machines">VIRTUAL MACHINES</h4>
+<p><strong>虚拟机（vm）是物理硬件的抽象</strong>，可以将一个服务器转换为多个服务器。管理程序允许在一台机器上运行多个虚拟机。每个VM包括操作系统、应用程序、必要的二进制文件和库的完整副本——占用数十GB的空间。虚拟机也可能启动缓慢。</p>
+<ul>
+<li><p>镜像庞大 （数十GB）</p></li>
+<li><p>启停速度慢</p></li>
+<li><p>性能损耗大</p></li>
+</ul>
+<h2 id="docker镜像">3.Docker镜像</h2>
+<p>容器是一个标准的软件单元，它将代码及其所有依赖项打包，以便应用程序从一个计算环境快速可靠地运行到另一个计算环境。</p>
+<p>Docker容器镜像是一个轻量级的、独立的、可执行的软件包，<strong>它包含了运行应用程序所需的一切：代码、运行时间、系统工具、系统库和设置。</strong></p>
+<p>以Docker容器为例——当映像在Docker引擎上运行时，它们就变成了容器。容器化软件可用于Linux和基于windows的应用程序，无论基础设施如何，都将始终以相同的方式运行。容器将软件从它的环境中隔离出来，并确保它能够统一地工作，尽管在开发和阶段之间存在差异。</p>
+<p>镜像有两个重要的原则：</p>
+<ol type="1">
+<li>镜像是不可变的。镜像一旦创建就无法修改。您只能制作新图像或在其上添加更改。</li>
+<li>容器镜像由层组成。每个层代表一组添加、删除或修改文件的文件系统更改</li>
+</ol>
+<p>在Docker引擎上运行的Docker容器：</p>
+<ul>
+<li><p>标准：Docker为容器创建了行业标准，因此它们可以移植到任何地方</p></li>
+<li><p>轻量级：<strong>容器共享机器的操作系统内核</strong>，因此不需要每个应用程序一个操作系统，从而提高了服务器效率，降低了服务器和许可成本</p></li>
+<li><p>安全：容器中的应用程序更安全，<strong>Docker提供了业界最强的默认隔离功能</strong></p>
+<!-- <a href="docker.assets/image-20241208183039450.png" title="image-20241208183039450" class="gallery-item" style="box-shadow: none;"> <img src="docker.assets/image-20241208183039450.png" alt="image-20241208183039450" style="zoom:67%;" /></a> -->
+<a href="/2025/11/10/Docker-build-once-run-anywhere/image-20241208183039450.png" class="gallery-item" style="box-shadow: none;"> <img src="/2025/11/10/Docker-build-once-run-anywhere/image-20241208183039450.png" class=""></a></li>
+</ul>
+<h2 id="docker注册表">4.docker注册表</h2>
+<p>现在您已经知道什么是容器映像以及它是如何工作的，您可能想知道 - 将这些映像存储在哪里？</p>
+<p>镜像注册表是用于存储和共享容器镜像的集中位置。它可以是公共的或私人的。 <a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker Hub</a>是一个任何人都可以使用的公共注册表，并且是默认注册表。</p>
+<h4 id="注册表与存储库">注册表与存储库</h4>
+<p>当您使用注册表时，您可能会听到<strong>注册表</strong>和<strong>存储库</strong>这两个术语，就好像它们是可以互换的一样。尽管它们有相关性，但它们并不完全相同。</p>
+<p><strong>注册表</strong>是存储和管理容器映像的集中位置，而<strong>存储库</strong>是注册表中相关容器映像的集合。将其视为一个文件夹，您可以在其中根据项目组织图像。每个存储库都包含一个或多个容器映像。</p>
+<h2 id="docker-compose">5.Docker Compose</h2>
+<p><strong>如果您运行多个容器，如何将它们连接在一起？</strong></p>
+<p><strong>容器的一个最佳实践是每个容器应该做一件事并且做好。</strong>尽管这一规则也有例外，但请避免让一个容器执行多项操作的趋势。</p>
+<p>您可以使用多个<code>docker run</code>命令来启动多个容器。但是，您很快就会意识到您需要管理网络、将容器连接到这些网络所需的所有标志等等。完成后，清理工作会稍微复杂一些。</p>
+<p>使用 Docker Compose，您可以在单个 YAML 文件中定义所有容器及其配置。如果您将此文件包含在代码存储库中，则克隆您的存储库的任何人都可以使用单个命令启动并运行。</p>
+<p>重要的是要理解 Compose 是一个声明性工具 - 您只需定义它并运行即可。您并不总是需要从头开始重新创建所有内容。如果您进行了更改，请<code>docker compose up</code>再次运行，Compose 将协调文件中的更改并智能地应用它们。</p>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-10</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/Docker/'>
+                            Docker
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/Docker/'>
+                            Docker
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/10/STM32-Firmware-Update/'>STM32_Firmware_Update</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/MoveIt-Plugins/">MoveIt_Plugins</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

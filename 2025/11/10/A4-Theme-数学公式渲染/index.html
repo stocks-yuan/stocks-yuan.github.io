@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="index" />
+    <meta name="description" content="A4 Theme 数学公式渲染" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -110,6 +110,10 @@
         
         
             
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
 
@@ -182,36 +186,99 @@
     
 
     
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    A4 Theme 数学公式渲染
+                </div>
+            
+        
+      
+    
 
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-10</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：379</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：1分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
         
-        <div class=".article-gallery"><p><span class="github-emoji"><span> </span><img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Github:<a target="_blank" rel="noopener" href="https://github.com/stocks-yuan">stocks-yuan</a>
-<br></p>
-<p>🎯项目(In Development):</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/ipa_coverage_planning">ipa_coverage_planning</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/Yhs_Chassis_Driver_ROS2">Yhs_Chassis_Driver_ROS2</a>
-<br></p></li>
-</ul>
-<p>💪年度任务：</p>
-<ul>
-<li><p>完成项目(0/1)</p></li>
-<li><p>代码随想录(0/1)
-<br></p></li>
-</ul>
-<p>🤖Support:</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></p></li>
-<li><p>主题:<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4?tab=readme-ov-file">hexo-theme-A4</a></p></li>
-<li><p>github-emojis语法:<a target="_blank" rel="noopener" href="https://www.webfx.com/tools/emoji-cheat-sheet/">hexo-filter-github-emojis</a></p></li>
-</ul>
+        <div class=".article-gallery"><h2 id="安装mathjax">安装mathjax</h2>
+<p>1.命令行进入到网站文件夹
+2.执行安装hexo-filter-mathjax插件的命令
+</p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-mathjax</span><br></pre></td></tr></tbody></table></figure>
+3.添加如下配置到<code>_config.yml</code>文件
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hexo markdown支持数学公式插件</span></span><br><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or 'ams' or 'all'</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br><span class="line">  <span class="attr">append_css:</span> <span class="literal">true</span> <span class="comment"># add CSS to pages rendered by MathJax</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span> <span class="comment"># if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter</span></span><br><span class="line">  <span class="attr">packages:</span> <span class="comment"># extra packages to load</span></span><br><span class="line">  <span class="attr">extension_options:</span> {}</span><br><span class="line">    <span class="comment"># you can put your extension options here</span></span><br><span class="line">    <span class="comment"># see http://docs.mathjax.org/en/latest/options/input/tex.html#tex-extension-options for more detail</span></span><br></pre></td></tr></tbody></table></figure>
+4.在想要文章支持数学公式的post的front-matter中添加<code>mathjax: true</code>
+5.执行命令查看效果
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="安装pandoc">安装pandoc</h2>
+<blockquote>
+<p>Q：为什么不使用hexo默认渲染器<code>hexo-renderer-marked</code>，而是安装<code>hexo-renderer-pandoc</code>
+A：实测发现Hexo默认的渲染器<code>hexo-renderer-marked</code>很多公式渲染失败，更换<code>hexo-renderer-pandoc</code>后一切正常。<code>hexo-renderer-marked</code>仓库也推荐使用<code>hexo-renderer-pandoc</code>：“hexo-renderer-pandoc is recommended because it can handle mathematical formulas in markdown documents perfectly.”</p>
+</blockquote>
+<p>1.install <a target="_blank" rel="noopener" href="https://pandoc.org/installing.html">pandoc</a></p>
+<p>2.如果你正在使用<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a>或<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-renderer-markdown-it">hexo-renderer-markdown-it</a>,请你删除它们，并安装<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-renderer-pandoc">hexo-renderer-pandoc</a></p>
+<p><code>cd</code> into your hexo root folder and execute the following command:
+</p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm uninstall hexo-renderer-markdown-it --save</span><br><span class="line">npm install hexo-renderer-pandoc --save</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>3.添加如下配置到<code>_config.yml</code>文件</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">pandocPath:</span> <span class="string">C:/Program</span> <span class="string">Files/Pandoc/pandoc.exe</span> <span class="comment">#根据自己的安装路径修改</span></span><br><span class="line">  <span class="attr">args:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"--mathjax"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"--wrap=preserve"</span> <span class="comment">#关键参数：保留原始换行，避免随意添加换行符</span></span><br></pre></td></tr></tbody></table></figure>
 </div>
     </div>
 
     <div class="post-meta">
         <i>
+        
+            <span>2025-11-10</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/hexo/'>
+                            hexo
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/'>
+                            博客搭建
+                        </a>
+                    
+                </span>
+            
         
         </i>
     </div>
@@ -223,12 +290,20 @@
     
             <div class="post-footer-pre-next">
                 
+                    <span>上一篇：<a href='/2025/11/10/Universal-Robots-ROS2-Driver-1/'>Universal_Robots_ROS2_Driver(1)</a></span>
+                
 
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/UR5%E6%9C%BA%E6%A2%B0%E8%87%82%E6%AD%A3%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%88%86%E6%9E%90-Matlab%E4%BB%BF%E7%9C%9F/">UR5机械臂正逆运动学分析+Matlab仿真</a>
+                    </span>
                 
             </div>
     
         
     
+
+    
+        
 
      
 </div>

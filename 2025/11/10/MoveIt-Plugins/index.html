@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="MoveIt_Plugins" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    MoveIt_Plugins
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-10</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：2.3k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：10分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h2 id="moveit-plugin-interfaces">1. MoveIt Plugin Interfaces</h2>
+<p>MoveIt2涉及到多个不同的领域，并提供了许多接口，以便让用户可以覆盖MoveIt2框架的不同部分和实现新的概念，而无需触碰该框架的核心。下面列出了MoveIt2中不同类型的插件，并概述了这些插件在该框架内的用途。</p>
+<p><a target="_blank" rel="noopener" href="http://images.ncnynl.com/ros/2021/ros2-movelt2-12.jpg" title="请输入图片描述" class="gallery-item" style="box-shadow: none;"> <img src="http://images.ncnynl.com/ros/2021/ros2-movelt2-12.jpg" alt="请输入图片描述" style="zoom: 80%;"></a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#movegroupcapability">move_group::MoveGroupCapability</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#kinematicsbase">kinematics::KinematicsBase</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#plannermanager">planning_interface::PlannerManager</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#planningrequestadapter">planning_request_adapter::PlanningRequestAdapter</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#moveitcontrollermanager">moveit_controller_manager::MoveItControllerManager</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#controllerhandleallocator">moveit_ros_control_interface::ControllerHandleAllocator</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#moveitsensormanager">moveit_sensor_manager::MoveItSensorManager</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#constraintsamplerallocator">constraint_samplers::ConstraintSamplerAllocator</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#collisionplugin">collision_detection::CollisionPlugin</a></li>
+<li><a target="_blank" rel="noopener" href="https://moveit.ai/documentation/plugins/#occupancymapupdater">occupancy_map_monitor::OccupancyMapUpdater</a></li>
+</ul>
+<p>Movelt通过插件接口与运动规划器一起工作。这允许Movelt与来自多个库的不同运动规划器进行通信和使用，使Movelt易于扩展。Motion Planner 与move_group的接口是通过 ROS action或service（由move_group_node提供）实现的。</p>
+<p><a target="_blank" rel="noopener" href="https://oss.guyuehome.com/Uploads/wp/2020/11/3-26.png" title="img" class="gallery-item" style="box-shadow: none;"> <img src="https://oss.guyuehome.com/Uploads/wp/2020/11/3-26.png" alt="img" style="zoom: 50%;"></a></p>
+<h2 id="creating-motion-planner-plugin">2. Creating Motion Planner Plugin</h2>
+<p>在本节中，我们将展示如何将一个新的运动规划器作为插件添加到 MoveIt 中。MoveIt 中的基类是<code>planning_interface</code>，任何新的规划器插件都应该继承自该基类。为了演示目的，创建了一个线性插值规划器（lerp），它在关节空间中规划两个状态之间的运动。这个规划器可以作为添加任何新规划器的起点，因为它包含了必要的基础知识。本教程中涉及的最终源文件可在<a target="_blank" rel="noopener" href="https://github.com/moveit/moveit2_tutorials/tree/main/doc/examples/creating_moveit_plugins/lerp_motion_planner/src">此处</a>找到。</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── include</span><br><span class="line">│   └── lerp_interface</span><br><span class="line">│       ├── lerp_interface.h	#lerp_interface类</span><br><span class="line">│       └── lerp_planning_context.h		#lerp_planning_context类</span><br><span class="line">├── launch</span><br><span class="line">│   └── lerp_example.launch</span><br><span class="line">├── lerp_interface_plugin_description.xml	#插件描述 xml 文件</span><br><span class="line">├── lerp_planner.png</span><br><span class="line">└── src</span><br><span class="line">    ├── lerp_example.cpp	#加载和使用创建的 lerp 规划器</span><br><span class="line">    ├── lerp_interface.cpp	#规划算法入口点(solve方法实现)</span><br><span class="line">    ├── lerp_planner_manager.cpp	#重写lerp_planner_manager类中方法</span><br><span class="line">    └── lerp_planning_context.cpp	#重写lerp_planning_context类中方法</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">5 directories, 10 files</span><br></pre></td></tr></tbody></table></figure>
+<p>下图显示了<strong>在 MoveIt 中添加新规划器的类之间关系的简要总体视图。</strong></p>
+<blockquote>
+<p><strong>planning_interface.h</strong></p>
+<ul>
+<li><strong>PlannerConfigurationSettings：</strong>配置运动规划插件中算法所需要的参数(可选)</li>
+<li><strong>PlanningContext：</strong>运动规划插件的运行上下文，也就是具体调用算法的位置</li>
+<li><strong>PlanningManager：</strong> 运动规划插件管理器，用来注册新创建的运动规划插件</li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://moveit.picknik.ai/humble/_images/lerp_planner.png" title="../../../_images/lerp_planner.png" class="gallery-item" style="box-shadow: none;"> <img src="https://moveit.picknik.ai/humble/_images/lerp_planner.png" alt="../../../_images/lerp_planner.png"></a></p>
+<h3 id="创建lerpplanplannermanager类">1.创建<code>LERPPlanPlannerManager</code>类</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LERPPlannerManager</span> : <span class="keyword">public</span> planning_interface::PlannerManager</span><br></pre></td></tr></tbody></table></figure>
+<p>首先，我们在 <code>moveit_tutorials</code> 包中创建插件类。要为 lerp 创建插件类，请在 src 文件夹中创建一个名为 lerp_planner_manager.cpp 的文件。<strong>在此文件中， LERPPlanPlannerManager 覆盖了 planning_interface 中的 PlannerManager 类的函数</strong>。在此文件的末尾，我们需要将 <code>LERPPlanPlannerManager</code>类注册为插件，这是通过 class_loader 中的 <code>CLASS_LOADER_REGISTER_CLASS</code>宏完成的。</p>
+<h4 id="lerp_planner_manager.cpp">lerp_planner_manager.cpp:</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;moveit/planning_interface/planning_interface.h&gt;</span> <span class="comment">// 包含MoveIt!规划接口头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;moveit/planning_interface/planning_response.h&gt;</span> <span class="comment">// 包含MoveIt!规划响应头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;moveit/planning_scene/planning_scene.h&gt;</span> <span class="comment">// 包含MoveIt!规划场景头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;moveit/collision_detection_fcl/collision_detector_allocator_fcl.h&gt;</span> <span class="comment">// 包含FCL碰撞检测器分配器头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;class_loader/class_loader.hpp&gt;</span> <span class="comment">// 包含类加载器头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"lerp_interface/lerp_planning_context.h"</span> <span class="comment">// 包含LERP规划上下文头文件</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">namespace</span> lerp_interface <span class="comment">// 定义命名空间lerp_interface</span></span><br><span class="line">{</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LERPPlannerManager</span> : <span class="keyword">public</span> planning_interface::PlannerManager <span class="comment">// 定义LERPPlannerManager类，继承自PlannerManager</span></span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">LERPPlannerManager</span>() : planning_interface::<span class="built_in">PlannerManager</span>() <span class="comment">// 构造函数</span></span><br><span class="line">  {</span><br><span class="line">  }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">initialize</span><span class="params">(<span class="type">const</span> moveit::core::RobotModelConstPtr&amp; model, <span class="type">const</span> std::string&amp; <span class="comment">/*ns*/</span>)</span> <span class="keyword">override</span> <span class="comment">// 初始化函数</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> std::string&amp; gpName : model-&gt;<span class="built_in">getJointModelGroupNames</span>()) <span class="comment">// 遍历机器人模型的关节组名称</span></span><br><span class="line">    {</span><br><span class="line">      std::cout &lt;&lt; <span class="string">"group name "</span> &lt;&lt; gpName &lt;&lt; std::endl &lt;&lt; <span class="string">"robot model  "</span> &lt;&lt; model-&gt;<span class="built_in">getName</span>() &lt;&lt; std::endl; <span class="comment">// 输出组名称和机器人模型名称</span></span><br><span class="line">      planning_contexts_[gpName] =</span><br><span class="line">          <span class="built_in">LERPPlanningContextPtr</span>(<span class="keyword">new</span> <span class="built_in">LERPPlanningContext</span>(<span class="string">"lerp_planning_context"</span>, gpName, model)); <span class="comment">// 创建LERP规划上下文并存储在map中</span></span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 返回true表示初始化成功</span></span><br><span class="line">  }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">canServiceRequest</span><span class="params">(<span class="type">const</span> moveit_msgs::MotionPlanRequest&amp; req)</span> <span class="type">const</span> <span class="keyword">override</span> <span class="comment">// 检查是否可以处理请求</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> req.trajectory_constraints.constraints.<span class="built_in">empty</span>(); <span class="comment">// 如果轨迹约束为空，则返回true</span></span><br><span class="line">  }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="function">std::string <span class="title">getDescription</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> <span class="comment">// 获取描述</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"LERP"</span>; <span class="comment">// 返回描述字符串</span></span><br><span class="line">  }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">getPlanningAlgorithms</span><span class="params">(std::vector&lt;std::string&gt;&amp; algs)</span> <span class="type">const</span> <span class="keyword">override</span> <span class="comment">// 获取规划算法</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    algs.<span class="built_in">clear</span>(); <span class="comment">// 清空算法列表</span></span><br><span class="line">    algs.<span class="built_in">push_back</span>(<span class="string">"lerp"</span>); <span class="comment">// 添加LERP算法</span></span><br><span class="line">  }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="function">planning_interface::PlanningContextPtr <span class="title">getPlanningContext</span><span class="params">(<span class="type">const</span> planning_scene::PlanningSceneConstPtr&amp; planning_scene,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                            <span class="type">const</span> planning_interface::MotionPlanRequest&amp; req,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                            moveit_msgs::MoveItErrorCodes&amp; error_code)</span> <span class="type">const</span> <span class="keyword">override</span> <span class="comment">// 获取规划上下文</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    error_code.val = moveit_msgs::MoveItErrorCodes::SUCCESS; <span class="comment">// 设置错误码为成功</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (req.group_name.<span class="built_in">empty</span>()) <span class="comment">// 如果请求的组名称为空</span></span><br><span class="line">    {</span><br><span class="line">      <span class="built_in">ROS_ERROR</span>(<span class="string">"No group specified to plan for"</span>); <span class="comment">// 输出错误信息</span></span><br><span class="line">      error_code.val = moveit_msgs::MoveItErrorCodes::INVALID_GROUP_NAME; <span class="comment">// 设置错误码为无效组名称</span></span><br><span class="line">      <span class="keyword">return</span> planning_interface::<span class="built_in">PlanningContextPtr</span>(); <span class="comment">// 返回空指针</span></span><br><span class="line">    }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (!planning_scene) <span class="comment">// 如果规划场景为空</span></span><br><span class="line">    {</span><br><span class="line">      <span class="built_in">ROS_ERROR</span>(<span class="string">"No planning scene supplied as input"</span>); <span class="comment">// 输出错误信息</span></span><br><span class="line">      error_code.val = moveit_msgs::MoveItErrorCodes::FAILURE; <span class="comment">// 设置错误码为失败</span></span><br><span class="line">      <span class="keyword">return</span> planning_interface::<span class="built_in">PlanningContextPtr</span>(); <span class="comment">// 返回空指针</span></span><br><span class="line">    }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 创建使用混合碰撞检测器的规划场景</span></span><br><span class="line">    planning_scene::PlanningScenePtr ps = planning_scene-&gt;<span class="built_in">diff</span>();</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 设置FCL为分配器</span></span><br><span class="line">    ps-&gt;<span class="built_in">setActiveCollisionDetector</span>(collision_detection::CollisionDetectorAllocatorFCL::<span class="built_in">create</span>(), <span class="literal">true</span>);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 检索并配置现有上下文</span></span><br><span class="line">    <span class="type">const</span> LERPPlanningContextPtr&amp; context = planning_contexts_.<span class="built_in">at</span>(req.group_name);</span><br><span class="line">    <span class="built_in">ROS_INFO_STREAM_NAMED</span>(<span class="string">"lerp_planner_manager"</span>, <span class="string">"===&gt;&gt;&gt; context is made "</span>); <span class="comment">// 输出信息</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    context-&gt;<span class="built_in">setPlanningScene</span>(ps); <span class="comment">// 设置规划场景</span></span><br><span class="line">    context-&gt;<span class="built_in">setMotionPlanRequest</span>(req); <span class="comment">// 设置运动规划请求</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    error_code.val = moveit_msgs::MoveItErrorCodes::SUCCESS; <span class="comment">// 设置错误码为成功</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> context; <span class="comment">// 返回上下文</span></span><br><span class="line">  }</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  std::map&lt;std::string, LERPPlanningContextPtr&gt; planning_contexts_; <span class="comment">// 规划上下文map</span></span><br><span class="line">};</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">}  <span class="comment">// namespace lerp_interface</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 注册LERPPlannerManager类为插件</span></span><br><span class="line"><span class="built_in">CLASS_LOADER_REGISTER_CLASS</span>(lerp_interface::LERPPlannerManager, planning_interface::PlannerManager);</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="创建-lerpplanningcontext-类">2.创建 <code>LERPPlanningContext</code> 类</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LERPPlanningContext</span> : <span class="keyword">public</span> planning_interface::PlanningContext</span><br></pre></td></tr></tbody></table></figure>
+<p>接下来我们<strong>创建</strong> <strong><code>LERPPlanningContext</code> 类，该类将覆盖 <code>PlanningContext</code> 的功能。这个类将覆盖 solve 函数，其中规划器解决问题并返回解决方案</strong>。</p>
+<h4 id="lerp_planning_context.h">lerp_planning_context.h</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> LERP_PLANNING_CONTEXT_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LERP_PLANNING_CONTEXT_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;moveit/planning_interface/planning_interface.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"lerp_interface/lerp_interface.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> lerp_interface</span><br><span class="line">{</span><br><span class="line"><span class="built_in">MOVEIT_CLASS_FORWARD</span>(LERPPlanningContext);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LERPPlanningContext</span> : <span class="keyword">public</span> planning_interface::PlanningContext</span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">LERPPlanningContext</span>(<span class="type">const</span> std::string&amp; name, <span class="type">const</span> std::string&amp; group, <span class="type">const</span> moveit::core::RobotModelConstPtr&amp; model);</span><br><span class="line">  ~<span class="built_in">LERPPlanningContext</span>() <span class="keyword">override</span></span><br><span class="line">  {</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">solve</span><span class="params">(planning_interface::MotionPlanResponse&amp; res)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">solve</span><span class="params">(planning_interface::MotionPlanDetailedResponse&amp; res)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">terminate</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">clear</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  moveit::core::RobotModelConstPtr robot_model_;</span><br><span class="line">  moveit::core::RobotStatePtr robot_state_;</span><br><span class="line">  LERPInterfacePtr lerp_interface_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">}  <span class="comment">// namespace lerp_interface</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>  <span class="comment">// LERP_PLANNING_CONTEXT_H</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="创建lerpinterface类">3.创建<code>LERPInterface</code>类</h3>
+<p>由于 solve 函数的实现可能需要许多来自规划器代码库的类，因此更具可读性的是创建另一个名为 <code>LERPInterface</code> 的类，其中将进行规划器 solve 方法的实际实现。<strong>实际上，这个类是新运动规划算法的入口点。</strong></p>
+<h4 id="lerp_interface.h">lerp_interface.h</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ros/ros.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;moveit/planning_interface/planning_interface.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> lerp_interface</span><br><span class="line">{</span><br><span class="line"><span class="built_in">MOVEIT_CLASS_FORWARD</span>(LERPInterface);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LERPInterface</span></span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">LERPInterface</span>(<span class="type">const</span> ros::NodeHandle&amp; nh = ros::<span class="built_in">NodeHandle</span>(<span class="string">"~"</span>));</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">solve</span><span class="params">(<span class="type">const</span> planning_scene::PlanningSceneConstPtr&amp; planning_scene,</span></span></span><br><span class="line"><span class="params"><span class="function">             <span class="type">const</span> planning_interface::MotionPlanRequest&amp; req, moveit_msgs::MotionPlanDetailedResponse&amp; res)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  ros::NodeHandle nh_;</span><br><span class="line">  std::string name_;</span><br><span class="line">  <span class="type">int</span> num_steps_;</span><br><span class="line">  <span class="type">int</span> dof_;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">interpolate</span><span class="params">(<span class="type">const</span> std::vector&lt;std::string&gt;&amp; joint_names, moveit::core::RobotStatePtr&amp; robot_state,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">const</span> moveit::core::JointModelGroup* joint_model_group, <span class="type">const</span> std::vector&lt;<span class="type">double</span>&gt;&amp; start_joint_vals,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">const</span> std::vector&lt;<span class="type">double</span>&gt;&amp; goal_joint_vals, trajectory_msgs::JointTrajectory&amp; joint_trajectory)</span></span>;</span><br><span class="line">};</span><br><span class="line">}  <span class="comment">// namespace lerp_interface</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="plannerconfigurationsettings">4.PlannerConfigurationSettings</h3>
+<p><code>PlannerConfigurationSettings</code> 可以用来传递特定于规划器的参数。另一种传递这些参数的方法是使用 ROS 参数服务器，该服务器从 yaml 文件中读取。在本教程中，对于我们的 lerp 规划器，我们在 panda_moveit_config 包中使用 <code>lerp_planning.yaml</code> ，该包仅包含一个参数 <code>num_steps</code> ，该参数在每次调用其 solve 函数时都会加载到 <code>lerp_interface</code> 中。</p>
+<h3 id="export-the-plugin">5.Export the plugin</h3>
+<p>首先，我们需要使插件可用于 ROS 工具链。为此，应创建一个包含以下选项的插件描述 xml 文件（ <code>emptyplan_interface_plugin_description.xml</code> ），其中包含 <code>library</code> 标签：</p>
+<h4 id="emptyplan_interface_plugin_description.xml">emptyplan_interface_plugin_description.xml:</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;library path=<span class="string">"libmoveit_lerp_planner_plugin"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">class</span> name=<span class="string">"lerp_interface/LERPPlanner"</span> type=<span class="string">"lerp_interface::LERPPlannerManager"</span> base_class_type=<span class="string">"planning_interface::PlannerManager"</span>&gt;</span><br><span class="line">    &lt;description&gt;</span><br><span class="line">      The lerp motion planner plugin which interpolates between two given start <span class="keyword">and</span> goal joint state values.</span><br><span class="line">    &lt;/description&gt;</span><br><span class="line">  &lt;/<span class="keyword">class</span>&gt;</span><br><span class="line">&lt;/library&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="package.xml">package.xml:</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">export</span>&gt;</span><br><span class="line">   &lt;moveit_core plugin=<span class="string">"${prefix}/doc/creating_moveit_plugins/lerp_motion_planner/lerp_interface_plugin_description.xml"</span>/&gt;</span><br><span class="line">&lt;/<span class="keyword">export</span>&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="check-the-plugin">6.Check the plugin</h3>
+<p>使用以下命令，可以验证新插件是否已正确创建和导出：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rospack plugins --attrib=plugin moveit_core</span><br></pre></td></tr></tbody></table></figure>
+<p>结果应包含 <code>moveit_planners_lerp</code> 以及插件描述 xml 文件的地址：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">moveit_tutorials &lt;ros_workspace&gt;/src/moveit_tutorials/creating_moveit_plugins/lerp_motion_planner/lerp_interface_plugin_description.xml</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="plugin-usage">7.Plugin usage</h3>
+<p>在本小节中，我们将<strong>解释如何加载和使用我们之前创建的 lerp 规划器。</strong>为此，创建了一个名为 <code>lerp_example.cpp</code> 的 node。</p>
+<p>第一步是通过以下代码行<strong>获取与请求的规划组以及规划场景相关的机器人的状态和关节组：</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">moveit::<span class="function">core::RobotStatePtr <span class="title">robot_state</span><span class="params">(<span class="keyword">new</span> moveit::core::RobotState(robot_model))</span></span>;</span><br><span class="line"><span class="type">const</span> moveit::core::JointModelGroup* joint_model_group = robot_state-&gt;<span class="built_in">getJointModelGroup</span>(PLANNING_GROUP);</span><br><span class="line"><span class="type">const</span> std::vector&lt;std::string&gt;&amp; joint_names = joint_model_group-&gt;<span class="built_in">getVariableNames</span>();</span><br><span class="line"><span class="function">planning_scene::PlanningScenePtr <span class="title">planning_scene</span><span class="params">(<span class="keyword">new</span> planning_scene::PlanningScene(robot_model))</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>下一步是<strong>使用 pluginlib 加载规划器，并将参数 <code>planner_plugin_name</code> 设置为我们创建的参数：</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">boost::scoped_ptr&lt;pluginlib::ClassLoader&lt;planning_interface::PlannerManager&gt;&gt; planner_plugin_loader;</span><br><span class="line">planning_interface::PlannerManagerPtr planner_instance;</span><br><span class="line">std::string planner_plugin_name =  <span class="string">"lerp_interface/LERPPlanner"</span>;</span><br><span class="line">node_handle.<span class="built_in">setParam</span>(<span class="string">"planning_plugin"</span>, planner_plugin_name);</span><br></pre></td></tr></tbody></table></figure>
+<p>加载规划器后，是时候为运动规划问题设置起始状态和目标状态了。起始状态是机器人的当前状态，设置为 <code>req.start_state</code> 。另一方面，目标约束是通过使用目标状态和关节模型组创建 <code>moveit_msgs::Constraints</code> 来设置的。此约束被传递给 <code>req.goal_constraint</code> 。以下代码显示了如何执行这些步骤：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Get the joint values of the start state and set them in request.start_state</span></span><br><span class="line">std::vector&lt;<span class="type">double</span>&gt; start_joint_values;</span><br><span class="line">robot_state-&gt;<span class="built_in">copyJointGroupPositions</span>(joint_model_group, start_joint_values);</span><br><span class="line">req.start_state.joint_state.position = start_joint_values;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// Goal constraint</span></span><br><span class="line">moveit::<span class="function">core::RobotState <span class="title">goal_state</span><span class="params">(robot_model)</span></span>;</span><br><span class="line">std::vector&lt;<span class="type">double</span>&gt; joint_values = { <span class="number">0.8</span>, <span class="number">0.7</span>, <span class="number">1</span>, <span class="number">1.3</span>, <span class="number">1.9</span>, <span class="number">2.2</span>, <span class="number">3</span> };</span><br><span class="line">goal_state.<span class="built_in">setJointGroupPositions</span>(joint_model_group, joint_values);</span><br><span class="line">moveit_msgs::Constraints joint_goal = kinematic_constraints::<span class="built_in">constructGoalConstraints</span>(goal_state, joint_model_group);</span><br><span class="line">req.goal_constraints.<span class="built_in">clear</span>();</span><br><span class="line">req.goal_constraints.<span class="built_in">push_back</span>(joint_goal);</span><br></pre></td></tr></tbody></table></figure>
+<p>到目前为止，我们已经加载了规划器并为运动规划问题创建了起始状态和目标状态，但我们尚未解决该问题。通过给定的起始状态和目标状态信息，在关节状态下解决运动规划问题是通过创建一个 <code>PlanningContext</code> 实例并调用其 <code>solve</code> 函数来完成的。请记住，传递给此 solve 函数的响应应为 <code>planning_interface::MotionPlanResponse</code> 类型：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">planning_interface::PlanningContextPtr context = planner_instance-&gt;<span class="built_in">getPlanningContext</span>(planning_scene, req, res.error_code_);</span><br></pre></td></tr></tbody></table></figure>
+<p>最后，要运行此节点，我们需要在启动文件夹中 <code>roslaunch lerp_example.launch</code>。此启动文件通过传递 <code>lerp</code> 作为规划器的名称来启动包 <code>panda_moveit_config</code> 的 <code>demo.launch</code> 。然后， <code>lerp_example</code> 被启动， <code>lerp_planning.yaml</code> 被加载以将 lerp 特定参数设置到 ROS 参数服务器。</p>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-10</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/10/Docker-build-once-run-anywhere/'>Docker(build once, run anywhere)</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/Dual-URsim/">Dual_URsim</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

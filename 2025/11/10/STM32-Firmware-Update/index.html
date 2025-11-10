@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="index" />
+    <meta name="description" content="STM32_Firmware_Update" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -110,6 +110,10 @@
         
         
             
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
 
@@ -182,36 +186,100 @@
     
 
     
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    STM32_Firmware_Update
+                </div>
+            
+        
+      
+    
 
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-10</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：425</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：1分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
         
-        <div class=".article-gallery"><p><span class="github-emoji"><span> </span><img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Github:<a target="_blank" rel="noopener" href="https://github.com/stocks-yuan">stocks-yuan</a>
-<br></p>
-<p>🎯项目(In Development):</p>
+        <div class=".article-gallery"><p><span class="github-emoji"><span> </span><img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>：<a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/STM32_Firmware_Update">STM32_Firmware_Update</a></p>
+<p>为实现<code>STM32_Firmware_Update</code>需要建立两个工程(<code>Bootloader工程</code>和<code>APP工程</code>)。<code>Bootloader工程</code>是MCU默认装载的程序，<code>Bootloader工程</code>内部不含应用程序的代码，正常启动时，它可以自动跳转到主应用程序地址处读取并执行现有版本程序。<code>APP工程</code>是包含所有应用程序代码。</p>
+<h2 id="bootloader工程">Bootloader工程</h2>
+<p>Bootloader程序存在两种模式：</p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/ipa_coverage_planning">ipa_coverage_planning</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/stocks-yuan/Yhs_Chassis_Driver_ROS2">Yhs_Chassis_Driver_ROS2</a>
-<br></p></li>
+<li><p><strong>固件更新模式</strong>：当需要更新固件时，通过外部触发等方式，进入一个长期运行的状态，通过各种方式(U盘、SD卡、OTA)完成固件更新操作。</p></li>
+<li><p><strong>正常启动模式</strong>：如果没有外部触发操作或未找到更新文件，则直接跳转到主应用程序（APP）执行当前版本程序。</p></li>
 </ul>
-<p>💪年度任务：</p>
+<p>正常启动模式下，bootloader程序的主要目的是引导MCU执行指定Flash区域的应用程序(APP)，其核心引导代码是：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> APP_FLASH_ADDR 0x08010000 <span class="comment">//64KB</span></span></span><br><span class="line"></span><br><span class="line">	<span class="type">void</span> (*app_entry_ptr)(<span class="type">void</span>);</span><br><span class="line">	__set_MSP(*(<span class="type">uint32_t</span> *)APP_FLASH_ADDR); <span class="comment">//init MSP</span></span><br><span class="line">	app_entry_ptr = (<span class="type">void</span> (*)(<span class="type">void</span>))(*(<span class="type">uint32_t</span> *)(APP_FLASH_ADDR+<span class="number">4</span>)); <span class="comment">//init PC ResetHander</span></span><br><span class="line">	app_entry_ptr();<span class="comment">// run to main</span></span><br></pre></td></tr></tbody></table></figure>
+<a href="/2025/11/10/STM32-Firmware-Update/bootloader.png" class="gallery-item" style="box-shadow: none;"> <img src="/2025/11/10/STM32-Firmware-Update/bootloader.png" class="" width="400"></a>
+<p>如上图所示，<code>bootloader</code>程序的起始地址是<code>0x08000000</code>，是Flash的默认起始地址；APP程序的起始地址为<code>0x08010000</code>，是人为设置的地址。</p>
+<h2 id="app工程">APP工程</h2>
+<p>因此使用<code>bootloader</code>时，其APP项目需要修改运行起始地址(默认是<code>0x08000000</code>,配置后需要与<code>Bootloader工程</code>中<code>APP_FLASH_ADDR</code>一致)、重定位中断向量表、通过<code>fromelf.exe</code>工具生成bin文件。</p>
+<h2 id="具体实现">具体实现</h2>
+<p>使用U盘、SD卡、USB升级时，一般将APP工程拷贝到单片机的外部SPI Flash中，Bootloader工程通过Fatfs文件系统读取外部SPI Flash中的固件(bin文件)来实现固件升级。</p>
+<h2 id="项目来源">项目来源</h2>
 <ul>
-<li><p>完成项目(0/1)</p></li>
-<li><p>代码随想录(0/1)
-<br></p></li>
-</ul>
-<p>🤖Support:</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></p></li>
-<li><p>主题:<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4?tab=readme-ov-file">hexo-theme-A4</a></p></li>
-<li><p>github-emojis语法:<a target="_blank" rel="noopener" href="https://www.webfx.com/tools/emoji-cheat-sheet/">hexo-filter-github-emojis</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/SloftyLiu/stm32f407_bootloader_spiflash">stm32f407_bootloader_spiflash</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/SloftyLiu/stm32f407_network_OTA">stm32f407_network_OTA</a></p></li>
 </ul>
 </div>
     </div>
 
     <div class="post-meta">
         <i>
+        
+            <span>2025-11-10</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7/'>
+                            固件升级
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/STM32/'>
+                            STM32
+                        </a>
+                    
+                </span>
+            
         
         </i>
     </div>
@@ -223,12 +291,20 @@
     
             <div class="post-footer-pre-next">
                 
+                    <span>上一篇：<a href='/2025/11/10/Machine-Model-of-Wheelbot/'>Machine-Model-of-Wheelbot</a></span>
+                
 
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/Docker-build-once-run-anywhere/">Docker(build once, run anywhere)</a>
+                    </span>
                 
             </div>
     
         
     
+
+    
+        
 
      
 </div>

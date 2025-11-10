@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="Dual_URsim" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    Dual_URsim
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-10</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：723</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：2分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h1 id="问题描述">问题描述</h1>
+<p>UR官方只提供了单个机械臂的仿真方案，但这里需要对双臂仿真。
+在ubuntu系统中实现两个URsim机械臂仿真器，要求主机和两个ursim在同一网段内。</p>
+<h1 id="解决方案">解决方案</h1>
+<h3 id="docker-compose-简介">Docker Compose 简介</h3>
+<p><strong>Docker Compose</strong> 是一个用于定义和运行多容器 Docker 应用程序的工具。通过一个 YAML 文件（通常命名为 <code>docker-compose.yml</code>），你可以配置应用程序所需的服务、网络和卷等资源，并使用一条命令启动所有服务。</p>
+<a href="/2025/11/10/Dual-URsim/Docker-Compose.png" class="gallery-item" style="box-shadow: none;"> <img src="/2025/11/10/Dual-URsim/Docker-Compose.png" class=""></a>
+<h4 id="核心功能">核心功能</h4>
+<ol type="1">
+<li><strong>多容器管理</strong>：允许你在单个文件中定义多个容器及其配置。</li>
+<li><strong>服务依赖</strong>：可以指定服务启动顺序，确保依赖服务先启动。</li>
+<li><strong>环境变量</strong>：支持通过环境变量进行配置。</li>
+<li><strong>网络和卷管理</strong>：方便地定义网络和卷，供容器使用。</li>
+<li><strong>一键启停</strong>：通过 <code>docker-compose up</code> 和 <code>docker-compose down</code> 快速启动和停止所有服务。</li>
+</ol>
+<h4 id="步骤">步骤</h4>
+<ul>
+<li>调用<code>docker pull</code>命令应该可以从docker hub中拉取镜像</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull universalrobots/ursim_cb3 </span><br><span class="line">docker pull universalrobots/ursim_e-series</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>调用<code>docker images</code>命令检测镜像下载是否成功</p></li>
+<li><p><code>/home</code> （或工作空间功能包下）创建文件夹</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir dual_ursim &amp;&amp; cd dual_ursim</span><br></pre></td></tr></tbody></table></figure></li>
+<li><p>创建<code>docker-compose.yml</code>文件（以配置两个UR5机械臂为例）：</p></li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch docker-compose.yml &amp;&amp; gedit docker-compose.yml</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定 Docker Compose 文件的版本</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义服务（容器）</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># 定义名为 leftArm 的服务</span></span><br><span class="line">  <span class="attr">leftArm:</span></span><br><span class="line">    <span class="comment"># 使用 universalrobots/ursim_cb3 镜像</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">universalrobots/ursim_cb3</span></span><br><span class="line">    <span class="comment"># 设置环境变量，指定机器人模型为 UR5</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ROBOT_MODEL=UR5</span></span><br><span class="line">    <span class="comment"># 配置网络</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ursim_net:</span>  <span class="comment"># 使用名为 ursim_net 的网络</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">10.5</span><span class="number">.0</span><span class="number">.5</span>  <span class="comment"># 为该服务分配静态 IP 地址(用户可自定义，但需要在ursim_net内)</span></span><br><span class="line">    <span class="comment"># 配置卷（将主机目录挂载到容器中）</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="comment"># 将主机目录(可自定义) /home/stocks/dual_ursim/urcaps 挂载到容器的 /urcaps 目录()</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/stocks/dual_ursim/urcaps:/urcaps</span></span><br><span class="line">      <span class="comment"># 将主机目录(可自定义) /home/stocks/dual_ursim/programs_leftArm 挂载到容器的 /ursim/programs 目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/stocks/dual_ursim/programs_leftArm:/ursim/programs</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 定义名为 rightArm 的服务</span></span><br><span class="line">  <span class="attr">rightArm:</span></span><br><span class="line">    <span class="comment"># 使用 universalrobots/ursim_cb3 镜像</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">universalrobots/ursim_cb3</span></span><br><span class="line">    <span class="comment"># 设置环境变量，指定机器人模型为 UR5</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ROBOT_MODEL=UR5</span></span><br><span class="line">    <span class="comment"># 配置网络</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ursim_net:</span>  <span class="comment"># 使用名为 ursim_net 的网络</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">10.5</span><span class="number">.0</span><span class="number">.6</span>  <span class="comment"># 为该服务分配静态 IP 地址(用户可自定义，但需要在ursim_net内)</span></span><br><span class="line">    <span class="comment"># 配置卷（将主机目录挂载到容器中）</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="comment"># 将主机目录(可自定义) /home/stocks/dual_ursim/urcaps 挂载到容器的 /urcaps 目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/stocks/dual_ursim/urcaps:/urcaps</span></span><br><span class="line">      <span class="comment"># 将主机目录(可自定义) /home/stocks/dual_ursim/programs_rightArm 挂载到容器的 /ursim/programs 目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/stocks/dual_ursim/programs_rightArm:/ursim/programs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义网络</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">ursim_net:</span>  <span class="comment"># 定义名为 ursim_net 的网络</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span>  <span class="comment"># 使用桥接模式</span></span><br><span class="line">    <span class="attr">ipam:</span>  <span class="comment"># IP 地址管理配置</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">subnet:</span> <span class="number">10.5</span><span class="number">.0</span><span class="number">.0</span><span class="string">/24</span>  <span class="comment"># 指定子网范围(用户可自定义)</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>启动容器</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose -p dual_ursim -f docker-compose.yml up</span><br></pre></td></tr></tbody></table></figure>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-10</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/Universal-Robots-ROS2-Driver/'>
+                            Universal_Robots_ROS2_Driver
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E6%9C%BA%E6%A2%B0%E8%87%82/'>
+                            机械臂
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/10/MoveIt-Plugins/'>MoveIt_Plugins</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/%E4%B8%B2%E5%8F%A3%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%B8%89%E5%B1%82%E7%BB%93%E6%9E%84-%E7%89%A9%E7%90%86%E5%B1%82%E3%80%81%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82/">串口协议的三层结构(物理层、数据链路层、应用层)</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>
