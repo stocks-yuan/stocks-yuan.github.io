@@ -237,10 +237,12 @@
 </ul>
 <h3 id="quick-start">Quick Start</h3>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash start_sim_dual_ur5.sh</span><br></pre></td></tr></tbody></table></figure>
-<p>此指令分为三步：
-- 第一步：调用<code>bash ./src/ursim_script/docker_dual_ur5.sh</code>，启动双臂UR_SIM仿真
-- 第二步：调用 <code>ros2 launch dual_ur5_arm_driver start_dual_arm_driver.launch.py</code>命令，启动双臂驱动程序
-- 第三步：调用<code>ros2 launch dual_arm_moveit_config dual_moveit.launch.py</code>命令，启动Moveit功能包</p>
+<p>此指令分为三步：</p>
+<ul>
+<li><p>第一步：调用<code>bash ./src/ursim_script/docker_dual_ur5.sh</code>，启动双臂UR_SIM仿真</p></li>
+<li><p>第二步：调用 <code>ros2 launch dual_ur5_arm_driver start_dual_arm_driver.launch.py</code>命令，启动双臂驱动程序</p></li>
+<li><p>第三步：调用<code>ros2 launch dual_arm_moveit_config dual_moveit.launch.py</code>命令，启动Moveit功能包</p></li>
+</ul>
 <blockquote>
 <p>若不想调用<code>bash start_sim_dual_ur5.sh</code>，可以按照顺序分别调用</p>
 </blockquote>
@@ -286,6 +288,8 @@
             
     
             <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/11/%E5%9F%BA%E4%BA%8EFreeRTOS%E7%9A%84STM32%E5%BC%82%E6%AD%A5%E8%A7%A3%E8%80%A6%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E4%BB%A5UART-DMA%E5%8F%91%E9%80%81%E4%B8%BA%E4%BE%8B/'>基于FreeRTOS的STM32异步解耦通信机制设计与实现—以UART DMA发送为例</a></span>
                 
 
                 

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="基于FreeRTOS的STM32异步解耦通信机制设计与实现—以UART DMA发送为例" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    基于FreeRTOS的STM32异步解耦通信机制设计与实现—以UART DMA发送为例
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-11</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.7k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：8分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><center>
+<a href="cover.png" class="gallery-item" style="box-shadow: none;"> <img src="cover.png" width="60%"></a>
+</center>
+<h2 id="一引言">一、引言</h2>
+<p>在嵌入式实时系统中，外设通信（如UART、SPI、I2C）通常面临以下挑战：</p>
+<ul>
+<li><p>阻塞式调用导致CPU利用率低</p></li>
+<li><p>多任务竞争引发数据损坏</p></li>
+<li><p>高耦合性使得代码难以维护和扩展</p></li>
+</ul>
+<p>本文以STM32H7的UART DMA通信为例，提出一种基于FreeRTOS的​<strong>​异步解耦通信框架​</strong>​，通过消息队列、二值信号量、互斥量管理，实现高效可靠的外设数据传输。</p>
+<h2 id="二解耦机制设计">二、解耦机制设计</h2>
+<h4 id="封装外设对象">2.1 封装外设对象</h4>
+<p>按照面向对象的思想，对单片机外设构建一个结构体对象，封装外设所需的方法和成员变量，成员函数使用函数指针，成员变量使用void *类型，实现解耦的目的。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">UART_DEVICE_T</span></span><br><span class="line">{</span><br><span class="line">    <span class="built_in">int</span> (*Init)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">int</span> BaudRate, <span class="type">int</span> WordLength, <span class="type">int</span> StopBits, <span class="type">int</span> Parity);</span><br><span class="line">    <span class="built_in">int</span> (*Send)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> len, <span class="type">uint16_t</span> timeout_ms);</span><br><span class="line">    <span class="built_in">int</span> (*SendFromISR)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> len);</span><br><span class="line">    <span class="built_in">int</span> (*Recv)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> *len, <span class="type">uint16_t</span> timeout_ms);</span><br><span class="line">    <span class="built_in">int</span> (*Set_Txbuf)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *buf, <span class="type">int</span> len);</span><br><span class="line">    <span class="built_in">int</span> (*Get_Rxbuf)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *buf, <span class="type">int</span> len);</span><br><span class="line">    <span class="built_in">int</span> (*printf_info)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint16_t</span> timeout_ms ,<span class="type">const</span> <span class="type">char</span> *format, ...); </span><br><span class="line">    <span class="built_in">int</span> (*printf_info_FromISR)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">const</span> <span class="type">char</span> *format, ...); </span><br><span class="line">    <span class="built_in">int</span> (*printf_error)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint16_t</span> timeout_ms ,<span class="type">const</span> <span class="type">char</span> *format, ...); </span><br><span class="line">    <span class="built_in">int</span> (*printf_error_FromISR)(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">const</span> <span class="type">char</span> *format, ...); </span><br><span class="line">    <span class="type">void</span> *Priv_data;</span><br><span class="line">    <span class="type">bool</span> isInited;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UART_DEVICES_T</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">UART_DEVICE_T</span> *puart7;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">UART_DEVICE_T</span> *puart10;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="实现成员函数和成员变量">2.2 实现成员函数和成员变量</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">UART_DATA_T</span></span><br><span class="line">{</span><br><span class="line">    UART_HandleTypeDef *handle;</span><br><span class="line">    SemaphoreHandle_t xTxSem;</span><br><span class="line">    <span class="type">uint8_t</span> rxBuffer[rx_buffer_size];</span><br><span class="line">    <span class="comment">// uint8_t txBuffer[tx_buffer_size];</span></span><br><span class="line">    QueueHandle_t xRxQueue;</span><br><span class="line">    QueueHandle_t xTxqueue;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">UART_TX_MSG_T</span> <span class="type">msg_t</span>;</span><br><span class="line">    QueueHandle_t xTxMutex;</span><br><span class="line">    QueueHandle_t xRxMutex;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UART_DATA_T</span> <span class="type">stm32h7_uart10_data_t</span> = {</span><br><span class="line">    &amp;huart10,</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">/* API Declaration --------------------------------------------------*/</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">stm32_uart_dma_init</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">int</span> BaudRate, <span class="type">int</span> WordLength, <span class="type">int</span> StopBits, <span class="type">int</span> Parity)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">stm32_uart_dma_send</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> len, <span class="type">uint16_t</span> timeout_ms)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">stm32_uart_dma_send_FromISR</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">stm32_uart_dma_recv</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> *len, <span class="type">uint16_t</span> timeout_ms)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">printf_info</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint16_t</span> timeout_ms, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">printf_info_FromISR</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">printf_error</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint16_t</span> timeout_ms, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">printf_error_FromISR</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* UART_DEVICE_INSTANCE --------------------------------------------------*/</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">struct</span> <span class="title class_">UART_DEVICE_T</span> <span class="type">g_stm32h7_uart10_t</span> = {</span><br><span class="line">    stm32_uart_dma_init,</span><br><span class="line">    stm32_uart_dma_send,</span><br><span class="line">    stm32_uart_dma_send_FromISR,</span><br><span class="line">    stm32_uart_dma_recv,</span><br><span class="line">    Set_Txbuf,</span><br><span class="line">    Get_Rxbuf,</span><br><span class="line">    printf_info,</span><br><span class="line">    printf_info_FromISR,</span><br><span class="line">    printf_error,</span><br><span class="line">    printf_error_FromISR,</span><br><span class="line">    &amp;<span class="type">stm32h7_uart10_data_t</span>,</span><br><span class="line">    <span class="literal">false</span>,</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">/* UART_DEVICE REGISTRATION --------------------------------------------------*/</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UART_DEVICES_T</span> Uart_devs = {</span><br><span class="line">    &amp;<span class="type">g_stm32h7_uart7_t</span>,</span><br><span class="line">    &amp;<span class="type">g_stm32h7_uart10_t</span>,</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UART_DEVICES_T</span> *pUart_devs = &amp;Uart_devs;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="使用示例">2.3 使用示例</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">StartDefaultTask</span><span class="params">(<span class="type">void</span> *argument)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN StartDefaultTask */</span></span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">UART_DEVICE_T</span> *pUart10 = pUart_devs-&gt;puart10;</span><br><span class="line">  <span class="comment">/* Infinite loop */</span></span><br><span class="line">  <span class="type">uint8_t</span> msg1[] = <span class="string">"Hello FreeRTOS from Thread1\r\n"</span>;</span><br><span class="line">  <span class="type">char</span> msg2[] = <span class="string">"Hello FreeRTOS2 from Thread1\r\n"</span>;</span><br><span class="line">  <span class="keyword">for</span> (;;)</span><br><span class="line">  {</span><br><span class="line">    pUart10-&gt;<span class="built_in">Send</span>(pUart10, msg1, <span class="built_in">sizeof</span>(msg1), <span class="number">100</span>);</span><br><span class="line">    pUart10-&gt;<span class="built_in">Send</span>(pUart10, (<span class="type">uint8_t</span> *)msg2, <span class="built_in">sizeof</span>(msg2), <span class="number">100</span>);</span><br><span class="line">    pUart10-&gt;<span class="built_in">printf_info</span>(pUart10, <span class="number">100</span>, <span class="string">"Hello Uart10\r\n"</span>);</span><br><span class="line">    <span class="built_in">vTaskDelay</span>(<span class="built_in">pdMS_TO_TICKS</span>(<span class="number">100</span>));</span><br><span class="line">  }</span><br><span class="line">  <span class="comment">/* USER CODE END StartDefaultTask */</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>调用这些底层通信接口时，可以完全不用关心底层的实现机制。并且外部函数中无法访问外设内部的信息。</p>
+<h2 id="三异步通信机制设计">三、异步通信机制设计</h2>
+<p>这里主要使用了3种FreeRTOS中的IPC通信机制：</p>
+<ul>
+<li><p>消息队列：解耦生产者（数据请求发送任务）与消费者（DMA发送任务），避免任务中直接调用导致阻塞</p></li>
+<li><p>二值信号量：实现串口发送任务与发送完成中断之间的同步，避免无同步连续调用DMA发送函数导致发送数据覆盖问题。</p></li>
+<li><p>互斥量：避免多线程任务争夺唯一外设资源，保护UART_DATA_T中的数据，防止数据竞争。</p></li>
+</ul>
+<h4 id="发送接口">3.1 发送接口</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">stm32_uart_dma_send</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> len, <span class="type">uint16_t</span> timeout_ms)</span></span><br><span class="line">{</span><br><span class="line">    BaseType_t xReturned;</span><br><span class="line">    <span class="keyword">if</span> (len &gt; tx_buffer_size)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span> =</span> pdev-&gt;Priv_data;</span><br><span class="line">    <span class="comment">//避免多线程冲突，增加互斥量,保护变量uart_data</span></span><br><span class="line">    <span class="keyword">if</span>(xSemaphoreTake(uart_data-&gt;xTxMutex, pdMS_TO_TICKS(timeout_ms)) != pdTRUE)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//这里拷贝data指向的数据，是为了防止外部任务执行此函数后，修改data指向的数据内容</span></span><br><span class="line">    <span class="built_in">memset</span>(uart_data-&gt;<span class="type">msg_t</span>.data, <span class="number">0</span>, tx_buffer_size);</span><br><span class="line">    <span class="built_in">memcpy</span>(uart_data-&gt;<span class="type">msg_t</span>.data, data, len);</span><br><span class="line">    uart_data-&gt;<span class="type">msg_t</span>.len = len;</span><br><span class="line">    </span><br><span class="line">    xReturned = xQueueSend(uart_data-&gt;xTxqueue, &amp;(uart_data-&gt;<span class="type">msg_t</span>), pdMS_TO_TICKS(timeout_ms));</span><br><span class="line">    xSemaphoreGive(uart_data-&gt;xTxMutex);</span><br><span class="line">    <span class="keyword">if</span> (xReturned != pdPASS)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//中断版本</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">stm32_uart_dma_send_FromISR</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> len)</span></span><br><span class="line">{</span><br><span class="line">    BaseType_t xReturned;</span><br><span class="line">    BaseType_t pxHigherPriorityTaskWoken;</span><br><span class="line">    <span class="keyword">if</span> (len &gt; tx_buffer_size)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span> =</span> pdev-&gt;Priv_data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//避免多线程冲突，增加互斥量</span></span><br><span class="line">    <span class="keyword">if</span>(xSemaphoreTakeFromISR(uart_data-&gt;xTxMutex, <span class="literal">NULL</span>) != pdTRUE)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(uart_data-&gt;<span class="type">msg_t</span>.data, <span class="number">0</span>, tx_buffer_size);</span><br><span class="line">    <span class="built_in">memcpy</span>(uart_data-&gt;<span class="type">msg_t</span>.data, data, len);</span><br><span class="line">    uart_data-&gt;<span class="type">msg_t</span>.len = len;</span><br><span class="line"></span><br><span class="line">    xReturned = xQueueSendFromISR(uart_data-&gt;xTxqueue, &amp;(uart_data-&gt;<span class="type">msg_t</span>), &amp;pxHigherPriorityTaskWoken);</span><br><span class="line">    xSemaphoreGiveFromISR(uart_data-&gt;xTxMutex,<span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (xReturned != pdPASS)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pxHigherPriorityTaskWoken == pdTRUE)</span><br><span class="line">    {</span><br><span class="line">        portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><code>stm32_uart_dma_send</code>函数没有直接调用HAL库发送函数，而是通过消息队列将消息发送到<strong>外设发送任务</strong>中处理。<code>uart_send_task_handle</code>任务负责读取消息队列信息然后调用HAL_DMA发送，队列中没有消息时，此任务就会无限期阻塞。uart_data-&gt;xTxSem二值信号量同步<strong>外设发送任务</strong>与<strong>发送完成中断</strong>，避免了DMA的数据覆盖问题。</p>
+<p>通过这种异步通信的设计，可以减少其他任务在调用外设函数时阻塞等待的时间，增大CPU利用率。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">uart_send_task_handle</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *puart_dev)</span></span><br><span class="line">{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span> =</span> puart_dev-&gt;Priv_data;</span><br><span class="line">    <span class="comment">//STM32H7中0x20000000的RAM部分不支持DMA1、DMA2，因此强制msg_t 分配在AXI SRAM</span></span><br><span class="line">    <span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">UART_TX_MSG_T</span> <span class="title">msg_t</span> __<span class="title">attribute__</span>((<span class="title">section</span>(".<span class="title">ARM</span>.__<span class="title">at_0x24000000</span>")));</span></span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    {</span><br><span class="line">        BaseType_t xReturned;</span><br><span class="line">        xReturned = xQueueReceive(uart_data-&gt;xTxqueue, &amp;<span class="type">msg_t</span>, portMAX_DELAY);</span><br><span class="line">        <span class="keyword">if</span>(xReturned != pdPASS)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        }</span><br><span class="line">        HAL_UART_Transmit_DMA(uart_data-&gt;handle, <span class="type">msg_t</span>.data, <span class="type">msg_t</span>.len);</span><br><span class="line">        xSemaphoreTake(uart_data-&gt;xTxSem, pdMS_TO_TICKS(<span class="number">100</span>));</span><br><span class="line">         </span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_UART_TxCpltCallback</span><span class="params">(UART_HandleTypeDef *huart)</span></span><br><span class="line">{</span><br><span class="line">    BaseType_t pxHigherPriorityTaskWoken;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (huart-&gt;Instance == UART7)</span><br><span class="line">    {</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span> =</span> pUart_devs-&gt;puart7-&gt;Priv_data;</span><br><span class="line">        xSemaphoreGiveFromISR(uart_data-&gt;xTxSem, &amp;pxHigherPriorityTaskWoken);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (huart-&gt;Instance == USART10)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">struct</span> UART_DATA_T *uart_data = pUart_devs-&gt;puart10-&gt;Priv_data;</span><br><span class="line">        xSemaphoreGiveFromISR(uart_data-&gt;xTxSem, &amp;pxHigherPriorityTaskWoken);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (pxHigherPriorityTaskWoken == pdTRUE)</span><br><span class="line">    {</span><br><span class="line">        portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="接收接口">3.2 接收接口</h4>
+<p>这里实现的串口接收采用的是IDLE不定长数据接收+DMA的方式。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">HAL_UARTEx_RxEventCallback</span><span class="params">(UART_HandleTypeDef *huart, <span class="type">uint16_t</span> Size)</span></span><br><span class="line">{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (huart-&gt;Instance == UART7)</span><br><span class="line">    {</span><br><span class="line">        </span><br><span class="line">        uart_data = &amp;<span class="type">stm32h7_uart7_data_t</span>;</span><br><span class="line"></span><br><span class="line">        xQueueSendFromISR(uart_data-&gt;xRxQueue, &amp;Size, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">        HAL_UARTEx_ReceiveToIdle_DMA(uart_data-&gt;handle, uart_data-&gt;rxBuffer, rx_buffer_size);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (huart-&gt;Instance == USART10)</span><br><span class="line">    {</span><br><span class="line">        </span><br><span class="line">        uart_data = &amp;<span class="type">stm32h7_uart10_data_t</span>;</span><br><span class="line"></span><br><span class="line">        xQueueSendFromISR(uart_data-&gt;xRxQueue, &amp;Size, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">        HAL_UARTEx_ReceiveToIdle_DMA(uart_data-&gt;handle, uart_data-&gt;rxBuffer, rx_buffer_size);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">stm32_uart_dma_recv</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint8_t</span> *data, <span class="type">int16_t</span> *len, <span class="type">uint16_t</span> timeout_ms)</span></span><br><span class="line">{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span> =</span> pdev-&gt;Priv_data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pdPASS == xQueueReceive(uart_data-&gt;xRxQueue, len, pdMS_TO_TICKS(timeout_ms)))</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">memcpy</span>(data, uart_data-&gt;rxBuffer, *len);</span><br><span class="line">        <span class="built_in">memset</span>(uart_data-&gt;rxBuffer, <span class="number">0</span>, *len);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="初始化接口">3.3 初始化接口</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">stm32_uart_dma_init</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">int</span> BaudRate, <span class="type">int</span> WordLength, <span class="type">int</span> StopBits, <span class="type">int</span> Parity)</span></span><br><span class="line">{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UART_DATA_T</span> *<span class="title">uart_data</span> =</span> pdev-&gt;Priv_data;</span><br><span class="line"></span><br><span class="line">    uart_data-&gt;handle-&gt;Init.BaudRate = BaudRate;</span><br><span class="line">    uart_data-&gt;handle-&gt;Init.WordLength = WordLength;</span><br><span class="line">    uart_data-&gt;handle-&gt;Init.StopBits = StopBits;</span><br><span class="line">    uart_data-&gt;handle-&gt;Init.Parity = Parity;</span><br><span class="line"></span><br><span class="line">    uart_data-&gt;xTxSem = xSemaphoreCreateBinary();</span><br><span class="line">    uart_data-&gt;xRxQueue = xQueueCreate(uart_rx_queue_length, <span class="number">4</span>);</span><br><span class="line">    uart_data-&gt;xTxqueue = xQueueCreate(uart_tx_queue_length, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> UART_TX_MSG_T));</span><br><span class="line">    uart_data-&gt;<span class="type">msg_t</span>.len = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(uart_data-&gt;<span class="type">msg_t</span>.data, <span class="number">0</span>, tx_buffer_size);</span><br><span class="line">    uart_data-&gt;xTxMutex = xSemaphoreCreateMutex();</span><br><span class="line">    uart_data-&gt;xRxMutex = xSemaphoreCreateMutex();</span><br><span class="line"></span><br><span class="line">    pdev-&gt;isInited = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">//这里启动IDLE中断，并指定接收数据缓冲区</span></span><br><span class="line">    HAL_UARTEx_ReceiveToIdle_DMA(uart_data-&gt;handle, uart_data-&gt;rxBuffer, rx_buffer_size);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="其余接口">3.4 其余接口</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">printf_info</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint16_t</span> timeout_ms, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> src_buf[<span class="number">50</span>] = {<span class="number">0</span>};</span><br><span class="line">    <span class="type">char</span> dest_buf[<span class="number">55</span>] = <span class="string">"Info:"</span>;</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, format);</span><br><span class="line"></span><br><span class="line">    vsnprintf(src_buf, <span class="keyword">sizeof</span>(src_buf), format, ap);</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="built_in">strcat</span>(dest_buf, src_buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pdev-&gt;Send(pdev, (<span class="type">uint8_t</span> *)dest_buf, <span class="built_in">strlen</span>(dest_buf), timeout_ms);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">printf_info_FromISR</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> src_buf[<span class="number">50</span>] = {<span class="number">0</span>};</span><br><span class="line">    <span class="type">char</span> dest_buf[<span class="number">55</span>] = <span class="string">"Info:"</span>;</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, format);</span><br><span class="line"></span><br><span class="line">    vsnprintf(src_buf, <span class="keyword">sizeof</span>(src_buf), format, ap);</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="built_in">strcat</span>(dest_buf, src_buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pdev-&gt;SendFromISR(pdev, (<span class="type">uint8_t</span> *)dest_buf, <span class="built_in">strlen</span>(dest_buf));</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">printf_error</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">uint16_t</span> timeout_ms, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> src_buf[<span class="number">50</span>] = {<span class="number">0</span>};</span><br><span class="line">    <span class="type">char</span> dest_buf[<span class="number">56</span>] = <span class="string">"Error:"</span>;</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, format);</span><br><span class="line"></span><br><span class="line">    vsnprintf(src_buf, <span class="keyword">sizeof</span>(src_buf), format, ap);</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="built_in">strcat</span>(dest_buf, src_buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pdev-&gt;Send(pdev, (<span class="type">uint8_t</span> *)dest_buf, <span class="built_in">strlen</span>(dest_buf), timeout_ms);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">printf_error_FromISR</span><span class="params">(<span class="keyword">struct</span> UART_DEVICE_T *pdev, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">char</span> src_buf[<span class="number">50</span>] = {<span class="number">0</span>};</span><br><span class="line">    <span class="type">char</span> dest_buf[<span class="number">56</span>] = <span class="string">"Error:"</span>;</span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, format);</span><br><span class="line"></span><br><span class="line">    vsnprintf(src_buf, <span class="keyword">sizeof</span>(src_buf), format, ap);</span><br><span class="line">    va_end(ap);</span><br><span class="line">    <span class="built_in">strcat</span>(dest_buf, src_buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pdev-&gt;SendFromISR(pdev, (<span class="type">uint8_t</span> *)dest_buf, <span class="built_in">strlen</span>(dest_buf));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-11</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/STM32/'>
+                            STM32
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/10/UR5-DualArm-Driver-ROS2/">UR5_DualArm_Driver_ROS2</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>
