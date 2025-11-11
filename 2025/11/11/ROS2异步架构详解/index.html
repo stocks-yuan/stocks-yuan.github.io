@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="ROS2异步架构详解" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    ROS2异步架构详解
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-11</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：2.1k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：7分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h3 id="异步架构特性">异步架构特性</h3>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 34%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">ROS2（异步架构）</th>
+<th style="text-align: left;">优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">通信模型</td>
+<td style="text-align: left;">非阻塞，事件驱动</td>
+<td style="text-align: left;">节点健壮性高，生命周期解耦</td>
+</tr>
+<tr>
+<td style="text-align: left;">核心调度</td>
+<td style="text-align: left;">多线程执行器 + 回调组</td>
+<td style="text-align: left;">灵活的并发控制，高性能</td>
+</tr>
+<tr>
+<td style="text-align: left;">底层支撑</td>
+<td style="text-align: left;">DDS 中间件</td>
+<td style="text-align: left;">工业级可靠性、实时性和跨平台能力</td>
+</tr>
+<tr>
+<td style="text-align: left;">资源利用</td>
+<td style="text-align: left;">多线程，线程池</td>
+<td style="text-align: left;">充分利用多核CPU，高吞吐量</td>
+</tr>
+</tbody>
+</table>
+<h3 id="核心思想异步通信">核心思想：异步通信</h3>
+<p>ROS2 的异步架构核心在于 <strong>非阻塞的、事件驱动的通信模型</strong>。这与 ROS1 的同步模型有根本性区别。</p>
+<ul>
+<li><strong>ROS1（同步为主）</strong>： 当一个节点调用 <code>publish()</code> 发送消息时，如果与接收者的连接尚未建立好，或者在发送过程中遇到问题，调用线程可能会被阻塞，直到发送完成或超时。这可能导致节点“卡住”。</li>
+<li><strong>ROS2（异步默认）</strong>： 当一个节点调用 <code>publish()</code> 时，消息通常会被立即放入一个<strong>中间队列（出站队列）</strong> 中，然后函数立即返回。后台有独立的线程（执行器）负责从队列中取出消息，并通过底层通信层（DDS）实际发送出去。发送者不会被发送过程阻塞。</li>
+</ul>
+<p>这种设计带来了巨大的优势：<strong>发布者和订阅者的生命周期被解耦</strong>。即使订阅者节点暂时未运行，或者网络出现短暂波动，发布者也能继续正常运行，不会因此阻塞。</p>
+<hr>
+<h3 id="异步架构的关键组件">异步架构的关键组件</h3>
+<p>ROS2 的异步架构主要由以下几个核心组件协同工作实现：</p>
+<h4 id="dds数据分发服务">1. DDS（数据分发服务）</h4>
+<p>DDS 是 ROS2 的通信中间件，它本身就是一个强大的、以数据为中心的、异步的发布-订阅系统。ROS2 的异步特性在很大程度上是继承自 DDS 的。DDS 负责实际的网络通信、发现、序列化、反序列化、可靠性保证等繁重工作。</p>
+<h4 id="执行器executor">2. 执行器（Executor）</h4>
+<p><strong>执行器是一个在节点内部不断循环的线程，负责检查各种异步事件（如定时器到期、收到订阅消息、收到服务请求等）</strong>，并调用相应的回调函数来处理这些事件。</p>
+<p>ROS2 主要提供两种执行器：</p>
+<ul>
+<li><strong>单线程执行器（<code>SingleThreadedExecutor</code>）</strong>
+<ul>
+<li><strong>工作方式</strong>： 在一个线程内循环处理所有回调函数。</li>
+<li><strong>特点</strong>： 简单、线程安全。但如果某个回调函数执行时间过长，会阻塞后续所有回调的执行，可能导致消息丢失或响应延迟。</li>
+<li><strong>适用场景</strong>： 回调函数轻量、执行快速，且对简单性要求高的应用。</li>
+</ul></li>
+<li><strong>多线程执行器（<code>MultiThreadedExecutor</code>）</strong>
+<ul>
+<li><strong>工作方式</strong>： 从一个共享的队列中取出回调函数，并将其分配到<strong>线程池</strong>中的空闲线程去执行。</li>
+<li><strong>特点</strong>： 实现了真正的并发处理。一个长时间运行的回调不会阻塞其他回调。但需要开发者注意回调函数内的<strong>线程安全</strong>问题（例如，对共享数据的访问需要使用互斥锁等机制）。</li>
+<li><strong>适用场景</strong>： 需要高性能、处理大量数据或有耗时回调函数的应用。这是更常用、更推荐的方式。</li>
+</ul></li>
+</ul>
+<h4 id="回调callbacks">3. 回调（Callbacks）</h4>
+<p>回调函数是响应异步事件的具体处理逻辑。ROS2 中主要有以下几种类型的回调：</p>
+<ul>
+<li><p><strong>订阅回调（Subscription Callback）</strong>： 当收到订阅的 topic 消息时触发。</p></li>
+<li><p><strong>定时器回调（Timer Callback）</strong>： 按照预设频率周期性触发。</p></li>
+<li><p><strong>服务回调（Service Callback）</strong>： 当收到服务请求时触发。</p></li>
+<li><p><strong>客户端回调（Client Callback）</strong>： 当收到服务响应时触发（异步客户端）。</p></li>
+</ul>
+<blockquote>
+<p>服务/客户端回调包括：Service服务/客户端、Action服务/客户端、Parameter服务/客户端</p>
+</blockquote>
+<h4 id="回调组callback-groups">4. 回调组（Callback Groups）</h4>
+<p>回调组是<strong>多线程执行器</strong>环境下用于管理回调执行策略的核心机制。它允许你对节点内的回调进行分组，并为不同的组设置不同的并发策略。</p>
+<ul>
+<li><strong>可互斥回调组（Mutually Exclusive）</strong>
+<ul>
+<li>组内的所有回调函数<strong>不能同时执行</strong>。执行器会保证同一时间只有一个该组内的回调被处理。</li>
+<li><strong>优点</strong>： 天然线程安全，无需额外加锁。</li>
+<li><strong>缺点</strong>： 并发性受限。</li>
+</ul></li>
+<li><strong>可重入回调组（Reentrant）</strong>
+<ul>
+<li>组内的回调函数<strong>可以同时执行</strong>。执行器会立即将它们分配给线程池中的不同线程。</li>
+<li><strong>优点</strong>： 最大化并发性，提高响应速度。</li>
+<li><strong>缺点</strong>： 如果回调函数会访问共享资源，开发者必须自行处理线程同步（如使用互斥锁）。</li>
+</ul></li>
+</ul>
+<p>一个节点可以创建多个回调组，并将不同的回调分配给不同的组。例如，你可以将控制算法的回调放在一个“可互斥组”中以保证数据安全，而将记录日志的回调放在一个“可重入组”中以获得最高性能。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建回调组</span></span><br><span class="line">reentrant_group_ = <span class="keyword">this</span>-&gt;<span class="built_in">create_callback_group</span>(rclcpp::CallbackGroupType::Reentrant);</span><br><span class="line">mutex_group_ = <span class="keyword">this</span>-&gt;<span class="built_in">create_callback_group</span>( rclcpp::CallbackGroupType::MutuallyExclusive);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建订阅者，使用可重入回调组</span></span><br><span class="line">rclcpp::SubscriptionOptions options;</span><br><span class="line">options.callback_group = reentrant_group_;</span><br><span class="line"></span><br><span class="line">subscription_ = <span class="keyword">this</span>-&gt;<span class="built_in">create_subscription</span>&lt;async_demo_msgs::msg::SensorData&gt;(</span><br><span class="line">    <span class="string">"sensor_data"</span>, qos,[](){},options);</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h3 id="异步架构工作流程详解">异步架构工作流程详解</h3>
+<p>让我们通过一个具体的例子（一个节点发布传感器数据，另一个节点订阅并处理）来串联整个流程：</p>
+<ol type="1">
+<li><strong>发布者节点</strong>：
+<ul>
+<li>程序调用 <code>publisher-&gt;publish(msg)</code>。</li>
+<li>消息 <code>msg</code> 被复制并放入与该发布者关联的<strong>出站队列</strong>中。<code>publish()</code> 函数立即返回。</li>
+<li><strong>后台线程（DDS 和执行器）</strong> 持续监视这个队列，一旦有消息，就通过 DDS 将其序列化并发送到网络上。</li>
+</ul></li>
+<li><strong>网络传输</strong>：
+<ul>
+<li>DDS 负责消息的可靠传输、发现订阅者、可能的多播等。</li>
+</ul></li>
+<li><strong>订阅者节点</strong>：
+<ul>
+<li>节点的 <strong>DDS 层</strong> 从网络接收到消息，将其反序列化。</li>
+<li>反序列化后的消息被放入与该订阅关联的<strong>入站队列</strong>中。</li>
+<li>节点的<strong>执行器</strong>（例如 <code>MultiThreadedExecutor</code>）在它的主循环中不断检查所有入站队列。</li>
+<li>执行器发现该订阅的队列中有新消息，它不会立即处理，而是根据该订阅所属的<strong>回调组</strong>的策略来决定下一步行动：
+<ul>
+<li>如果回调组是 <code>Mutually Exclusive</code>，且该组正有回调在执行，则新消息暂存于队列中等待。</li>
+<li>如果回调组是 <code>Reentrant</code>，或者线程池有空闲，执行器会将对应的<strong>回调函数对象</strong>放入线程池的任务队列中。</li>
+</ul></li>
+</ul></li>
+<li><strong>回调执行</strong>：
+<ul>
+<li>线程池中的某个工作线程从任务队列中取出这个回调函数并执行它。</li>
+<li>此时，执行器的主循环和工作线程是并发的，它可以继续去检查和处理其他事件（如新的消息、定时器等）。</li>
+</ul></li>
+</ol>
+<hr>
+<h3 id="总结">总结</h3>
+<ol type="1">
+<li><p><strong>首选多线程执行器</strong>： 对于绝大多数应用，<code>rclcpp::executors::MultiThreadedExecutor</code> 是更好的选择，它能更好地利用多核CPU，避免回调阻塞。</p></li>
+<li><p><strong>善用回调组</strong>： 这是实现高性能、高可靠性节点的关键。</p>
+<ul>
+<li>将对实时性要求高、但处理逻辑简单的回调（如电机控制指令发布）设为 <code>Reentrant</code>。</li>
+<li>将需要访问大量共享数据、逻辑复杂的回调（如SLAM建图）设为 <code>Mutually Exclusive</code>，或在其内部小心加锁。</li>
+</ul></li>
+<li><p><strong>保持回调简短</strong>： 回调函数应该尽可能快地执行完毕。<strong>如果需要长时间运行的任务（如复杂的计算、文件I/O），应该将其交给单独的线程处理(即使用多线程执行器并发处理异步事件)</strong>，或者使用 <code>async</code>/<code>await</code>（如果使用支持协程的语言）模式，避免阻塞执行器。</p></li>
+<li><p><strong>理解服务质量（QoS）</strong>： ROS2 的异步性与 QoS 配置紧密相关。例如，设置合适的<strong>队列深度</strong> 非常重要。如果发布消息的速度远大于处理速度，队列会被填满，导致旧消息被丢弃。你需要根据应用需求在“不丢失数据”和“低延迟”之间做出权衡。</p></li>
+</ol>
+<p>总而言之，ROS2 的异步架构通过 <strong>DDS + 执行器 + 回调组</strong> 的三层设计，提供了一个强大、灵活且高性能的通信框架。深入理解并正确运用这些概念，是开发出高效、稳定ROS2机器人系统的基石。</p>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-11</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/ROS2%E5%BC%82%E6%AD%A5%E6%9E%B6%E6%9E%84/'>
+                            ROS2异步架构
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/11/ROS2%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%88Executor%EF%BC%89%E6%A8%A1%E5%9E%8B/'>ROS2执行器（Executor）模型</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/11/ROS2%E5%8F%82%E6%95%B0%E7%B3%BB%E7%BB%9F/">ROS2参数系统</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

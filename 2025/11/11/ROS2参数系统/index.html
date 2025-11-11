@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="ROS2参数系统" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    ROS2参数系统
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-11</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：2.1k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：9分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h4 id="一概述">一、概述</h4>
+<p>ROS2参数系统是一个分布式的参数管理机制，每个节点都可以同时作为参数服务端和客户端。参数系统基于DDS的发布-订阅和Service-Client机制组合实现，但对用户透明。</p>
+<p><strong>架构特点</strong>：</p>
+<ul>
+<li><p>分布式：没有中心化化的参数服务器，任何节点都可以作为服务端和客户端</p></li>
+<li><p>双向性：节点可同时作为服务端和客户端</p></li>
+<li><p>动态配置：支持运行时参数修改</p></li>
+</ul>
+<h4 id="二参数服务端参数客户端实现">二、参数服务端、参数客户端实现</h4>
+<p><strong>每个ROS2节点默认都是参数服务端</strong>，通过声明参数自动启用；客户端需要使用手动实现</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//手动创建客户端</span></span><br><span class="line">param_client_Async = std::<span class="built_in">make_shared</span>&lt;rclcpp::AsyncParametersClient&gt;(<span class="keyword">this</span>, <span class="string">"parameter_server_node"</span>);</span><br><span class="line">param_client_Sync = std::<span class="built_in">make_shared</span>&lt;rclcpp::SyncParametersClient&gt;(<span class="keyword">this</span>, <span class="string">"parameter_server_node"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"rclcpp/rclcpp.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RoomSegmentationServer</span> : <span class="keyword">public</span> rclcpp::Node</span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">RoomSegmentationServer</span>() : <span class="built_in">Node</span>(<span class="string">"room_segmentation_server"</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">// 声明参数 - 自动成为参数服务端</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;<span class="built_in">declare_parameter</span>(<span class="string">"room_segmentation_algorithm"</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">this</span>-&gt;<span class="built_in">declare_parameter</span>(<span class="string">"display_segmented_map"</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">initialize_algorithm</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//注册参数回调函数</span></span><br><span class="line">        param_callback_handle_ = <span class="keyword">this</span>-&gt;<span class="built_in">add_on_set_parameters_callback</span>(</span><br><span class="line">            std::<span class="built_in">bind</span>(&amp;AdvancedRoomSegmentationServer::parameters_callback, </span><br><span class="line">                     <span class="keyword">this</span>, std::placeholders::_1));</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">initialize_algorithm</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// 获取参数值</span></span><br><span class="line">        algorithm = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"room_segmentation_algorithm"</span>).<span class="built_in">as_int</span>();</span><br><span class="line">        display_map = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"display_segmented_map"</span>).<span class="built_in">as_bool</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), </span><br><span class="line">                   <span class="string">"算法: %d, 显示地图: %s"</span>, algorithm, display_map ? <span class="string">"是"</span> : <span class="string">"否"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//参数回调函数</span></span><br><span class="line">    rcl_interfaces::<span class="function">msg::SetParametersResult <span class="title">parameters_callback</span><span class="params">(<span class="type">const</span> std::vector&lt;rclcpp::Parameter&gt; &amp;parameters)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> result = rcl_interfaces::msg::<span class="built_in">SetParametersResult</span>();</span><br><span class="line">        result.successful = <span class="literal">true</span>;        </span><br><span class="line"></span><br><span class="line">    	<span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; param : parameters)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(param.<span class="built_in">get_name</span>() == <span class="string">"room_segmentation_algorithm"</span>){</span><br><span class="line">                <span class="comment">//更新对应参数"room_segmentation_algorithm"的变量值algorithm</span></span><br><span class="line">                algorithm = param.<span class="built_in">as_int</span>();</span><br><span class="line">                <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"算法参数已更新为: %d"</span>, algorithm);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(param.<span class="built_in">get_name</span>() == <span class="string">"display_segmented_map"</span>){</span><br><span class="line">                <span class="comment">//更新对应参数"display_segmented_map"的变量值display_map</span></span><br><span class="line">                display_map = param.<span class="built_in">as_bool</span>();</span><br><span class="line">                <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"显示地图: %s"</span>, display_map? <span class="string">"是"</span> : <span class="string">"否"</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr param_callback_handle_;</span><br><span class="line">    <span class="type">int</span> algorithm;</span><br><span class="line">    <span class="type">bool</span> display_map;</span><br><span class="line">    </span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<!-- #### Client实现
+Todo -->
+<h4 id="三获取参数的多种方式">三、获取参数的多种方式</h4>
+<ol type="1">
+<li>节点内部获取参数</li>
+</ol>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.1 直接获取并转换类型</span></span><br><span class="line"><span class="type">int</span> algorithm = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"room_segmentation_algorithm"</span>).<span class="built_in">as_int</span>();</span><br><span class="line"><span class="type">bool</span> display_map = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"display_segmented_map"</span>).<span class="built_in">as_bool</span>();</span><br><span class="line"><span class="type">double</span> neighborhood = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"voronoi_neighborhood_index"</span>).<span class="built_in">as_double</span>();</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2" type="1">
+<li>通过参数客户端获取其它节点的参数</li>
+</ol>
+<blockquote>
+<p><strong>同步参数客户端：</strong>调用简单，阻塞等待;
+适合：初始化、低频调用</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ParameterClientNode</span> : <span class="keyword">public</span> rclcpp::Node</span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ParameterClientNode</span>() : <span class="built_in">Node</span>(<span class="string">"parameter_client"</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">// 创建同步参数客户端</span></span><br><span class="line">        param_client_ = std::<span class="built_in">make_shared</span>&lt;rclcpp::SyncParametersClient&gt;(</span><br><span class="line">            <span class="keyword">this</span>, <span class="string">"room_segmentation_server"</span>);</span><br><span class="line">            </span><br><span class="line">        <span class="comment">// 一直等待，直到参数服务可用</span></span><br><span class="line">        <span class="keyword">while</span> (!param_client_-&gt;<span class="built_in">wait_for_service</span>(std::chrono::<span class="built_in">seconds</span>(<span class="number">5</span>))) {</span><br><span class="line">        <span class="keyword">if</span> (!rclcpp::<span class="built_in">ok</span>()) {</span><br><span class="line">            <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Interrupted while waiting for service."</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Waiting for parameter service..."</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    rclcpp::SyncParametersClient::SharedPtr param_client_;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">get_parameters_from_server</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// 获取单个参数</span></span><br><span class="line">        <span class="type">int</span> algorithm = param_client_-&gt;<span class="built_in">get_parameter</span>&lt;<span class="type">int</span>&gt;(<span class="string">"room_segmentation_algorithm"</span>);</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"远程算法参数: %d"</span>, algorithm);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取多个参数</span></span><br><span class="line">        std::vector&lt;std::string&gt; param_names = {</span><br><span class="line">            <span class="string">"room_segmentation_algorithm"</span>,</span><br><span class="line">            <span class="string">"display_segmented_map"</span>,</span><br><span class="line">            <span class="string">"voronoi_neighborhood_index"</span></span><br><span class="line">        };</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">auto</span> parameters = param_client_-&gt;<span class="built_in">get_parameters</span>(param_names);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; param : parameters) {</span><br><span class="line">            <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"远程参数 %s = %s"</span>,</span><br><span class="line">                       param.<span class="built_in">get_name</span>().<span class="built_in">c_str</span>(),</span><br><span class="line">                       param.<span class="built_in">value_to_string</span>().<span class="built_in">c_str</span>());</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 列出所有参数名</span></span><br><span class="line">        <span class="keyword">auto</span> param_descriptors = param_client_-&gt;<span class="built_in">list_parameters</span>({}, <span class="number">10</span>);</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"远程节点参数列表:"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; name : param_descriptors.names) {</span><br><span class="line">            <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"  - %s"</span>, name.<span class="built_in">c_str</span>());</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>异步参数客户端：</strong></p>
+<blockquote>
+<p>高性能远程访问，非阻塞，高性能
+适合：实时系统，高频循环，GUI应用</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;rclcpp/rclcpp.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;rclcpp_components/register_node_macro.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AsyncParameterClient</span> : <span class="keyword">public</span> rclcpp::Node</span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">AsyncParameterClient</span>() : <span class="built_in">Node</span>(<span class="string">"async_parameter_client"</span>)</span><br><span class="line">  {</span><br><span class="line">    <span class="comment">// 创建异步参数客户端</span></span><br><span class="line">    param_client_ = std::<span class="built_in">make_shared</span>&lt;rclcpp::AsyncParametersClient&gt;(<span class="keyword">this</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取参数示例</span></span><br><span class="line">    <span class="built_in">get_parameters_async_example</span>();</span><br><span class="line">    </span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">get_parameters_async_example</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>{  </span><br><span class="line">    <span class="comment">// 异步获取单个参数</span></span><br><span class="line">    <span class="keyword">auto</span> int_future = param_client_-&gt;<span class="built_in">get_parameter</span>(<span class="string">"async_int"</span>, std::chrono::<span class="built_in">seconds</span>(<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用std::async处理异步结果</span></span><br><span class="line">    std::<span class="built_in">async</span>(std::launch::async, [<span class="keyword">this</span>, future = std::<span class="built_in">move</span>(int_future)]() {</span><br><span class="line">      <span class="keyword">try</span> {</span><br><span class="line">        rclcpp::Parameter param = future.<span class="built_in">get</span>();</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步获取参数 '%s': %s"</span>, </span><br><span class="line">                   param.<span class="built_in">get_name</span>().<span class="built_in">c_str</span>(), param.<span class="built_in">value_to_string</span>().<span class="built_in">c_str</span>());</span><br><span class="line">      } <span class="built_in">catch</span> (<span class="type">const</span> std::exception&amp; e) {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步获取参数异常: %s"</span>, e.<span class="built_in">what</span>());</span><br><span class="line">      }</span><br><span class="line">    });</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 异步获取多个参数</span></span><br><span class="line">    <span class="keyword">auto</span> multi_future = param_client_-&gt;<span class="built_in">get_parameters</span>(</span><br><span class="line">      {<span class="string">"async_string"</span>, <span class="string">"async_double"</span>}, std::chrono::<span class="built_in">seconds</span>(<span class="number">3</span>));</span><br><span class="line">    </span><br><span class="line">    std::<span class="built_in">async</span>(std::launch::async, [<span class="keyword">this</span>, future = std::<span class="built_in">move</span>(multi_future)]() {</span><br><span class="line">      <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">auto</span> params = future.<span class="built_in">get</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; param : params) {</span><br><span class="line">          <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步获取多参数 '%s': %s"</span>, </span><br><span class="line">                     param.<span class="built_in">get_name</span>().<span class="built_in">c_str</span>(), param.<span class="built_in">value_to_string</span>().<span class="built_in">c_str</span>());</span><br><span class="line">        }</span><br><span class="line">      } <span class="built_in">catch</span> (<span class="type">const</span> std::exception&amp; e) {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步获取多参数异常: %s"</span>, e.<span class="built_in">what</span>());</span><br><span class="line">      }</span><br><span class="line">    });</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  rclcpp::AsyncParametersClient::SharedPtr param_client_;</span><br><span class="line">  std::shared_ptr&lt;rclcpp::ParameterCallbackHandle&gt; param_callback_handle_;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="四设置参数的多种方式">四、设置参数的多种方式</h4>
+<ol type="1">
+<li>节点内部设置参数</li>
+</ol>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> new_algorithm = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">this</span>-&gt;<span class="built_in">set_parameter</span>(rclcpp::<span class="built_in">Parameter</span>(<span class="string">"room_segmentation_algorithm"</span>, new_algorithm))</span><br><span class="line"><span class="comment">//批量设置参数</span></span><br><span class="line"><span class="keyword">this</span>-&gt;<span class="built_in">set_parameters</span>({</span><br><span class="line">    rclcpp::<span class="built_in">Parameter</span>(<span class="string">"room_segmentation_algorithm"</span>, new_algorithm),</span><br><span class="line">    rclcpp::<span class="built_in">Parameter</span>(<span class="string">"display_segmented_map"</span>, <span class="literal">true</span>)</span><br><span class="line">});    </span><br></pre></td></tr></tbody></table></figure>
+<ol start="2" type="1">
+<li>通过参数客户端设置其它节点的参数</li>
+</ol>
+<blockquote>
+<p>设置参数会触发服务端通过 <code>this-&gt;add_on_set_parameters_callback()</code> 注册的回调函数</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在其他节点中</span></span><br><span class="line"><span class="keyword">auto</span> param_client = std::<span class="built_in">make_shared</span>&lt;rclcpp::AsyncParametersClient&gt;(</span><br><span class="line">    <span class="keyword">this</span>, <span class="string">"room_segmentation_server"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置参数</span></span><br><span class="line"><span class="keyword">auto</span> future = param_client-&gt;<span class="built_in">set_parameters</span>({</span><br><span class="line">    rclcpp::<span class="built_in">Parameter</span>(<span class="string">"room_segmentation_algorithm"</span>, <span class="number">4</span>),</span><br><span class="line">    rclcpp::<span class="built_in">Parameter</span>(<span class="string">"display_segmented_map"</span>, <span class="literal">true</span>)},</span><br><span class="line">    std::chrono::<span class="built_in">seconds</span>(<span class="number">5</span>));   <span class="comment">//5s超时</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用std::async处理异步结果</span></span><br><span class="line">    std::<span class="built_in">async</span>(std::launch::async, [<span class="keyword">this</span>, future = std::<span class="built_in">move</span>(future)]() {</span><br><span class="line">      <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">auto</span> results = future.<span class="built_in">get</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; result : results) {</span><br><span class="line">          <span class="keyword">if</span> (result.successful) {</span><br><span class="line">            <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步设置参数 '%s' 成功"</span>, </span><br><span class="line">                        result.reason.<span class="built_in">c_str</span>());</span><br><span class="line">          } <span class="keyword">else</span> {</span><br><span class="line">            <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步设置参数 '%s' 失败"</span>, </span><br><span class="line">                        result.reason.<span class="built_in">c_str</span>());</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      } <span class="built_in">catch</span> (<span class="type">const</span> std::exception&amp; e) {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步设置参数异常: %s"</span>, e.<span class="built_in">what</span>());</span><br><span class="line">      }</span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用spin_until_future_complete处理异步结果</span></span><br><span class="line">    <span class="keyword">if</span> (rclcpp::<span class="built_in">spin_until_future_complete</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_node_base_interface</span>(), future) !=</span><br><span class="line">        rclcpp::FutureReturnCode::SUCCESS)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Failed to set parameters"</span>);</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>ROS2异步操作方式对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>std::async</code> 方式</th>
+<th><code>spin_until_future_complete</code> 方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>线程模型</strong></td>
+<td>创建新线程等待</td>
+<td>在当前线程的事件循环中等待</td>
+</tr>
+<tr>
+<td><strong>阻塞性</strong></td>
+<td>非阻塞调用</td>
+<td>阻塞当前线程直到完成或超时</td>
+</tr>
+<tr>
+<td><strong>并发性</strong></td>
+<td>支持并发多个异步操作</td>
+<td>顺序执行，一次处理一个future</td>
+</tr>
+<tr>
+<td><strong>资源开销</strong></td>
+<td>有线程创建开销</td>
+<td>无额外线程开销</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>需要并行处理多个异步操作</td>
+<td>简单的顺序异步操作</td>
+</tr>
+</tbody>
+</table>
+<p><code>std::async</code> 方式</p>
+<ul>
+<li><p><strong>优点</strong>：真正的异步非阻塞，适合高并发场景</p></li>
+<li><p><strong>缺点</strong>：线程管理复杂，资源开销较大</p></li>
+<li><p><strong>适用情况</strong>：需要同时处理多个独立的异步操作</p></li>
+</ul>
+<p><code>spin_until_future_complete</code> 方式</p>
+<ul>
+<li><p><strong>优点</strong>：代码简洁，资源效率高，符合ROS2事件循环模型</p></li>
+<li><p><strong>缺点</strong>：会阻塞当前线程，不适合高并发场景</p></li>
+<li><p><strong>适用情况</strong>：简单的顺序异步操作，大多数ROS2应用的推荐方式</p></li>
+</ul>
+<p>选择建议：
+对于大多数ROS2应用，推荐使用 <strong><code>spin_until_future_complete</code> 方式</strong>，因为它更符合ROS2的设计哲学且资源效率更高。只有在确实需要并行处理多个独立异步操作时，才考虑使用 <code>std::async</code> 方式。</p>
+<ol start="3" type="1">
+<li>通过命令行修改</li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有参数</span></span><br><span class="line">ros2 param list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取参数值</span></span><br><span class="line">ros2 param get /room_segmentation_server room_segmentation_algorithm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置参数值</span></span><br><span class="line">ros2 param <span class="built_in">set</span> /room_segmentation_server room_segmentation_algorithm 2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出参数到YAML</span></span><br><span class="line">ros2 param dump /room_segmentation_server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从YAML文件加载参数</span></span><br><span class="line">ros2 param load /room_segmentation_server parameters.yaml</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ol start="4" type="1">
+<li>通过launch文件设置参数</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># launch文件中的参数设置</span></span><br><span class="line"><span class="keyword">from</span> launch <span class="keyword">import</span> LaunchDescription</span><br><span class="line"><span class="keyword">from</span> launch_ros.actions <span class="keyword">import</span> Node</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_launch_description</span>():</span><br><span class="line">    <span class="keyword">return</span> LaunchDescription([</span><br><span class="line">        Node(</span><br><span class="line">            package=<span class="string">'ipa_room_segmentation'</span>,</span><br><span class="line">            executable=<span class="string">'room_segmentation_server'</span>,</span><br><span class="line">            name=<span class="string">'room_segmentation_server'</span>,</span><br><span class="line">            <span class="comment">#设置参数，使用字典</span></span><br><span class="line">            parameters=[{</span><br><span class="line">                <span class="string">'room_segmentation_algorithm'</span>: <span class="number">3</span>,</span><br><span class="line">                <span class="string">'display_segmented_map'</span>: <span class="literal">False</span>,</span><br><span class="line">                <span class="string">'voronoi_neighborhood_index'</span>: <span class="number">280</span></span><br><span class="line">            }]</span><br><span class="line">        )</span><br><span class="line">    ])</span><br></pre></td></tr></tbody></table></figure>
+<ol start="5" type="1">
+<li>YAML参数文件</li>
+</ol>
+<ul>
+<li><p>ROS2格式
+</p><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/**:</span></span><br><span class="line">  <span class="attr">ros__parameters:</span></span><br><span class="line">    <span class="comment"># 基本类型</span></span><br><span class="line">    <span class="attr">int_param:</span> <span class="number">42</span></span><br><span class="line">    <span class="attr">double_param:</span> <span class="number">3.14</span></span><br><span class="line">    <span class="attr">bool_param:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">string_param:</span> <span class="string">"hello world"</span></span><br><span class="line">    <span class="comment"># 数组</span></span><br><span class="line">    <span class="attr">int_array:</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="attr">double_array:</span> [<span class="number">1.1</span>, <span class="number">2.2</span>, <span class="number">3.3</span>]</span><br><span class="line">    <span class="attr">string_array:</span> [<span class="string">"algo1"</span>, <span class="string">"algo2"</span>, <span class="string">"algo3"</span>]</span><br><span class="line">    <span class="attr">bool_array:</span> [<span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">true</span>]</span><br><span class="line">    <span class="comment"># 嵌套结构</span></span><br><span class="line">    <span class="attr">complex_param:</span></span><br><span class="line">      <span class="attr">sub_param1:</span> <span class="number">100</span></span><br><span class="line">      <span class="attr">sub_param2:</span> <span class="string">"test"</span></span><br><span class="line">      <span class="attr">sub_array:</span> [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>节点特定命名空间
+</p><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/room_segmentation_server:</span></span><br><span class="line">  <span class="attr">ros__parameters:</span></span><br><span class="line">    <span class="attr">room_segmentation_algorithm:</span> <span class="number">3</span></span><br><span class="line">    <span class="attr">display_segmented_map:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">room_area_factor_lower_limit_voronoi:</span> <span class="number">0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#多个节点</span></span><br><span class="line"><span class="string">/camera_node:</span></span><br><span class="line">  <span class="attr">ros__parameters:</span></span><br><span class="line">    <span class="attr">exposure_time:</span> <span class="number">1000</span></span><br><span class="line">    <span class="attr">resolution:</span> <span class="string">"1920x1080"</span></span><br><span class="line">    <span class="attr">frame_rate:</span> <span class="number">30.0</span></span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p><strong>加载yaml参数文件</strong></p></li>
+</ul>
+<p><strong>方式1：通过launch文件加载</strong>
+</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> launch <span class="keyword">import</span> LaunchDescription</span><br><span class="line"><span class="keyword">from</span> launch_ros.actions <span class="keyword">import</span> Node</span><br><span class="line"><span class="keyword">from</span> ament_index_python.packages <span class="keyword">import</span> get_package_share_directory</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_launch_description</span>():</span><br><span class="line">    <span class="comment"># 获取参数文件路径</span></span><br><span class="line">    param_file = os.path.join(</span><br><span class="line">        get_package_share_directory(<span class="string">'ipa_room_segmentation'</span>),</span><br><span class="line">        <span class="string">'config'</span>,</span><br><span class="line">        <span class="string">'room_segmentation_params.yaml'</span></span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> LaunchDescription([</span><br><span class="line">        Node(</span><br><span class="line">            package=<span class="string">'ipa_room_segmentation'</span>,</span><br><span class="line">            executable=<span class="string">'room_segmentation_server'</span>,</span><br><span class="line">            name=<span class="string">'room_segmentation_server'</span>,</span><br><span class="line">            parameters=[param_file],  <span class="comment"># 加载参数文件路径</span></span><br><span class="line">            output=<span class="string">'screen'</span>,</span><br><span class="line">            emulate_tty=<span class="literal">True</span></span><br><span class="line">        )</span><br><span class="line">    ])</span><br></pre></td></tr></tbody></table></figure>
+当通过launch文件加载YAML文件时，ROS2启动系统会：<p></p>
+<ul>
+<li><p>自动声明参数：YAML中的所有参数都会被自动声明，等效于代码中声明</p></li>
+<li><p>设置参数值：参数会被设置为YAML文件中指定的值</p></li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RoomSegmentationServer</span> : <span class="keyword">public</span> rclcpp::Node</span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">RoomSegmentationServer</span>() : <span class="built_in">Node</span>(<span class="string">"room_segmentation_server"</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">// 以下声明是多余的，因为YAML文件已经处理了</span></span><br><span class="line">        <span class="comment">// this-&gt;declare_parameter("room_segmentation_algorithm", 0);  // 不需要</span></span><br><span class="line">        <span class="comment">// this-&gt;declare_parameter("display_segmented_map", false);     // 不需要</span></span><br><span class="line">        <span class="comment">// this-&gt;declare_parameter("max_iterations", 500);              // 不需要</span></span><br><span class="line">        <span class="comment">// this-&gt;declare_parameter("distance_threshold", 0.1);          // 不需要</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 直接使用参数即可</span></span><br><span class="line">        <span class="type">int</span> algorithm = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"room_segmentation_algorithm"</span>).<span class="built_in">as_int</span>();</span><br><span class="line">        <span class="type">bool</span> display = <span class="keyword">this</span>-&gt;<span class="built_in">get_parameter</span>(<span class="string">"display_segmented_map"</span>).<span class="built_in">as_bool</span>();</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>方式2：在源代码中加载参数文件</strong></p>
+<blockquote>
+<p>手动解析yaml文件，这绕过了ROS2的参数系统，不建议使用</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在节点构造函数中</span></span><br><span class="line"><span class="built_in">RoomSegmentationServer</span>() : <span class="built_in">Node</span>(<span class="string">"room_segmentation_server"</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 方法1：使用节点选项</span></span><br><span class="line">    <span class="comment">// 这需要在启动时通过命令行传递参数文件</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 方法2：编程方式读取YAML（复杂，不推荐）</span></span><br><span class="line">    <span class="comment">// load_parameters_from_yaml("/path/to/params.yaml");</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复杂的YAML解析函数（一般不推荐，使用ROS2内置机制更好）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">load_parameters_from_yaml</span><span class="params">(<span class="type">const</span> std::string&amp; yaml_file)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="comment">// 需要手动解析YAML并调用declare_parameter</span></span><br><span class="line">    <span class="comment">// 这绕过了ROS2的参数系统，不建议使用</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-11</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/11/ROS2%E5%BC%82%E6%AD%A5%E6%9E%B6%E6%9E%84%E8%AF%A6%E8%A7%A3/'>ROS2异步架构详解</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/11/%E5%9F%BA%E4%BA%8EFreeRTOS%E7%9A%84STM32%E5%BC%82%E6%AD%A5%E8%A7%A3%E8%80%A6%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E4%BB%A5UART-DMA%E5%8F%91%E9%80%81%E4%B8%BA%E4%BE%8B/">基于FreeRTOS的STM32异步解耦通信机制设计与实现—以UART DMA发送为例</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

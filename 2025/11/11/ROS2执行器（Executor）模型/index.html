@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="ROS2执行器（Executor）模型" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝 文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌 标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁 分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟 关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    ROS2执行器（Executor）模型
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-11</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.4k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：5分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">主线程spin()</span><br><span class="line">    │</span><br><span class="line">    ├── 执行器轮询</span><br><span class="line">    │   ├── 定时器回调</span><br><span class="line">    │   ├── 订阅消息回调 </span><br><span class="line">    │   ├── 服务响应回调</span><br><span class="line">    │   ├── 参数响应回调 </span><br><span class="line">    │   ├── XXX响应回调</span><br><span class="line">    │</span><br><span class="line">    └── 异步参数客户端回调函数调用（非阻塞，立即返回）</span><br></pre></td></tr></tbody></table></figure>
+<p><code>rclcpp::spin()</code>意味着不断循环处理事件，<code>spin()</code>负责处理以下所有类型的异步事件：</p>
+<table>
+<colgroup>
+<col style="width: 35%">
+<col style="width: 35%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">异步事件(Executor可调用对象)</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Timer 定时器回调</strong></td>
+<td style="text-align: left;"><code>create_wall_timer()</code> 创建的回调函数</td>
+<td style="text-align: left;">定时执行的任务</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Topic 订阅消息回调</strong></td>
+<td style="text-align: left;"><code>create_subscription()</code> 创建的回调函数</td>
+<td style="text-align: left;">接收到的Topic消息处理</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Service 客户请求回调</strong></td>
+<td style="text-align: left;"><code>create_service()</code> 注册的服务回调函数</td>
+<td style="text-align: left;">处理来自客户端的服务调用请求</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Service 服务响应回调</strong></td>
+<td style="text-align: left;"><code>async_send_request()</code> 的响应回调</td>
+<td style="text-align: left;">异步服务调用返回的结果处理</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action Goal响应回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal()</code> 的目标响应回调</td>
+<td style="text-align: left;">动作服务器对目标请求的接受/拒绝响应</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action Feedback回调</strong></td>
+<td style="text-align: left;">动作客户端的反馈回调函数</td>
+<td style="text-align: left;">动作执行过程中的进度更新信息</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action Result 回调</strong></td>
+<td style="text-align: left;">动作客户端的结果回调函数</td>
+<td style="text-align: left;">动作执行完成的最终结果</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>参数变更回调</strong></td>
+<td style="text-align: left;"><code>add_on_set_parameters_callback()</code> 注册的回调</td>
+<td style="text-align: left;">节点参数被设置或修改时的处理</td>
+</tr>
+</tbody>
+</table>
+<h5 id="单线程执行器默认情况">单线程执行器(默认情况)</h5>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv);</span><br><span class="line">    <span class="keyword">auto</span> node = std::<span class="built_in">make_shared</span>&lt;AsyncVsSyncExample&gt;();</span><br><span class="line">    </span><br><span class="line">    executor.<span class="built_in">spin</span>(node);  <span class="comment">// 在这个线程中处理所有回调</span></span><br><span class="line">    </span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>根据ROS2官网所述<code>rclcpp::spin()</code>函数其实就是<code>SingleThreadedExecutor</code>全局包装，所以上述代码也可以写为：
+</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv); </span><br><span class="line">    <span class="keyword">auto</span> node = std::<span class="built_in">make_shared</span>&lt;AsyncVsSyncExample&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 单线程执行器 - 所有回调在同一个线程中执行</span></span><br><span class="line">    rclcpp::executors::SingleThreadedExecutor executor;</span><br><span class="line">    executor.<span class="built_in">add_node</span>(node);</span><br><span class="line">    executor.<span class="built_in">spin</span>();  <span class="comment">// 在这个线程中处理所有回调</span></span><br><span class="line">    </span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+对于单线程执行器，整个过程就一个线程（也就是调用spin()的线程），主要循环尝试获取可调用对象，如果成功，就执行回调函数。这样加入到单线程执行器中节点的内部回调串行执行，流程图如下：<p></p>
+<center>
+<a href="1.png" class="gallery-item" style="box-shadow: none;"> <img src="1.png" width="60%"></a>
+</center>
+<p>在ROS2 Humble官网文档中，有一张图简单说明了底层的调度过程。</p>
+<center>
+<a href="executors_basic_principle.png" class="gallery-item" style="box-shadow: none;"> <img src="executors_basic_principle.png" width="80%"></a>
+</center>
+<blockquote>
+<p>左图上方圆形表示回调函数，例如<code>processOdom()</code>是<code>/odom</code>话题的回调
+左图下方信封形状代表接收到话题，例如<code>/goal</code>有两个数据，<code>/odom</code>有三个数据，<code>/cmd</code>没有数据</p>
+</blockquote>
+<p>左图说明了调度的三个过程：</p>
+<ol type="1">
+<li><p><code>wait</code>：<strong>尝试等待底层(Middleware)数据到来</strong>。初始化wait_set，并根据底层数据情况，设置wait_set（wait_set可以简单理解成数组，每个数组元素表示队列里是否有可处理的数据，1表示有可处理数据，0表示没有数据）。图中/goal和/odom有消息，对应的掩码就是1，/cmd没有消息，对应的掩码就是0。所以wait_set就是101。这个过程在get_next_executable()函数中。</p></li>
+<li><p><code>take</code>：<strong>获取一个可执行对象</strong>，这个过程在get_next_executable()函数中。</p></li>
+<li><p><code>execute</code>：<strong>拿到可调用对象的线程，会直接调用回调函数</strong>。这个过程在execute_any_executable()函数中。</p></li>
+</ol>
+<h5 id="多线程执行器">多线程执行器</h5>
+<p>单线程执行器的问题：</p>
+<ul>
+<li><p>所有回调都是串行执行，如果其中回调执行的工作比较多，其他回调必须等待，造成调度后延。</p></li>
+<li><p>即使回调执行很短，但如果你有很多回调需要服务，甚至需要他们同时执行，单线程执行器很难满足。</p></li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> node = std::<span class="built_in">make_shared</span>&lt;AsyncVsSyncExample&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 多线程执行器 - 回调可能在多个线程中执行</span></span><br><span class="line">    rclcpp::<span class="function">executors::MultiThreadedExecutor <span class="title">executor</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        rclcpp::executors::MultiThreadedExecutor::Options().number_of_threads(<span class="number">4</span>))</span></span>;</span><br><span class="line">    </span><br><span class="line">    executor.<span class="built_in">add_node</span>(node);</span><br><span class="line">    executor.<span class="built_in">spin</span>();  <span class="comment">// 在多个线程中处理回调</span></span><br><span class="line">    </span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<center>
+<a href="1.drawio.svg" class="gallery-item" style="box-shadow: none;"> <img src="1.drawio.svg"></a>
+</center>
+<ol type="1">
+<li><strong>问题1：多线程执行器，与单线程执行器有关系？执行器会启动多少线程？</strong></li>
+</ol>
+<ul>
+<li><p>单线程执行器和多线程执行器继承自同一个父类<code>Executor</code>，具有相似的编码结构。</p></li>
+<li><p>在多线程执行器构造时，可以指定大于0的线程数目，或者默认线程数目<code>std::thread::hardware_concurrency()</code>，一般为机器CPU核心数。</p></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>问题2：多线程执行器spin()和单线程spin()差异在哪里？</strong></li>
+</ol>
+<ul>
+<li><p>多线程执行器的spin()启动多个线程，如果用户只启动一个线程，就退化到单线程执行器</p></li>
+<li><p>spin()互斥执行get_next_executable()，并发执行execute_any_executable()，给予回调并发执行能力</p></li>
+</ul>
+<ol start="3" type="1">
+<li><strong>问题3：什么是回调组？</strong></li>
+</ol>
+<p>回调组是<strong>多线程执行器</strong>环境下用于管理回调执行策略的核心机制。它允许你对节点内的回调进行分组，并为不同的组设置不同的并发策略。</p>
+<ul>
+<li>互斥回调组：（Mutually Exclusive Callback Group）
+<ul>
+<li><p>组内的所有回调函数不能同时执行。执行器会保证同一时间只有一个该组内的回调被处理。</p></li>
+<li><p>优点：<strong>天然线程安全，无需额外加锁。</strong></p></li>
+<li><p>缺点：并发性受限</p></li>
+</ul></li>
+<li>可重入回调组（Reentrant Callback Group）
+<ul>
+<li><p>组内的回调函数可以同时执行。<strong>执行器会立即将它们分配给线程池中的不同线程。</strong></p></li>
+<li><p>优点：最大化并发性，提高响应速度。</p></li>
+<li><p>缺点：如果回调函数会访问<strong>共享资源</strong>，开发者必须自行处理线程同步（如使用互斥锁）</p></li>
+</ul></li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建回调组</span></span><br><span class="line">reentrant_group_ = <span class="keyword">this</span>-&gt;<span class="built_in">create_callback_group</span>(rclcpp::CallbackGroupType::Reentrant);</span><br><span class="line">mutex_group_ = <span class="keyword">this</span>-&gt;<span class="built_in">create_callback_group</span>( rclcpp::CallbackGroupType::MutuallyExclusive);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建订阅者，使用可重入回调组</span></span><br><span class="line">rclcpp::SubscriptionOptions options;</span><br><span class="line">options.callback_group = reentrant_group_;</span><br><span class="line"></span><br><span class="line">subscription_ = <span class="keyword">this</span>-&gt;<span class="built_in">create_subscription</span>&lt;async_demo_msgs::msg::SensorData&gt;(</span><br><span class="line">    <span class="string">"sensor_data"</span>, qos,[](){},options);</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<p>参考文献：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1894524262410346613">ROS2执行器(Executor)详解</a></li>
+</ol>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-11</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/ROS2%E5%BC%82%E6%AD%A5%E6%9E%B6%E6%9E%84/'>
+                            ROS2异步架构
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/11/ROS2%E5%BC%82%E6%AD%A5%E6%9E%B6%E6%9E%84%E8%AF%A6%E8%A7%A3/">ROS2异步架构详解</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>
