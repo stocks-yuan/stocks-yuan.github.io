@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="常用电机汇总" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    常用电机汇总
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-14</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.9k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：6分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><blockquote>
+<p>文档使用AI工具生成</p>
+</blockquote>
+<h3 id="五种常见电机对比表">五种常见电机对比表</h3>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">直流有刷电机</th>
+<th style="text-align: left;"><strong>直流无刷电机</strong></th>
+<th style="text-align: left;">步进电机</th>
+<th style="text-align: left;">永磁同步电机</th>
+<th style="text-align: left;">交流异步电机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>供电方式</strong></td>
+<td style="text-align: left;">直流电</td>
+<td style="text-align: left;"><strong>直流电 + 电子换向器</strong></td>
+<td style="text-align: left;">直流电 + 驱动器（脉冲信号）</td>
+<td style="text-align: left;">交流电（通常由直流电池经逆变器转换而来）</td>
+<td style="text-align: left;">交流电</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>控制原理</strong></td>
+<td style="text-align: left;">改变直流电压/电流</td>
+<td style="text-align: left;">通过控制器改变供电相序（电子换向）</td>
+<td style="text-align: left;">控制电脉冲的数量和频率</td>
+<td style="text-align: left;">控制交流电的频率和幅值（矢量控制）</td>
+<td style="text-align: left;">控制交流电的频率和幅值</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>转速特性</strong></td>
+<td style="text-align: left;">转速与电压大致成正比</td>
+<td style="text-align: left;"><strong>转速与电压成正比</strong></td>
+<td style="text-align: left;"><strong>转速与脉冲频率严格成正比</strong></td>
+<td style="text-align: left;">转子转速与磁场转速<strong>同步</strong></td>
+<td style="text-align: left;">转子转速<strong>略低于</strong>磁场转速，存在“转差率”</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>扭矩特性</strong></td>
+<td style="text-align: left;">起动扭矩大</td>
+<td style="text-align: left;"><strong>起动扭矩极大</strong>，扭矩特性平滑</td>
+<td style="text-align: left;"><strong>低速扭矩大</strong>，但随转速升高而下降</td>
+<td style="text-align: left;">扭矩密度高，调速范围宽</td>
+<td style="text-align: left;">起动扭矩较大，高速性能好</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>效率</strong></td>
+<td style="text-align: left;">中等（电刷损耗）</td>
+<td style="text-align: left;"><strong>高</strong>（无电刷损耗）</td>
+<td style="text-align: left;">中等（存在振荡和发热）</td>
+<td style="text-align: left;"><strong>很高</strong>（尤其在常用转速区）</td>
+<td style="text-align: left;">较高（高速时效率高）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>结构复杂度</strong></td>
+<td style="text-align: left;">简单（电机本体）</td>
+<td style="text-align: left;">较复杂（电机+控制器）</td>
+<td style="text-align: left;">较简单</td>
+<td style="text-align: left;">复杂（需逆变器和复杂控制算法）</td>
+<td style="text-align: left;">简单、坚固（转子为鼠笼）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>可靠性/维护</strong></td>
+<td style="text-align: left;"><strong>低</strong>（电刷为易损件）</td>
+<td style="text-align: left;"><strong>高</strong>（无刷，电子部件是寿命关键）</td>
+<td style="text-align: left;"><strong>高</strong>（无刷）</td>
+<td style="text-align: left;"><strong>高</strong>（无刷、无机械接触）</td>
+<td style="text-align: left;"><strong>极高</strong>（无刷、结构坚固）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>成本</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">中等（电机+控制器）</td>
+<td style="text-align: left;">中等（电机+驱动器）</td>
+<td style="text-align: left;">高（含稀土永磁体和逆变器）</td>
+<td style="text-align: left;">较低（无永磁体）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>核心特点</strong></td>
+<td style="text-align: left;">控制简单，成本低</td>
+<td style="text-align: left;"><strong>高效、长寿、高可靠性</strong>，快速动态响应</td>
+<td style="text-align: left;"><strong>精确定位</strong>，无累积误差</td>
+<td style="text-align: left;"><strong>超高效率、高功率密度</strong>，平滑安静</td>
+<td style="text-align: left;"><strong>坚固耐用、成本低</strong>，高速性能好</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>主要应用场景</strong></td>
+<td style="text-align: left;">玩具、简单工具</td>
+<td style="text-align: left;"><strong>无人机、电脑风扇</strong>、电动工具、航模</td>
+<td style="text-align: left;"><strong>3D打印机、CNC机床</strong>、精密仪器</td>
+<td style="text-align: left;"><strong>新能源汽车主驱动</strong>、变频空调、精密伺服</td>
+<td style="text-align: left;">工业风机水泵、特斯拉Model S/X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="说明文档">说明文档</h3>
+<h4 id="直流有刷电机">1. 直流有刷电机</h4>
+<p>这是最传统、最基本的电机类型。其核心特点是内部有一个<strong>机械换向器</strong>和<strong>电刷</strong>。直流电通过电刷和换向器为转子的线圈供电，通过不断切换电流方向来产生持续的旋转力。</p>
+<ul>
+<li><p><strong>优点</strong>：控制极其简单（只需改变电压即可调速），成本低，起动扭矩大。</p></li>
+<li><p><strong>缺点</strong>：电刷和换向器之间存在机械摩擦，会产生火花、噪音和电磁干扰，且为易损件，需要定期更换，可靠性较低，效率也不高。</p></li>
+<li><p><strong>应用</strong>：正逐渐被无刷电机取代，但仍广泛应用于对成本敏感、控制要求不高的场合。</p></li>
+</ul>
+<center>
+<a href="1.jpeg" class="gallery-item" style="box-shadow: none;"> <img src="1.jpeg" width="50%"></a>
+</center>
+<br>
+<center>
+<a href="2.webp" class="gallery-item" style="box-shadow: none;"> <img src="2.webp" width="50%"></a>
+</center>
+<h4 id="直流无刷电机bldc">2. 直流无刷电机(BLDC)</h4>
+<p>直流无刷电机可以看作是用<strong>电子线路</strong>取代了机械电刷和换向器的直流有刷电机。其转子是永磁体，定子是绕组。它需要一个电子控制器来检测转子的位置，并据此有序地给定子不同绕组通电，<strong>形成旋转磁场来驱动永磁转子</strong>。</p>
+<ul>
+<li><p><strong>优点</strong>：继承了直流有刷电机起动扭矩大、调速简单的优点，同时克服了其缺点：效率高、寿命长、噪音低、维护少。</p></li>
+<li><p><strong>缺点</strong>：需要复杂的控制器和转子位置传感器，成本高于有刷电机。</p></li>
+<li><p><strong>应用</strong>：对可靠性和效率要求高的场合，如电脑散热风扇、无人机、电动工具、家用电器等。</p></li>
+</ul>
+<center>
+<a href="3.jpg" class="gallery-item" style="box-shadow: none;"> <img src="3.jpg" width="50%"></a>
+</center>
+<h4 id="步进电机">3. 步进电机</h4>
+<p>步进电机将电脉冲信号转换为精确的角位移。它不连续旋转，而是<strong>一步一步地转动</strong>。每输入一个脉冲信号，电机就按预定方向转动一个固定的角度（步距角）。</p>
+<ul>
+<li><p><strong>优点</strong>：可以实现<strong>开环控制</strong>（无需位置传感器即可实现精确定位），低速时具有很大的扭矩，定位精度高且无累积误差。</p></li>
+<li><p><strong>缺点</strong>：存在振荡和失步风险（如果负载超过其扭矩），高速性能差，效率不高且运行时有噪音和振动。</p></li>
+<li><p><strong>应用</strong>：所有需要精确控制位置和速度的开环控制系统。</p></li>
+</ul>
+<center>
+<a href="MT1-28_f01.gif" class="gallery-item" style="box-shadow: none;"> <img src="MT1-28_f01.gif" width="70%"></a>
+</center>
+<h4 id="永磁同步电机pmsm">4. 永磁同步电机(PMSM)</h4>
+<blockquote>
+<p>从本质上讲，直流无刷电机和永磁同步电机在<strong>机械结构</strong>上几乎是相同的，都是<strong>永磁转子+绕组定子</strong>。它们的核心区别在于<strong>供电波形和控制目标</strong>：</p>
+<ul>
+<li><p><strong>直流无刷电机</strong>：通常采用方波电流驱动，控制目标相对简单，侧重于实现良好的调速性能。您可以理解为“永磁同步电机的一种简化控制版本”。</p></li>
+<li><p><strong>永磁同步电机</strong>：通常采用正弦波电流驱动，使用更复杂的矢量控制算法，目标是实现极其平稳、安静、高效的运行，扭矩波动极小。</p></li>
+</ul>
+</blockquote>
+<p>这是当前新能源汽车的主流选择。其转子使用<strong>高性能永磁体</strong>（如钕铁硼）来产生磁场。定子通入由逆变器产生的三相交流电，形成旋转磁场，“吸引”着永磁体转子以<strong>完全相同（同步）</strong> 的速度旋转。</p>
+<ul>
+<li><p><strong>优点</strong>：<strong>效率和功率密度极高</strong>（同体积下功率最大），调速范围宽，运行平稳、噪音小。</p></li>
+<li><p><strong>缺点</strong>：成本高（依赖稀土永磁材料），在极端高温下有退磁风险，控制系统复杂（需要转子位置传感器和复杂的算法）。</p></li>
+<li><p><strong>应用</strong>：新能源汽车驱动电机、工业伺服系统、家用变频电器（如空调、洗衣机）。</p></li>
+</ul>
+<center>
+<a href="3508.jpg" class="gallery-item" style="box-shadow: none;"> <img src="3508.jpg" width="50%"></a>
+</center>
+<h4 id="交流异步电机">5. 交流异步电机</h4>
+<p>也称为感应电机，是工业领域最常用的电机。其转子不是永磁体，而是由<strong>短路导条</strong>组成的“鼠笼”结构。定子的旋转磁场“切割”转子导条，在其中<strong>感应出电流</strong>，从而产生磁场。转子转速永远“追赶”不上磁场转速，存在<strong>转差率</strong>，故称“异步”。</p>
+<ul>
+<li><p><strong>优点</strong>：结构<strong>极其简单、坚固、可靠</strong>，成本低（无需永磁体），几乎免维护，耐高温性能好。</p></li>
+<li><p><strong>缺点</strong>：效率和平顺性通常略低于永磁同步电机，低速轻载时效率较低，需要从电网吸收无功功率以建立磁场。</p></li>
+<li><p><strong>应用</strong>：工业驱动（风机、水泵、传送带）、特斯拉等品牌的部分电动车、家用电器（如风扇、洗衣机）。</p></li>
+</ul>
+<center>
+<a href="720w.png" class="gallery-item" style="box-shadow: none;"> <img src="720w.png" width="60%"></a>
+</center>
+<h3 id="总结与选择建议">总结与选择建议</h3>
+<ul>
+<li><p><strong>追求极致效率和静谧性</strong>（如电动汽车）：首选 <strong>永磁同步电机</strong>。</p></li>
+<li><p><strong>追求耐用、低成本和高可靠性</strong>（如工业风机）：首选 <strong>交流异步电机</strong>。</p></li>
+<li><p><strong>需要低成本且简单的速度控制</strong>：可考虑 <strong>直流有刷电机</strong>。</p></li>
+<li><p><strong>需要精确的位置控制而不依赖传感器</strong>：首选 <strong>步进电机</strong>。</p></li>
+</ul>
+<p>现代高端电动汽车常采用“前永磁同步+后交流异步”的组合，充分利用永磁电机在城市低速工况下的高效率，和异步电机在高速、激烈驾驶下的高性能和可靠性，实现能效与动力的完美平衡。</p>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-14</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E7%94%B5%E6%9C%BA/'>
+                            电机
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/14/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0Callback/'>回调函数Callback</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/14/ROS2-Action/">ROS2 Action</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

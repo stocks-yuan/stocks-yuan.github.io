@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="回调函数Callback" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    回调函数Callback
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-14</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.3k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：4分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h3 id="回调函数">回调函数</h3>
+<h5 id="定义">1.定义</h5>
+<blockquote>
+<p><strong>在计算机科学中，回调函数是指一段以参数的形式传递给其它函数的函数。</strong></p>
+</blockquote>
+<p>回调函数是一种软件设计上的概念，和某个编程语言没有关系，几乎所有的编程语言都能实现回调函数。</p>
+<h5 id="为什么需要回调函数">2.为什么需要回调函数</h5>
+<center>
+<a href="1.png" class="gallery-item" style="box-shadow: none;"> <img src="1.png" width="50%"></a>
+</center>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/people/mac-82-59">图片来源:码农的荒岛求生</a></p>
+<p><strong>回调函数这种软件设计的需求来源：</strong></p>
+<p>用户通常需要在库函数实现中的某个特定节点(比如数据发送成功、数据接收成功、文件读取完成)进行自定义操作(比如打印日志、处理接收到的数据)，但是库函数编写者在写库函数时并不清楚用户在这些特定节点的具体操作，为此<strong>库函数编写者在库函数这些特定节点处设计了外部接口给用户调用，即回调函数</strong>。这样用户自定义的回调函数集成到库函数中了。使用库函数时，用户将自定义的回调函数作为库函数的参数，这样自定义的回调函数可以在库函数的特定节点处被调用。</p>
+<p>最后值得注意的一点就是回调函数被调用的时间节点，回调函数只在某些特定的节点被调用，就像上面说的数据发送成功、数据接收成功、文件读取完成等，这些都是事件，也就是event，本质上我们编写的回调函数就是用来处理event的，因此从这个角度看回调函数不过就是<code>event handler</code>。</p>
+<blockquote>
+<p><strong>tip：正常的函数调用都是上层用户函数调用底层函数，而回调函数是底层函数调用上层用户函数的特例。</strong></p>
+</blockquote>
+<ul>
+<li><p>回调函数示例（使用lambda表达式）：
+</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*******************  Parameter callback  *******************/</span></span><br><span class="line">param_cb_handle_ = <span class="keyword">this</span>-&gt;<span class="built_in">add_on_set_parameters_callback</span>([<span class="keyword">this</span>](<span class="type">const</span> std::vector&lt;rclcpp::Parameter&gt; &amp;parameters)</span><br><span class="line">    -&gt; rcl_interfaces::msg::SetParametersResult {</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>-&gt;<span class="built_in">parameter_callback</span>(parameters);</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>回调函数示例（使用<code>std::bind()</code>）：
+</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*******************  Create action server  *******************/</span></span><br><span class="line">room_sequence_with_checkpoints_server_ = rclcpp_action::<span class="built_in">create_server</span>&lt;ipa_building_msgs::action::FindRoomSequenceWithCheckpoints&gt;(</span><br><span class="line">    <span class="keyword">this</span>,</span><br><span class="line">    action_name_,</span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::handle_goal, <span class="keyword">this</span>, std::placeholders::_1, std::placeholders::_2),</span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::handle_cancel, <span class="keyword">this</span>, std::placeholders::_1),</span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::handle_accepted, <span class="keyword">this</span>, std::placeholders::_1));</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+</ul>
+<p><code>std::bind()</code>:</p>
+<ul>
+<li><p>来自头文件 <functional>，用于把一个可调用对象（普通函数、成员函数、函数对象）与部分参数“预绑定”，生成一个新的可调用对象（binder）。</functional></p></li>
+<li><p>常用于创建回调、延迟调用或把成员函数适配为需要普通函数签名的接口。</p></li>
+<li><p>现代 C++ 推荐优先使用 lambda（更直观、可读、少性能/拷贝陷阱）。</p></li>
+</ul>
+<h5 id="同步回调synchronous-callbacks">3.同步回调(synchronous callbacks)</h5>
+<p>当我们调用库函数A并以参数的形式传入自定义回调函数后，在A返回之前回调函数会被执行，也就是说我们的主程序会等待回调函数执行完成，这就是所谓的同步回调。</p>
+<center>
+<a href="2.png" class="gallery-item" style="box-shadow: none;"> <img src="2.png" width="40%"></a>
+</center>
+<h5 id="异步回调asynchronous-callbacks">3.异步回调(asynchronous callbacks)</h5>
+<p>不同于同步回调， 当我们调用库函数A并以参数的形式传入回调函数后，A函数会立刻返回，也就是说函数A并不会阻塞主程序，一段时间后回调函数开始被执行，此时主程序可能在忙其它任务，回调函数的执行和主程序的运行同时进行。<strong>因此一般情况下，主程序和回调函数的执行位于不同的线程或者进程中</strong>。</p>
+<center>
+<a href="3.png" class="gallery-item" style="box-shadow: none;"> <img src="3.png" width="40%"></a>
+</center>
+<p>异步回调要比同步回调更能充分的利用机器资源，原因就在于在同步模式下，因为调用其它函数主程序被阻塞而暂停运行，但是异步调用不存在这个问题，主程序会一直运行下去。<strong>异步回调更常见于I/O操作，天然适用于Web服务这种高并发场景。</strong></p>
+<h5 id="回调地狱callback-hell">4.回调地狱(callback hell)</h5>
+<p><strong>回调地狱指的是异步回调嵌套过深，导致代码变得难以阅读、难以维护、错误处理分散且流程控制混乱的情况</strong>。典型场景是按顺序执行多个异步操作时，每一步都依赖上一步结果。</p>
+<p>示例（典型“金字塔”结构）：
+</p><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">readFile</span>(<span class="string">'a.txt'</span>, <span class="keyword">function</span>(<span class="params">err, a</span>){</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="title function_">handle</span>(err);</span><br><span class="line">    <span class="title function_">parse</span>(a, <span class="keyword">function</span>(<span class="params">err, b</span>){</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="title function_">handle</span>(err);</span><br><span class="line">        <span class="title function_">request</span>(b, <span class="keyword">function</span>(<span class="params">err, c</span>){</span><br><span class="line">            <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="title function_">handle</span>(err);</span><br><span class="line">            <span class="title function_">save</span>(c, <span class="keyword">function</span>(<span class="params">err, res</span>){</span><br><span class="line">                <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="title function_">handle</span>(err);</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">'done'</span>, res);</span><br><span class="line">            });</span><br><span class="line">        });</span><br><span class="line">    });</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>改进方法示例（Promise / async‑await）：
+</p><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Promise 链式写法</span></span><br><span class="line"><span class="title function_">readFileAsync</span>(<span class="string">'a.txt'</span>)</span><br><span class="line">  .<span class="title function_">then</span>(parse)</span><br><span class="line">  .<span class="title function_">then</span>(request)</span><br><span class="line">  .<span class="title function_">then</span>(save)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">'done'</span>, res))</span><br><span class="line">  .<span class="title function_">catch</span>(handle);</span><br><span class="line"></span><br><span class="line"><span class="comment">// async/await 写法（更直观）</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">run</span>(<span class="params"></span>){</span><br><span class="line">  <span class="keyword">try</span>{</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="title function_">readFileAsync</span>(<span class="string">'a.txt'</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="title function_">parse</span>(a);</span><br><span class="line">    <span class="keyword">const</span> c = <span class="keyword">await</span> <span class="title function_">request</span>(b);</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">save</span>(c);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">'done'</span>, res);</span><br><span class="line">  }<span class="keyword">catch</span>(e){</span><br><span class="line">    <span class="title function_">handle</span>(e);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>常见缓解策略：</p>
+<ul>
+<li><p>将内联回调提取为具名函数，降低嵌套深度；</p></li>
+<li><p>使用 Promise/Future 与 async/await 或语言提供的协程；</p></li>
+<li><p>使用控制流库（如 async.js）、响应式编程（如 RxJS）或状态机；</p></li>
+<li><p>设计更清晰的异步接口（链式 API、事件、流）。</p></li>
+</ul>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-14</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/%E5%90%8C%E6%AD%A5%E5%9B%9E%E8%B0%83/'>
+                            同步回调
+                        </a>
+                    
+                        <a href='/tags/%E5%BC%82%E6%AD%A5%E5%9B%9E%E8%B0%83/'>
+                            异步回调
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/'>
+                            编程模型与程序设计
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/14/%E5%90%8C%E6%AD%A5-synch-%E4%B8%8E%E5%BC%82%E6%AD%A5-asynch/'>同步(sync)与异步(async)</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/14/%E5%B8%B8%E7%94%A8%E7%94%B5%E6%9C%BA%E6%B1%87%E6%80%BB/">常用电机汇总</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

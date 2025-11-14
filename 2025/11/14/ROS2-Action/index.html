@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="ROS2 Action" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    ROS2 Action
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-14</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.1k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：5分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 42%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">异步事件</th>
+<th style="text-align: left;">注册</th>
+<th style="text-align: left;">回调作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Action 服务端回调</strong></td>
+<td style="text-align: left;"><code>create_server&lt;T&gt;(action_name, goal_callback, cancel_callback, result_callback)</code></td>
+<td style="text-align: left;"><strong>目标处理回调</strong>:是否接收新目标;<br> <strong>取消处理回调</strong>: 处理取消请求;<br><strong>结果处理回调</strong>: 处理最终结果</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action 客户端目标响应回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal(goal, send_goal_options.goal_response_callback)</code></td>
+<td style="text-align: left;">处理目标提交结果</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action 客户端反馈回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal(goal, send_goal_options.feedback_callback)</code></td>
+<td style="text-align: left;">处理执行进度反馈</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action 客户端结果回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal(goal, send_goal_options.result_callback)</code></td>
+<td style="text-align: left;">处理任务最终结果</td>
+</tr>
+</tbody>
+</table>
+<h3 id="服务端">服务端</h3>
+<h5 id="创建服务端">创建服务端</h5>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">action_name_ = <span class="string">"find_room_sequence_with_checkpoints_action"</span>;</span><br><span class="line">room_sequence_with_checkpoints_server_ = rclcpp_action::<span class="built_in">create_server</span>&lt;ipa_building_msgs::action::FindRoomSequenceWithCheckpoints&gt;(</span><br><span class="line">    <span class="keyword">this</span>,</span><br><span class="line">    action_name_,</span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::handle_goal, <span class="keyword">this</span>, std::placeholders::_1, std::placeholders::_2),</span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::handle_cancel, <span class="keyword">this</span>, std::placeholders::_1),</span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::handle_accepted, <span class="keyword">this</span>, std::placeholders::_1));</span><br><span class="line"></span><br><span class="line"><span class="comment">/************ Action server callbacks ************/</span> </span><br><span class="line"><span class="function">rclcpp_action::GoalResponse <span class="title">RoomSequencePlanningServer::handle_goal</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> rclcpp_action::GoalUUID &amp;uuid,</span></span></span><br><span class="line"><span class="params"><span class="function">    std::shared_ptr&lt;<span class="type">const</span> ipa_building_msgs::action::FindRoomSequenceWithCheckpoints::Goal&gt; goal)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    (<span class="type">void</span>)uuid;</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Received goal request for room sequence planning"</span>);</span><br><span class="line">    <span class="keyword">return</span> rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">rclcpp_action::CancelResponse <span class="title">RoomSequencePlanningServer::handle_cancel</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt;rclcpp_action::ServerGoalHandle&lt;ipa_building_msgs::action::FindRoomSequenceWithCheckpoints&gt;&gt; goal_handle)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Received request to cancel goal"</span>);</span><br><span class="line">    <span class="keyword">return</span> rclcpp_action::CancelResponse::ACCEPT;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RoomSequencePlanningServer::handle_accepted</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt;rclcpp_action::ServerGoalHandle&lt;ipa_building_msgs::action::FindRoomSequenceWithCheckpoints&gt;&gt; goal_handle)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="comment">// 在新线程中异步执行长时运行的任务，避免阻塞Action服务器的回调线程</span></span><br><span class="line">    <span class="comment">// Execute in a new thread</span></span><br><span class="line">    std::thread{std::<span class="built_in">bind</span>(&amp;RoomSequencePlanningServer::execute_find_room_sequence_with_checkpoints, <span class="keyword">this</span>, goal_handle)}.<span class="built_in">detach</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>创建一个 action 服务器需要 6 个信息：</p>
+<ol type="1">
+<li><p>action 类型名称： <code>ipa_building_msgs::action::FindRoomSequenceWithCheckpoints</code>。</p></li>
+<li><p>一个 action 所属的 ROS 2 节点： <code>this</code>。</p></li>
+<li><p>action 名称： <code>find_room_sequence_with_checkpoints_action</code>。</p></li>
+<li><p>用于处理目标的回调函数： <code>handle_goal</code>。</p></li>
+<li><p>用于处理取消的回调函数： <code>handle_cancel</code>。</p></li>
+<li><p>用于处理目标接受的回调函数： <code>handle_accepted</code>。</p></li>
+</ol>
+<blockquote>
+<p>注意，所有回调都需要快速返回，否则可能会导致 executor 闲置。</p>
+</blockquote>
+<h3 id="客户端">客户端</h3>
+<h5 id="创建客户端">创建客户端</h5>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">client_ = rclcpp_action::<span class="built_in">create_client</span>&lt;FindRoomSequence&gt;(</span><br><span class="line">    <span class="keyword">this</span>, <span class="string">"/room_sequence_planning/room_sequence_planning_server"</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 循环等待action服务端 */</span></span><br><span class="line"><span class="keyword">while</span> (!client_-&gt;<span class="built_in">wait_for_action_server</span>(std::chrono::<span class="built_in">seconds</span>(<span class="number">5</span>))) {</span><br><span class="line">    <span class="keyword">if</span>(!rclcpp::<span class="built_in">ok</span>()) {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Interrupted while waiting for the action server. Exiting."</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Waiting for action server to be available..."</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>创建一个 action 客户端需要 3 个信息：</p>
+<ol type="1">
+<li><p>action 类型名称：<code>FindRoomSequence</code>。</p></li>
+<li><p>一个 action 所属的 ROS 2 节点： <code>this</code>。</p></li>
+<li><p>action 名称： <code>/room_sequence_planning/room_sequence_planning_server</code>。</p></li>
+</ol>
+<h5 id="同步发送客户端">同步发送客户端</h5>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 goal</span></span><br><span class="line"><span class="keyword">auto</span> goal_msg = MapSegmentation::<span class="built_in">Goal</span>();</span><br><span class="line">goal_msg.input_map = map_image;</span><br><span class="line">goal_msg.map_resolution = <span class="number">0.05</span>;</span><br><span class="line">goal_msg.return_format_in_pixel = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送 goal 并同步等待响应</span></span><br><span class="line"><span class="keyword">auto</span> goal_handle_future = client_-&gt;<span class="built_in">async_send_goal</span>(goal_msg);</span><br><span class="line"></span><br><span class="line"><span class="comment">/************* 同步等待 goal 被接受 **************/</span> </span><br><span class="line"><span class="keyword">if</span> (rclcpp::<span class="built_in">spin_until_future_complete</span>(</span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">get_node_base_interface</span>(), </span><br><span class="line">    goal_handle_future</span><br><span class="line">) != rclcpp::FutureReturnCode::SUCCESS) {</span><br><span class="line">    <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Failed to send goal"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> goal_handle = goal_handle_future.<span class="built_in">get</span>();</span><br><span class="line"><span class="keyword">if</span> (!goal_handle) {</span><br><span class="line">    <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Goal was rejected"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 result</span></span><br><span class="line"><span class="keyword">auto</span> result_future = client_-&gt;<span class="built_in">async_get_result</span>(goal_handle);</span><br><span class="line"></span><br><span class="line"><span class="comment">/************* 同步等待 result **************/</span> </span><br><span class="line"><span class="keyword">if</span> (rclcpp::<span class="built_in">spin_until_future_complete</span>(</span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">get_node_base_interface</span>(), </span><br><span class="line">    result_future</span><br><span class="line">) != rclcpp::FutureReturnCode::SUCCESS) {</span><br><span class="line">    <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Failed to get result"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> result = result_future.<span class="built_in">get</span>();</span><br><span class="line"><span class="keyword">if</span> (result.code == rclcpp_action::ResultCode::SUCCEEDED) {</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Action succeeded!"</span>);</span><br><span class="line">    <span class="comment">//客户端处理结果</span></span><br><span class="line">    <span class="built_in">processResult</span>(result.result);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">    <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Action failed with code: %d"</span>, <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(result.code));</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理接收到的结果</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">processResult</span><span class="params">(<span class="type">const</span> MapSegmentation::Result::SharedPtr result)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Received result with %zu rooms"</span>, </span><br><span class="line">                result-&gt;room_information_in_pixel.<span class="built_in">size</span>());</span><br><span class="line">    <span class="comment">//existing code.......</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><strong><code>rclcpp::spin_until_future_complete</code>原型</strong>：
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ROS2节点持续 spin（即处理回调），直到传入的某个 std::future对象完成</span></span><br><span class="line">rclcpp::<span class="built_in">spin_until_future_complete</span>(</span><br><span class="line">    rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base,</span><br><span class="line">    std::future&lt;T&gt; future</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+<code>rclcpp::spin_until_future_complete</code>常用于ROS中等待一个异步任务(比如参数系统client、Action client发送 goal 后得到的 future)完成，同时确保在此期间 ROS2 的异步事件(比如 subscriber、timer、service 等回调)能被处理。</li>
+</ul>
+<h5 id="异步发送客户端">异步发送客户端</h5>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> goal_msg = MapSegmentation::<span class="built_in">Goal</span>();</span><br><span class="line">goal_msg.input_map = map_image;</span><br><span class="line">goal_msg.map_resolution = <span class="number">0.05</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置回调选项</span></span><br><span class="line"><span class="keyword">auto</span> send_goal_options = rclcpp_action::Client&lt;MapSegmentation&gt;::<span class="built_in">SendGoalOptions</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Goal 响应回调</span></span><br><span class="line">send_goal_options.goal_response_callback = </span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;ActionClientAsync::goalResponseCallback, <span class="keyword">this</span>, std::placeholders::_1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Feedback 回调</span></span><br><span class="line">send_goal_options.feedback_callback = </span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;ActionClientAsync::feedbackCallback, <span class="keyword">this</span>, </span><br><span class="line">                std::placeholders::_1, std::placeholders::_2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Result 回调</span></span><br><span class="line">send_goal_options.result_callback = </span><br><span class="line">    std::<span class="built_in">bind</span>(&amp;ActionClientAsync::resultCallback, <span class="keyword">this</span>, std::placeholders::_1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步发送 goal</span></span><br><span class="line">client_-&gt;<span class="built_in">async_send_goal</span>(goal_msg, send_goal_options);</span><br><span class="line"><span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Goal sent asynchronously"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Goal 响应回调</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">goalResponseCallback</span><span class="params">(std::shared_future&lt;GoalHandleMapSegmentation::SharedPtr&gt; future)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">auto</span> goal_handle = future.<span class="built_in">get</span>();</span><br><span class="line">    <span class="keyword">if</span> (!goal_handle) {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Goal was rejected"</span>);</span><br><span class="line">        result_promise_.<span class="built_in">set_value</span>(<span class="literal">false</span>);</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Goal accepted, waiting for result"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// Feedback 回调</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">feedbackCallback</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    GoalHandleMapSegmentation::SharedPtr,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt;<span class="type">const</span> MapSegmentation::Feedback&gt; feedback)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Progress: %.1f%%"</span>, feedback-&gt;progress * <span class="number">100.0</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// Result 回调</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">resultCallback</span><span class="params">(<span class="type">const</span> GoalHandleMapSegmentation::WrappedResult&amp; result)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">switch</span> (result.code) {</span><br><span class="line">        <span class="keyword">case</span> rclcpp_action::ResultCode::SUCCEEDED:</span><br><span class="line">            <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Action succeeded!"</span>);</span><br><span class="line">            <span class="comment">//处理action接收结果</span></span><br><span class="line">            <span class="built_in">processResult</span>(result.result);</span><br><span class="line">            result_promise_.<span class="built_in">set_value</span>(<span class="literal">true</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> rclcpp_action::ResultCode::ABORTED:</span><br><span class="line">            <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Action was aborted"</span>);</span><br><span class="line">            result_promise_.<span class="built_in">set_value</span>(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> rclcpp_action::ResultCode::CANCELED:</span><br><span class="line">            <span class="built_in">RCLCPP_WARN</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Action was canceled"</span>);</span><br><span class="line">            result_promise_.<span class="built_in">set_value</span>(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Unknown result code"</span>);</span><br><span class="line">            result_promise_.<span class="built_in">set_value</span>(<span class="literal">false</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理action接收结果</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">processResult</span><span class="params">(<span class="type">const</span> MapSegmentation::Result::SharedPtr result)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Processing result with %zu rooms"</span>, </span><br><span class="line">                result-&gt;room_information_in_pixel.<span class="built_in">size</span>());</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-14</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/14/%E5%B8%B8%E7%94%A8%E7%94%B5%E6%9C%BA%E6%B1%87%E6%80%BB/'>常用电机汇总</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/11/12/enum-class%E4%B8%8Eenum/">enum class与enum</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

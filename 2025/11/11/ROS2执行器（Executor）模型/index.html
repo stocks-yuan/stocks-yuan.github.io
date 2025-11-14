@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="ROS2执行器（Executor）模型" />
+    <meta name="description" content="ROS2异步事件与执行器模型" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -77,6 +77,11 @@
 
 
     
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
 
     
     
@@ -189,7 +194,7 @@
         
             
                 <div class="post-main-title" style="text-align: center;">
-                    ROS2执行器（Executor）模型
+                    ROS2异步事件与执行器模型
                 </div>
             
         
@@ -202,7 +207,7 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-11-11</span> 
+                    <span>最近更新：2025-11-13</span> 
                 
                 
                     
@@ -229,65 +234,71 @@
 
     <div class="post-md">
         
-        <div class=".article-gallery"><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">主线程spin()</span><br><span class="line">    │</span><br><span class="line">    ├── 执行器轮询</span><br><span class="line">    │   ├── 定时器回调</span><br><span class="line">    │   ├── 订阅消息回调 </span><br><span class="line">    │   ├── 服务响应回调</span><br><span class="line">    │   ├── 参数响应回调 </span><br><span class="line">    │   ├── XXX响应回调</span><br><span class="line">    │</span><br><span class="line">    └── 异步参数客户端回调函数调用（非阻塞，立即返回）</span><br></pre></td></tr></tbody></table></figure>
+        <div class=".article-gallery"><h4 id="ros2异步事件">ROS2异步事件</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">主线程spin()</span><br><span class="line">    │</span><br><span class="line">    ├── 执行器轮询</span><br><span class="line">    │   ├── 定时器回调</span><br><span class="line">    │   ├── 订阅消息回调 </span><br><span class="line">    │   ├── 服务响应回调</span><br><span class="line">    │   ├── 参数响应回调 </span><br><span class="line">    │   ├── XXX响应回调</span><br><span class="line">    │</span><br><span class="line">    └── 异步参数客户端回调函数调用（非阻塞，立即返回）</span><br></pre></td></tr></tbody></table></figure>
 <p><code>rclcpp::spin()</code>意味着不断循环处理事件，<code>spin()</code>负责处理以下所有类型的异步事件：</p>
 <table>
 <colgroup>
-<col style="width: 35%">
-<col style="width: 35%">
-<col style="width: 30%">
+<col style="width: 26%">
+<col style="width: 36%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">异步事件(Executor可调用对象)</th>
+<th style="text-align: left;">异步事件(执行器可调用对象)</th>
 <th style="text-align: left;">示例</th>
-<th style="text-align: left;">说明</th>
+<th style="text-align: left;"><code>callback</code>作用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>Timer 定时器回调</strong></td>
-<td style="text-align: left;"><code>create_wall_timer()</code> 创建的回调函数</td>
-<td style="text-align: left;">定时执行的任务</td>
+<td style="text-align: left;"><code>create_wall_timer(time, callback)</code></td>
+<td style="text-align: left;">处理定时执行的任务</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Topic 订阅消息回调</strong></td>
-<td style="text-align: left;"><code>create_subscription()</code> 创建的回调函数</td>
-<td style="text-align: left;">接收到的Topic消息处理</td>
+<td style="text-align: left;"><code>create_subscription&lt;T&gt;(name, qos, callback)</code></td>
+<td style="text-align: left;">处理接收到的Topic消息</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Service 客户请求回调</strong></td>
-<td style="text-align: left;"><code>create_service()</code> 注册的服务回调函数</td>
-<td style="text-align: left;">处理来自客户端的服务调用请求</td>
+<td style="text-align: left;"><strong>Service 服务端回调</strong></td>
+<td style="text-align: left;"><code>create_service&lt;T&gt;(name, callback)</code></td>
+<td style="text-align: left;">处理来自客户端的服务调用<code>request</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Service 服务响应回调</strong></td>
-<td style="text-align: left;"><code>async_send_request()</code> 的响应回调</td>
-<td style="text-align: left;">异步服务调用返回的结果处理</td>
+<td style="text-align: left;"><strong>Service 客户端回调</strong></td>
+<td style="text-align: left;"><code>async_send_request(request, callback)</code></td>
+<td style="text-align: left;">处理服务端的响应结果<code>response</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Action Goal响应回调</strong></td>
-<td style="text-align: left;"><code>async_send_goal()</code> 的目标响应回调</td>
-<td style="text-align: left;">动作服务器对目标请求的接受/拒绝响应</td>
+<td style="text-align: left;"><strong>Action 服务端回调</strong></td>
+<td style="text-align: left;"><code>create_server&lt;T&gt;(name, goal_callback, cancel_callback, result_callback)</code></td>
+<td style="text-align: left;"><strong>目标处理回调</strong>:接收新目标，决定是否接受; <strong>取消处理回调</strong>: 处理取消请求; <strong>结果处理回调</strong>: 处理最终结果</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Action Feedback回调</strong></td>
-<td style="text-align: left;">动作客户端的反馈回调函数</td>
-<td style="text-align: left;">动作执行过程中的进度更新信息</td>
+<td style="text-align: left;"><strong>Action 客户端目标响应回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal(goal, send_goal_options.goal_response_callback)</code></td>
+<td style="text-align: left;">处理目标提交结果</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Action Result 回调</strong></td>
-<td style="text-align: left;">动作客户端的结果回调函数</td>
-<td style="text-align: left;">动作执行完成的最终结果</td>
+<td style="text-align: left;"><strong>Action 客户端反馈回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal(goal, send_goal_options.feedback_callback)</code></td>
+<td style="text-align: left;">处理执行进度反馈</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Action 客户端结果回调</strong></td>
+<td style="text-align: left;"><code>async_send_goal(goal, send_goal_options.result_callback)</code></td>
+<td style="text-align: left;">处理任务最终结果</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>参数变更回调</strong></td>
-<td style="text-align: left;"><code>add_on_set_parameters_callback()</code> 注册的回调</td>
+<td style="text-align: left;"><code>add_on_set_parameters_callback()</code></td>
 <td style="text-align: left;">节点参数被设置或修改时的处理</td>
 </tr>
 </tbody>
 </table>
-<h5 id="单线程执行器默认情况">单线程执行器(默认情况)</h5>
+<h4 id="单线程执行器默认情况">单线程执行器(默认情况)</h4>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv);</span><br><span class="line">    <span class="keyword">auto</span> node = std::<span class="built_in">make_shared</span>&lt;AsyncVsSyncExample&gt;();</span><br><span class="line">    </span><br><span class="line">    executor.<span class="built_in">spin</span>(node);  <span class="comment">// 在这个线程中处理所有回调</span></span><br><span class="line">    </span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>根据ROS2官网所述<code>rclcpp::spin()</code>函数其实就是<code>SingleThreadedExecutor</code>全局包装，所以上述代码也可以写为：
 </p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv); </span><br><span class="line">    <span class="keyword">auto</span> node = std::<span class="built_in">make_shared</span>&lt;AsyncVsSyncExample&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 单线程执行器 - 所有回调在同一个线程中执行</span></span><br><span class="line">    rclcpp::executors::SingleThreadedExecutor executor;</span><br><span class="line">    executor.<span class="built_in">add_node</span>(node);</span><br><span class="line">    executor.<span class="built_in">spin</span>();  <span class="comment">// 在这个线程中处理所有回调</span></span><br><span class="line">    </span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -309,7 +320,7 @@
 <li><p><code>take</code>：<strong>获取一个可执行对象</strong>，这个过程在get_next_executable()函数中。</p></li>
 <li><p><code>execute</code>：<strong>拿到可调用对象的线程，会直接调用回调函数</strong>。这个过程在execute_any_executable()函数中。</p></li>
 </ol>
-<h5 id="多线程执行器">多线程执行器</h5>
+<h4 id="多线程执行器">多线程执行器</h4>
 <p>单线程执行器的问题：</p>
 <ul>
 <li><p>所有回调都是串行执行，如果其中回调执行的工作比较多，其他回调必须等待，造成调度后延。</p></li>
@@ -397,6 +408,8 @@
             
     
             <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/12/enum-class%E4%B8%8Eenum/'>enum class与enum</a></span>
                 
 
                 

@@ -77,6 +77,11 @@
 
 
     
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
 
     
     
@@ -202,7 +207,7 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-11-11</span> 
+                    <span>最近更新：2025-11-13</span> 
                 
                 
                     
@@ -274,6 +279,9 @@ Todo -->
 <p>设置参数会触发服务端通过 <code>this-&gt;add_on_set_parameters_callback()</code> 注册的回调函数</p>
 </blockquote>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在其他节点中</span></span><br><span class="line"><span class="keyword">auto</span> param_client = std::<span class="built_in">make_shared</span>&lt;rclcpp::AsyncParametersClient&gt;(</span><br><span class="line">    <span class="keyword">this</span>, <span class="string">"room_segmentation_server"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置参数</span></span><br><span class="line"><span class="keyword">auto</span> future = param_client-&gt;<span class="built_in">set_parameters</span>({</span><br><span class="line">    rclcpp::<span class="built_in">Parameter</span>(<span class="string">"room_segmentation_algorithm"</span>, <span class="number">4</span>),</span><br><span class="line">    rclcpp::<span class="built_in">Parameter</span>(<span class="string">"display_segmented_map"</span>, <span class="literal">true</span>)},</span><br><span class="line">    std::chrono::<span class="built_in">seconds</span>(<span class="number">5</span>));   <span class="comment">//5s超时</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用std::async处理异步结果</span></span><br><span class="line">    std::<span class="built_in">async</span>(std::launch::async, [<span class="keyword">this</span>, future = std::<span class="built_in">move</span>(future)]() {</span><br><span class="line">      <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">auto</span> results = future.<span class="built_in">get</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; result : results) {</span><br><span class="line">          <span class="keyword">if</span> (result.successful) {</span><br><span class="line">            <span class="built_in">RCLCPP_INFO</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步设置参数 '%s' 成功"</span>, </span><br><span class="line">                        result.reason.<span class="built_in">c_str</span>());</span><br><span class="line">          } <span class="keyword">else</span> {</span><br><span class="line">            <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步设置参数 '%s' 失败"</span>, </span><br><span class="line">                        result.reason.<span class="built_in">c_str</span>());</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      } <span class="built_in">catch</span> (<span class="type">const</span> std::exception&amp; e) {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"异步设置参数异常: %s"</span>, e.<span class="built_in">what</span>());</span><br><span class="line">      }</span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用spin_until_future_complete处理异步结果</span></span><br><span class="line">    <span class="keyword">if</span> (rclcpp::<span class="built_in">spin_until_future_complete</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_node_base_interface</span>(), future) !=</span><br><span class="line">        rclcpp::FutureReturnCode::SUCCESS)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">RCLCPP_ERROR</span>(<span class="keyword">this</span>-&gt;<span class="built_in">get_logger</span>(), <span class="string">"Failed to set parameters"</span>);</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<p><code>rclcpp::spin_until_future_complete</code>原型：
+</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ROS2节点持续 spin（即处理回调），直到传入的某个 std::future对象完成（即其关联的异步操作完成）</span></span><br><span class="line">rclcpp::<span class="built_in">spin_until_future_complete</span>(</span><br><span class="line">    rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base,</span><br><span class="line">    std::future&lt;T&gt; future</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><code>rclcpp::spin_until_future_complete</code>常用于ROS中等待一个异步任务(比如参数系统client、Action client发送 goal 后得到的 future)完成，同时确保在此期间 ROS2 的异步事件(比如 subscriber、timer、service 等回调)能被处理。</p>
 <p><strong>ROS2异步操作方式对比</strong>：</p>
 <table>
 <thead>
@@ -311,20 +319,8 @@ Todo -->
 </tr>
 </tbody>
 </table>
-<p><code>std::async</code> 方式</p>
-<ul>
-<li><p><strong>优点</strong>：真正的异步非阻塞，适合高并发场景</p></li>
-<li><p><strong>缺点</strong>：线程管理复杂，资源开销较大</p></li>
-<li><p><strong>适用情况</strong>：需要同时处理多个独立的异步操作</p></li>
-</ul>
-<p><code>spin_until_future_complete</code> 方式</p>
-<ul>
-<li><p><strong>优点</strong>：代码简洁，资源效率高，符合ROS2事件循环模型</p></li>
-<li><p><strong>缺点</strong>：会阻塞当前线程，不适合高并发场景</p></li>
-<li><p><strong>适用情况</strong>：简单的顺序异步操作，大多数ROS2应用的推荐方式</p></li>
-</ul>
 <p>选择建议：
-对于大多数ROS2应用，推荐使用 <strong><code>spin_until_future_complete</code> 方式</strong>，因为它更符合ROS2的设计哲学且资源效率更高。只有在确实需要并行处理多个独立异步操作时，才考虑使用 <code>std::async</code> 方式。</p>
+对于大多数ROS2应用，推荐使用ROS2支持 <strong><code>spin_until_future_complete</code> 方式</strong>，因为它更符合ROS2的设计哲学且资源效率更高。只有在确实需要并行处理多个独立异步操作时，才考虑使用 <code>std::async</code> 方式。</p>
 <ol start="3" type="1">
 <li>通过命令行修改</li>
 </ol>
