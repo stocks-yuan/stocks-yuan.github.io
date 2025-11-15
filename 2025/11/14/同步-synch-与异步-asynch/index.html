@@ -207,7 +207,7 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-11-14</span> 
+                    <span>最近更新：2025-11-15</span> 
                 
                 
                     
@@ -241,7 +241,7 @@
 <h4 id="同步">同步</h4>
 <ul>
 <li><p><strong>定义</strong>：同步操作是指调用方发起一个操作后，必须等待该操作执行完成并返回结果后，才能继续执行后续代码。<strong>这是一种线性的、顺序执行的方式。</strong></p></li>
-<li><p><strong>核心特征</strong>：<strong>阻塞</strong>。调用方线程的活动会因等待操作完成而被暂停。同步编程对程序员来说是最自然最容易理解的，但是在一些场景下并不高效。</p></li>
+<li><p><strong>核心特征</strong>：<span style="color: red;"><strong>阻塞</strong></span>。调用方线程的活动会因等待操作完成而被暂停。同步编程对程序员来说是最自然最容易理解的，但是在一些场景下并不高效。</p></li>
 <li><p><strong>适用场景</strong>：CPU密集型任务(复杂的数学计算、图像处理、数据压缩/加密),无并发需求的任务，可快速完成的简单操作(内存中的数据查找、简单的条件判断)。
 <strong>当任务本质上是顺序执行的，主要是计算，而非I/O时，同步是更简单、更高效的选择。</strong></p></li>
 </ul>
@@ -261,7 +261,7 @@
 <h4 id="异步">异步</h4>
 <ul>
 <li><p><strong>定义</strong>：异步操作是指调用方发起一个操作后，无需等待该操作完成，可以立即返回并继续执行后续代码。被发起的操作会在“后台”独立执行，并通过某种机制（<strong>如回调函数、Promise、事件</strong>）在将来某个时刻通知调用方其完成状态和结果。</p></li>
-<li><p><strong>核心特征</strong>：<strong>非阻塞</strong>。调用方线程的活动在发起操作后不会被暂停。</p></li>
+<li><p><strong>核心特征</strong>：<span style="color: red;"><strong>非阻塞</strong></span>。调用方线程的活动在发起操作后不会被暂停。</p></li>
 <li><p><strong>适用场景</strong>：I/O密集型应用(Web服务器/API网关、数据库客户端),图形用户界面程序，高并发、高吞吐量的网络服务。</p></li>
 </ul>
 <p><strong>当应用需要处理大量并发连接，或者需要避免因等待（尤其是I/O等待）而阻塞主线程时，异步是必不可少的选择。</strong></p>
@@ -359,7 +359,7 @@
                     <div class="footer">
     
         <span> 
-            © 2002-2025 stocks-yuan 
+            © 2025 stocks-yuan 
 
             
                 
