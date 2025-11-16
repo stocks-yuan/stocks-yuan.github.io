@@ -207,19 +207,19 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-11-15</span> 
+                    <span>最近更新：2025-11-16</span> 
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：1.5k</span>
+                     <span>字数总计：2.1k</span>
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                    <span>阅读估时：5分钟</span>
+                    <span>阅读估时：7分钟</span>
                 
                 
                     
@@ -237,11 +237,61 @@
         <div class=".article-gallery"><blockquote>
 <p>参考文献：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/270428703">从小白到高手，你需要理解同步与异步</a></p>
 </blockquote>
-<p>同步和异步是编程中两种不同的<strong>执行模式</strong>，主要区别在于任务的执行顺序和是否阻塞后续代码。</p>
+<p>同步和异步是编程中两种不同的<strong>执行模式</strong>，主要区别在于任务的执行顺序，两者没有优劣之分，需要根据需求，选择编写同步或异步的程序。</p>
+<ul>
+<li>同步，异步与阻塞、非阻塞、单线程、多线程没有绑定关系：</li>
+</ul>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">组合模式</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">线程状态</th>
+<th style="text-align: left;">优点</th>
+<th style="text-align: left;">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>同步阻塞</strong></td>
+<td style="text-align: left;">调用发出后，线程<strong>停止并等待</strong>结果返回。</td>
+<td style="text-align: left;">单线程或多线程。调用线程在等待结果时被<strong>挂起（阻塞）</strong>。</td>
+<td style="text-align: left;">编程模型简单直观，易于理解和调试。</td>
+<td style="text-align: left;">资源利用率极低。每个阻塞的连接都需要一个单独的线程，线程创建、上下文切换开销大，难以应对高并发。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>同步非阻塞</strong></td>
+<td style="text-align: left;">调用发出后<strong>立即返回</strong>（但未必有结果）。线程需要<strong>不断轮询</strong>以检查结果是否就绪。<br><strong>eg:</strong><code>rclcpp::spin_until_future_complete</code></td>
+<td style="text-align: left;">单线程或多线程。调用线程在等待结果期间<strong>可以执行其他任务</strong>（通常是轮询）。</td>
+<td style="text-align: left;">相比同步阻塞，能在单线程内处理多个任务。</td>
+<td style="text-align: left;">CPU 浪费在无效的轮询上，效率仍然不高。编程复杂度增加。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>异步阻塞</strong></td>
+<td style="text-align: left;">调用发出后立即返回，但调用者又<strong>主动等待</strong>异步操作的完成。<br><strong>eg:</strong>对 <code>std::future</code> 调用 <code>get()</code> 方法</td>
+<td style="text-align: left;">单线程或多线程。调用线程在等待异步结果时被<strong>挂起（阻塞）</strong>。</td>
+<td style="text-align: left;">可以提供异步接口，但使用同步的编程风格。</td>
+<td style="text-align: left;">效果上类似同步阻塞，没有发挥出异步的真正优势。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>异步非阻塞</strong></td>
+<td style="text-align: left;">调用发出后立即返回。结果就绪后，系统通过回调、事件等方式通知程序。<strong>eg:回调函数</strong></td>
+<td style="text-align: left;"><strong>通常是单线程（事件循环）</strong>，也可以是<strong>多线程</strong>。调用线程在等待结果期间<strong>完全自由</strong>，去处理其他任务。</td>
+<td style="text-align: left;"><strong>资源利用率最高，性能最佳。</strong> 单线程即可处理海量连接，无上下文切换开销。</td>
+<td style="text-align: left;">编程模型复杂，回调地狱（可用 async/await 缓解），错误处理难度大。</td>
+</tr>
+</tbody>
+</table>
 <h4 id="同步">同步</h4>
 <ul>
 <li><p><strong>定义</strong>：同步操作是指调用方发起一个操作后，必须等待该操作执行完成并返回结果后，才能继续执行后续代码。<strong>这是一种线性的、顺序执行的方式。</strong></p></li>
-<li><p><strong>核心特征</strong>：<span style="color: red;"><strong>阻塞</strong></span>。调用方线程的活动会因等待操作完成而被暂停。同步编程对程序员来说是最自然最容易理解的，但是在一些场景下并不高效。</p></li>
 <li><p><strong>适用场景</strong>：CPU密集型任务(复杂的数学计算、图像处理、数据压缩/加密),无并发需求的任务，可快速完成的简单操作(内存中的数据查找、简单的条件判断)。
 <strong>当任务本质上是顺序执行的，主要是计算，而非I/O时，同步是更简单、更高效的选择。</strong></p></li>
 </ul>
@@ -260,8 +310,7 @@
 <hr>
 <h4 id="异步">异步</h4>
 <ul>
-<li><p><strong>定义</strong>：异步操作是指调用方发起一个操作后，无需等待该操作完成，可以立即返回并继续执行后续代码。被发起的操作会在“后台”独立执行，并通过某种机制（<strong>如回调函数、Promise、事件</strong>）在将来某个时刻通知调用方其完成状态和结果。</p></li>
-<li><p><strong>核心特征</strong>：<span style="color: red;"><strong>非阻塞</strong></span>。调用方线程的活动在发起操作后不会被暂停。</p></li>
+<li><p><strong>定义</strong>：异步操作是指调用方发起一个操作后，无需等待该操作完成，可以立即返回并继续执行后续代码。被发起的操作会在“后台”独立执行，并通过某种机制（<strong>如回调函数、std::promise+std::future、事件通知</strong>）在将来某个时刻通知调用方其完成状态和结果。</p></li>
 <li><p><strong>适用场景</strong>：I/O密集型应用(Web服务器/API网关、数据库客户端),图形用户界面程序，高并发、高吞吐量的网络服务。</p></li>
 </ul>
 <p><strong>当应用需要处理大量并发连接，或者需要避免因等待（尤其是I/O等待）而阻塞主线程时，异步是必不可少的选择。</strong></p>
@@ -271,9 +320,16 @@
 </center>
 <p><strong>异步调用中调用方怎知到被调函数是否执行完成呢？(即上图中Notify的实现方式)</strong></p>
 <ol type="1">
-<li><strong>通知机制</strong>，也就是说当任务执行完成后发送信号用来通知调用方任务完成。注意这里的信号就有很多实现方式了，Linux中的signal，或者使用信号量等机制都可以实现。</li>
-<li><strong>回调函数</strong>，调用函数时通过引入回调函数，可以在被调函数结束时刻调用回调函数通知主程序(或者获取结果)。</li>
+<li><p><strong>通知机制</strong>，也就是说当任务执行完成后发送信号用来通知调用方任务完成。注意这里的信号就有很多实现方式了，Linux中的signal，或者使用信号量等机制都可以实现。</p></li>
+<li><p><strong>回调函数</strong>(<span style="color: red;"><strong>异步非阻塞</strong></span>)，调用函数时通过引入回调函数，可以在被调函数结束时刻调用回调函数通知主程序(或者获取结果)。</p></li>
+<li><p><strong><code>std::future()</code></strong>(<span style="color: red;"><strong>异步阻塞</strong></span>)
+<code>std::future()</code>获取异步调用结果的方法<code>get()</code>和<code>wait()</code>：
+</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"rclcpp/rclcpp.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">heavy_calculation</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">// 模拟耗时操作</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">seconds</span>(<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; fut = std::<span class="built_in">async</span>(std::launch::async, heavy_calculation);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 方式1：阻塞等待（主动查询）</span></span><br><span class="line">    <span class="type">int</span> result = fut.<span class="built_in">get</span>();  <span class="comment">// 阻塞直到结果就绪</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 方式2：轮询检查（主动查询）</span></span><br><span class="line">    <span class="keyword">while</span> (fut.<span class="built_in">wait_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">100</span>)) != </span><br><span class="line">           std::future_status::ready) {</span><br><span class="line">        <span class="comment">// 做其他工作</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">"Result: "</span> &lt;&lt; result &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
 </ol>
+<ul>
+<li><p><code>get()</code>会一直阻塞等待结果</p></li>
+<li><p><code>wait()</code>可以轮询检查</p></li>
+</ul>
 <h6 id="同一线程内异步调用">1. 同一线程内异步调用</h6>
 <p>同一线程内异步调用指在单一线程中通过事件循环（event loop）或任务队列实现的异步机制：调用方不会被阻塞，操作完成后由事件循环在同一线程中调度回调或继续执行后续任务。常见于浏览器/Node.js 的单线程模型、以及基于单线程事件循环的网络库（如 libuv、boost::asio 的单线程运行方式）。</p>
 <p>要点：</p>
@@ -294,9 +350,9 @@
 <li><p>需注意同步、数据竞争、对象生命周期和异常传播。</p></li>
 </ul>
 <p>示例（C++：用 std::thread + 回调）：
-</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">do_work_async</span><span class="params">(std::function&lt;<span class="type">void</span>(<span class="type">int</span>)&gt; cb)</span> </span>{</span><br><span class="line">  std::<span class="built_in">thread</span>([cb=std::<span class="built_in">move</span>(cb)](){</span><br><span class="line">    <span class="type">int</span> result = <span class="comment">/* ...耗时计算... */</span> <span class="number">42</span>;</span><br><span class="line">    <span class="built_in">cb</span>(result); <span class="comment">// 在工作线程中调用回调</span></span><br><span class="line">  }).<span class="built_in">detach</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="comment">//异步非阻塞</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">do_work_async</span><span class="params">(std::function&lt;<span class="type">void</span>(<span class="type">int</span>)&gt; cb)</span> </span>{</span><br><span class="line">  std::<span class="built_in">thread</span>([cb=std::<span class="built_in">move</span>(cb)](){</span><br><span class="line">    <span class="type">int</span> result = <span class="comment">/* ...耗时计算... */</span> <span class="number">42</span>;</span><br><span class="line">    <span class="built_in">cb</span>(result); <span class="comment">// 在工作线程中调用回调</span></span><br><span class="line">  }).<span class="built_in">detach</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>示例（C++：使用 std::future/std::async 获取结果）：
-</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> fut = std::<span class="built_in">async</span>(std::launch::async, [](){ <span class="keyword">return</span> <span class="built_in">heavy_compute</span>(); });</span><br><span class="line"><span class="comment">// 主线程可以继续做其它事</span></span><br><span class="line"><span class="type">int</span> res = fut.<span class="built_in">get</span>(); <span class="comment">// 在需要时阻塞等待结果</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="comment">//异步阻塞</span></span><br><span class="line"><span class="keyword">auto</span> fut = std::<span class="built_in">async</span>(std::launch::async, [](){ <span class="keyword">return</span> <span class="built_in">heavy_compute</span>(); });</span><br><span class="line"><span class="comment">// 主线程可以继续做其它事</span></span><br><span class="line"><span class="type">int</span> res = fut.<span class="built_in">get</span>(); <span class="comment">// 阻塞等待结果</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>注意事项：</p>
 <ul>
 <li><p>回调在工作线程执行时不要直接访问仅限主线程的资源（例如 GUI 元素）；</p></li>
@@ -334,6 +390,8 @@
             
     
             <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/11/16/std-future/'>std::future</a></span>
                 
 
                 
