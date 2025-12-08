@@ -207,13 +207,13 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-11-10</span> 
+                    <span>最近更新：2025-12-02</span> 
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：425</span>
+                     <span>字数总计：468</span>
                 
                 
                     
@@ -244,6 +244,11 @@
 </ul>
 <p>正常启动模式下，bootloader程序的主要目的是引导MCU执行指定Flash区域的应用程序(APP)，其核心引导代码是：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> APP_FLASH_ADDR 0x08010000 <span class="comment">//64KB</span></span></span><br><span class="line"></span><br><span class="line">	<span class="type">void</span> (*app_entry_ptr)(<span class="type">void</span>);</span><br><span class="line">	__set_MSP(*(<span class="type">uint32_t</span> *)APP_FLASH_ADDR); <span class="comment">//init MSP</span></span><br><span class="line">	app_entry_ptr = (<span class="type">void</span> (*)(<span class="type">void</span>))(*(<span class="type">uint32_t</span> *)(APP_FLASH_ADDR+<span class="number">4</span>)); <span class="comment">//init PC ResetHander</span></span><br><span class="line">	app_entry_ptr();<span class="comment">// run to main</span></span><br></pre></td></tr></tbody></table></figure>
+<p>主要完成两件事(ARM Cortex-M内核单片机的启动流程)：</p>
+<ol type="1">
+<li><p>设置MSP寄存器</p></li>
+<li><p>设置PC寄存器的值为APP的 <code>Reset_Handler</code> 的地址，运行 <code>Reset_Handler</code></p></li>
+</ol>
 <a href="/2025/11/10/STM32-Firmware-Update/bootloader.png" class="gallery-item" style="box-shadow: none;"> <img src="/2025/11/10/STM32-Firmware-Update/bootloader.png" class="" width="400"></a>
 <p>如上图所示，<code>bootloader</code>程序的起始地址是<code>0x08000000</code>，是Flash的默认起始地址；APP程序的起始地址为<code>0x08010000</code>，是人为设置的地址。</p>
 <h2 id="app工程">APP工程</h2>

@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="" />
+    <meta name="description" content="A*算法" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -67,119 +67,7 @@
     <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
 <meta name="generator" content="Hexo 8.1.1">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style></head>
+</head>
     
     
 
@@ -226,6 +114,10 @@ mjx-container[display="true"] + br {
         <script src="/js/darkmode-js.min.js"></script>
         
         
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
             
         
         <div class="paper">
@@ -299,16 +191,130 @@ mjx-container[display="true"] + br {
     
 
     
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    A*算法
+                </div>
+            
+        
+      
+    
 
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-12-08</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.1k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：3分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
         
-        
+        <div class=".article-gallery"><h3 id="一a寻路演示">一、A*寻路演示</h3>
+<center>
+<a href="2.gif" class="gallery-item" style="box-shadow: none;"> <img src="2.gif" width="70%"></a>
+</center>
+<p><a target="_blank" rel="noopener" href="https://qiao.github.io/PathFinding.js/visual/">A*可视化网站</a></p>
+<h3 id="二a寻路算法">二、A*寻路算法</h3>
+<p>A*算法是一种广泛使用的<strong>启发式寻路算法</strong>，这里启发的含义是：从某个位置开始寻路的时候，不是去随机遍历，而是利用一些已知的信息，来估算每种选择的成本，然后选择成本最低的方向。</p>
+<p>A*寻路算法的核心思想如下：</p>
+<ol type="1">
+<li><p>使用启发式函数来估计从当前节点到目标节点的成本(<code>h_cost</code>)。</p></li>
+<li><p>维护一个开放集( <code>open_set</code> 存储待探索的节点)和一个关闭集( <code>close_set</code> 存储已探索节点)。</p></li>
+<li><p>遍历邻域节点时选择总成本( <code>f_cost = g_cost + h_cost</code> )最低的节点探索。</p></li>
+</ol>
+<h4 id="节点">2.1 节点</h4>
+<p>算法中的节点需要包含
+1. 当前坐标信息(x,y)
+2. 当前节点的成本f值，g值，h值</p>
+<ul>
+<li><p>g值(g-cost)：从起点到当前节点的实际代价，反映已知路径的成本。</p></li>
+<li><p>h值(h-cost)：从当前节点到目标节点的启发式估计值。启发式估计值通常是基于某种启发式函数(如曼哈顿距离、欧几里得距离等)计算的。</p></li>
+<li><p>f值(f-cost)：从起点经过当前节点到达目标节点的总估计值。f = g + h。</p></li>
+</ul>
+<ol start="3" type="1">
+<li>父节点，当前节点所在最优路径下的前一个节点，最终倒退路径时用到。</li>
+</ol>
+<h4 id="开放集和关闭集">2.2 开放集和关闭集</h4>
+<p>开放集：包含所有已发现但尚未完全评估的节点，初始化的时候只用把开始节点加入。
+关闭集：包含所有已评估的节点，初始化的时候为空。</p>
+<blockquote>
+<p><strong>已评估节点</strong>是指：已经遍历邻居节点的节点</p>
+</blockquote>
+<p>这样算法不会重复评估已处理的节点，因为已经处理的都在关闭集中。另一方面，所有潜在的路径选择都被考虑，因为在开放集中。</p>
+<h4 id="搜索路径步骤">2.3 搜索路径步骤</h4>
+<ol type="1">
+<li><p><strong>初始化</strong>：设置起点的g值为0，计算起点到终点的启发估计值h，计算起点f值( <code>f = g + h</code> )。把起点放到开放集中，进入循环，只要开放集不为空，就继续搜索。</p></li>
+<li><p><strong>循环</strong>：</p></li>
+</ol>
+<p>从开放集中选择f值最小的节点作为当前评估节点，判断当前节点是否为目标节点，如果是进行回溯；如果不是目标节点，将当前节点添加入关闭集，遍历当前评估节点的所有邻居节点：</p>
+<ol type="1">
+<li>忽略无效节点和已在关闭集中的邻居节点；</li>
+<li>计算从起点经过当前节点到达邻居节点的g值；</li>
+<li>判断邻居节点是否在开放集中：</li>
+</ol>
+<ul>
+<li><p>如果邻居节点不在开放集中，创建邻居节点，将其加入；</p></li>
+<li><p>如果邻居节点在开放集中，且新路径 <code>g_cost</code> 不比旧路径 <code>g_cost</code> 小，跳过；</p></li>
+<li><p>如果邻居节点在开放集中，但新路径 <code>g_cost</code> 比旧路径 <code>g_cost</code> 小，更新邻居节点的父节点、g值、h值、f值；</p></li>
+</ul>
+<ol start="3" type="1">
+<li><strong>回溯</strong>：</li>
+</ol>
+<ul>
+<li>最后如果开放集为空且未找到路径，则说明不存在最短路径；</li>
+<li>若找到最短路径，只需回溯重建最短路径即可。在搜索过程中，为每个探索的节点设置了 parent 属性，最后反向遍历 parent 属性即可。</li>
+</ul>
+<h3 id="其他">其他</h3>
+<p>和<a target="_blank" rel="noopener" href="https://gallery.selfboot.cn/zh/algorithms/bfs_path">广度优先搜索</a>路径相比，A* 算法可以更快地找到最短路径。因为广度优先搜索是盲目地沿着路径开始查找，直到遍历所有的可能路径。</p>
+<p>而 A* 算法会利用启发式函数来估计从当前节点到目标节点的成本，从而更快地找到最短路径。具体可以从动画演示中看到这点区别。</p>
+<p>与<a target="_blank" rel="noopener" href="https://gallery.selfboot.cn/zh/algorithms/dijkstra">Dijkstra算法</a>相比，A*算法只找到从指定源到指定目标的最短路径，而不是从指定源到所有可能目标的最短路径树。</p>
+<p>这是使用特定目标导向启发式的必要权衡。对于Dijkstra算法，由于生成了整个最短路径树，所以每个节点都是一个目标，并且不可能有特定目标导向的启发式。</p>
+</div>
     </div>
 
     <div class="post-meta">
         <i>
+        
+            <span>2025-12-05</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/'>
+                            路径规划算法
+                        </a>
+                    
+                </span>
+            
         
         </i>
     </div>
@@ -320,11 +326,9 @@ mjx-container[display="true"] + br {
     
             <div class="post-footer-pre-next">
                 
-                    <span>上一篇：<a href='/'></a></span>
-                
 
                 
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/"></a>
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/12/02/%E5%BD%A2%E6%80%81%E5%AD%A6%E5%88%86%E5%89%B2%E7%AE%97%E6%B3%95-MorphologicalSegmentation/">形态学分割算法(MorphologicalSegmentation)</a>
                     </span>
                 
             </div>
