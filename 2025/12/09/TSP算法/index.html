@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="" />
+    <meta name="description" content="TSP算法" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -227,6 +227,10 @@ mjx-container[display="true"] + br {
         
         
             
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
 
@@ -299,16 +303,141 @@ mjx-container[display="true"] + br {
     
 
     
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    TSP算法
+                </div>
+            
+        
+      
+    
 
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-12-09</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.2k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：4分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
         
-        
+        <div class=".article-gallery"><p>TSP问题是组合优化问题，这里介绍 <code>ipa_building_navigation</code> 工具包中使用最近邻算法、遗传算法给出的TSP求解器。</p>
+<h4 id="一最近邻算法">一、最近邻算法()</h4>
+<p>这是一种贪心算法（Greedy Algorithm）。其核心原理是在每一步选择中，都选择当前状态下“最优”的局部解（即离当前节点最近的那个未访问节点），期望通过局部最优达到全局最优（尽管在TSP问题中，最近邻算法通常只能得到近似解，不一定是全局最短路径）。</p>
+<p><strong>总结</strong>：<span style="color: red;">从起点出发，每次都走到离当前位置最近且没去过的那个点，直到走完所有点。</span></p>
+<ul>
+<li><p>优点：计算速度非常快，算法复杂度为 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="6.606ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2919.8 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(975.3,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mo" transform="translate(2530.8,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></span>，实现简单。</p></li>
+<li><p>缺点：容易陷入局部最优，生成的路径通常比理论最优路径长（但在覆盖规划中通常是可以接受的）。</p></li>
+</ul>
+<center>
+<a href="nearest_order.png" class="gallery-item" style="box-shadow: none;"> <img src="nearest_order.png" width="40%"></a>
+</center>
+<h4 id="二遗传算法genetictspsolver">二、遗传算法(GeneticTSPSolver)</h4>
+<p>遗传算法（Genetic Algorithm, GA）是一种模拟自然选择和遗传机制的启发式搜索算法。它通过模拟生物进化过程中的“变异”、“选择”等操作，在解空间中搜索最优解。</p>
+<h5 id="实现步骤">实现步骤：</h5>
+<h6 id="初始种群生成-initialization">1.初始种群生成 (Initialization)</h6>
+<p>算法首先需要一个初始解作为进化的起点。</p>
+<ul>
+<li><p>最近邻初始化：代码首先调用 <code>NearestNeighborTSPSolver</code>（最近邻算法）来生成一个初始路径 <code>calculated_path</code>。</p></li>
+<li><p>闭环处理：将起始节点 <code>start_Node</code> 再次加入路径末尾，形成一个闭环路径（TSP要求回到起点）。</p></li>
+<li><p>这个初始路径被视为第一代种群的“父代（Parent）”。</p></li>
+</ul>
+<h6 id="进化循环-evolution-loop">2.进化循环 (Evolution Loop)</h6>
+<p>算法进入一个 <code>do...while</code> 循环，模拟一代代的进化过程。每一代包含以下步骤：</p>
+<p><strong>A. 变异 (Mutation)</strong>
+从当前的“父代”路径出发，通过随机变异生成多个“子代（Children）”。代码中设定每代生成 8个子代。
+mutatePath 函数实现了两种变异策略（随机选择一种）：</p>
+<ol type="1">
+<li><p>节点交换 (Node Switching)：随机选择路径中的两个节点（不包括起点和终点），交换它们的位置。这模拟了基因突变。</p></li>
+<li><p>区间反转 (Interval Inverting)：随机选择路径中的一段区间，将该区间内的节点顺序完全颠倒。这有助于跳出局部最优。</p></li>
+</ol>
+<p><strong>B. 选择 (Selection)</strong>
+生成了8个子代后，加上原来的父代，共有9个候选路径。
+<code>getBestPath</code> 函数计算这9个路径的总长度（适应度），并选择其中最短的路径作为下一代的“父代”。</p>
+<blockquote>
+<p>这体现了“优胜劣汰”的原则：只有适应度最高（路径最短）的个体才能生存下来并繁衍后代。</p>
+</blockquote>
+<h6 id="终止条件-termination">3. 终止条件 (Termination)</h6>
+<ol type="1">
+<li><p>最小代数 ( <code>min_number_of_generations_</code> )：算法必须至少运行指定的代数，保证有足够的搜索时间。</p></li>
+<li><p>收敛判定 ( <code>const_generations_number_</code> )：如果连续若干代（由 <code>changing_counter</code> 计数）最优路径都没有发生变化（即没有找到更好的解），则认为算法已经收敛，可以提前结束。</p></li>
+</ol>
+<h6 id="输出结果">4.输出结果</h6>
+<p>循环结束后，得到的 <code>calculated_path</code> 即为近似最优路径。</p>
+<p>移除末尾重复的起始节点，返回最终的节点访问顺序向量。</p>
+<h5 id="总结">总结</h5>
+<p>原理一句话概括：<span style="color: red;">先用贪心算法找个不错的解，然后不断地对这个解进行随机的小修改（变异），根据“优胜劣汰”原则保留适应度最高（路径最短）的个体，重复对这个体进行随机修改（变异），直到改不动为止。</span></p>
+<ul>
+<li><p>优点：相比单纯的贪心算法，遗传算法有能力跳出局部最优解，找到更接近全局最优的解。</p></li>
+<li><p>缺点：计算量比贪心算法大，且由于随机性，每次运行的结果可能略有不同。</p></li>
+</ul>
+<center>
+<a href="genetic_order.png" class="gallery-item" style="box-shadow: none;"> <img src="genetic_order.png" width="40%"></a>
+</center>
+<h4 id="三concorde-tsp-solver">三、Concorde TSP Solver</h4>
+<p>Concorde TSP Solver 是目前世界上公认的最优秀的精确求解 TSP 问题的软件之一，几乎被视为解决TSP问题的黄金标准。它不是简单的启发式算法，而是一个能保证找到最优解的数学优化工具。
+它使用复杂的线性规划（Linear Programming）、切平面法（Cutting-Plane Method） 和 分支定界（Branch and Bound） 等高级算法来寻找 TSP 的精确最优解（或者在极短时间内找到极高质量的近似解）。</p>
+<h5 id="总结-1">总结</h5>
+<ul>
+<li><p>优点：能得到全局最优解（Exact Solution），路径质量极高，远优于最近邻或简单的遗传算法。</p></li>
+<li><p>缺点：必须安装外部的 Concorde 软件。</p></li>
+</ul>
+<center>
+<a href="concorde_order.png" class="gallery-item" style="box-shadow: none;"> <img src="concorde_order.png" width="40%"></a>
+</center>
+<h4 id="四三种算法对比">四、三种算法对比</h4>
+<center>
+<a href="TSP_Path_Lengths.png" class="gallery-item" style="box-shadow: none;"> <img src="TSP_Path_Lengths.png" width="70%"></a>
+</center>
+<center>
+<a href="TSP_Execution_Times.png" class="gallery-item" style="box-shadow: none;"> <img src="TSP_Execution_Times.png" width="70%"></a>
+</center>
+</div>
     </div>
 
     <div class="post-meta">
         <i>
+        
+            <span>2025-12-09</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ipa-coverage-planning/'>
+                            ipa-coverage-planning
+                        </a>
+                    
+                </span>
+            
         
         </i>
     </div>
@@ -320,11 +449,9 @@ mjx-container[display="true"] + br {
     
             <div class="post-footer-pre-next">
                 
-                    <span>上一篇：<a href='/'></a></span>
-                
 
                 
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/"></a>
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/12/09/JPS%E7%AE%97%E6%B3%95/">JPS算法</a>
                     </span>
                 
             </div>
