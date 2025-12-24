@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="房间序列规划(TSP)" />
+    <meta name="description" content="" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
     <title>Stocks</title>
@@ -115,10 +115,6 @@
         
         
             
-                <div class="left-toc-container">
-                    <nav id="toc" class="bs-docs-sidebar"></nav>
-                </div>
-            
         
         <div class="paper">
 
@@ -191,84 +187,16 @@
     
 
     
-        
-            
-                <div class="post-main-title" style="text-align: center;">
-                    房间序列规划(TSP)
-                </div>
-            
-        
-      
-    
 
-    
-
-        
-            <div class="post-head-meta-center">
-        
-                
-                    <span>最近更新：2025-12-13</span> 
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                     <span>字数总计：198</span>
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                    <span>阅读估时：1分钟</span>
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                    <span id="busuanzi_container_page_pv">
-                        阅读量：<span id="busuanzi_value_page_pv"></span>次
-                    </span>
-                
-            </div>
     
 
     <div class="post-md">
         
-        <div class=".article-gallery"><h3 id="一action">一、Action</h3>
-<h4 id="goal">Goal</h4>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># goal definition</span></span><br><span class="line">sensor_msgs/Image input_map 				<span class="meta"># floor plan map [mono8 format], 0=obstacle or unknown, 255=free space </span></span><br><span class="line">float32 map_resolution						<span class="meta"># the resolution of the map in [meter/cell]</span></span><br><span class="line">geometry_msgs/Pose map_origin				<span class="meta"># the origin of the map in [meter] 地图坐标系中的原点在世界坐标系的坐标</span></span><br><span class="line">ipa_building_msgs/RoomInformation[] room_information_in_pixel		<span class="meta"># room data (min/max coordinates, center coordinates) measured in pixels</span></span><br><span class="line">float64 robot_radius						<span class="meta"># the robot footprint radius [m], used for excluding areas from path planning that could not be visited by the robot</span></span><br><span class="line">geometry_msgs/Pose robot_start_coordinate	<span class="meta"># current robot location (used to determine the closest checkpoint in the sequence of checkpoints) [in meter]</span></span><br></pre></td></tr></tbody></table></figure>
-<h4 id="result">Result</h4>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># result definition</span></span><br><span class="line">ipa_building_msgs/RoomSequence[] checkpoints	    <span class="meta"># sequence of checkpoints, should be ordered in optimized traveling salesman sequence</span></span><br><span class="line">                                                    # (checkpoint = a clique of rooms close [in terms of robot driving distance] to each other,</span><br><span class="line">                                                    <span class="meta">#      and a central [in terms of rooms in the group] checkpoint location)</span></span><br><span class="line">sensor_msgs/Image sequence_map				<span class="meta"># map that has the calculated sequence drawn in</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="二规划流程">二、规划流程</h3>
-<center>
-<a href="1.jpeg" class="gallery-item" style="box-shadow: none;"> <img src="1.jpeg" width="40%"></a>
-</center>
-<h3 id="三规划结果">三、规划结果</h3>
-<p>下图中节点间连线仅代表访问先后顺序，并非规划路径。</p>
-<center>
-<a href="2.jpeg" class="gallery-item" style="box-shadow: none;"> <img src="2.jpeg" width="80%"></a>
-</center>
-</div>
+        
     </div>
 
     <div class="post-meta">
         <i>
-        
-            <span>2025-12-13</span>
-            
-                <span>该篇文章被 Stocks yuan</span>
-            
-            
-             
-                <span>归为分类:
-                    
-                    
-                        <a href='/categories/ipa-coverage-planning/'>
-                            ipa-coverage-planning
-                        </a>
-                    
-                </span>
-            
         
         </i>
     </div>
@@ -280,11 +208,11 @@
     
             <div class="post-footer-pre-next">
                 
-                    <span>上一篇：<a href='/2025/12/13/%E5%85%A8%E8%A6%86%E7%9B%96%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92-grid-point-explorator/'>全覆盖路径规划(grid point explorator)</a></span>
+                    <span>上一篇：<a href='/'></a></span>
                 
 
                 
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/12/09/TSP%E7%AE%97%E6%B3%95/">TSP算法</a>
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/"></a>
                     </span>
                 
             </div>
