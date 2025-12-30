@@ -207,19 +207,19 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-12-23</span> 
+                    <span>最近更新：2025-12-29</span> 
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：304</span>
+                     <span>字数总计：1.1k</span>
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                    <span>阅读估时：1分钟</span>
+                    <span>阅读估时：3分钟</span>
                 
                 
                     
@@ -234,9 +234,38 @@
 
     <div class="post-md">
         
-        <div class=".article-gallery"><p>State Lattice Planner是核心框架，它通过将状态空间离散化为晶格结构，为机器人规划符合运动学约束的路径。这种规划器需要解决两个关键问题：一是如何生成连接两个状态点的可行轨迹，二是如何在这些轨迹中找到最优路径。
-OBVP（Optimal Boundary Value Problem，最优边界值问题）是State Lattice Planner的基础工具。当采用基于状态空间的采样方式时，需要求解OBVP来生成任意两点之间符合运动学方程的最优轨迹。OBVP将轨迹规划问题转化为最优控制问题，通过Pontryagin极小值原理求解，得到满足边界条件的最优轨迹。
-Hybrid A则是State Lattice Planner的具体实现算法。它将传统A算法与状态晶格思想结合，在搜索过程中考虑机器人的连续状态（位置、速度、朝向），通过剪枝策略在每个栅格中只保留一个最优节点，大大提高了搜索效率。Hybrid A*的启发式函数设计也考虑了车辆的非完整性约束，使其更适合实际应用。</p>
+        <div class=".article-gallery"><p>参考文献：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/403822524">知乎：State Lattice Planner(状态栅格规划)</a></p>
+<h3 id="一整体思想">一、整体思想</h3>
+<p>State Lattice Planner通过将状态空间离散化为晶格结构，为机器人规划符合运动学约束的路径。这种规划器需要解决两个关键问题：一是如何生成连接两个状态点的可行轨迹(满足动力学约束的)，二是如何在这些轨迹中找到最优路径。</p>
+<p>第一个问题：需要考虑生成状态栅格的方式，若是控制空间采样，只需要根据当前状态和离散的控制量向前积分即可得到；若是状态空间采样，通过求解边界值问题（BVP）可得到最优轨迹。</p>
+<p>第二个问题：通过控制空间采样或状态空间采样构建了满足机器人动力学约束的图后，求解图中两个状态点间的最优路径，其实就转变为了图搜索问题，可以使用A*等算法求解。</p>
+<p><strong>普通栅格(grid)与状态栅格的异同点</strong>：
+相同之处：它们都是将连续空间离散化，简化路径规划。</p>
+<p>不同之处：状态栅格中，每个顶点的连线都是根据机器人的运动学模型生成的，都是切实可行的路径，而普通栅格的方法并没有结合模型，所以两点之间的路径，机器人并不一定能通过，举个例子：</p>
+<center>
+<a href="1.jpg" class="gallery-item" style="box-shadow: none;"> <img src="1.jpg" width="80%"></a>
+</center>
+<p>如果现在机器人是一辆四轮小车，左图是栅格地图，右图是根据四轮小车的运动学模型建立的规则点阵（红色点，没画全，意思一下）。假设小车初始角度水平向右，对于小车而言，左图的蓝色路径，它是没办法走的，因为B点处得转角是90度，而小车转弯是有一定弧度的，对于右图而言，假设小车将的转弯角度离散化成三个方向，每个节点之间的路径都可通行。</p>
+<h3 id="二状态栅格生成">二、状态栅格生成</h3>
+<p>对于普通栅格点，直接给定栅格距离等，直接生成就好，而状态点阵需要结合机器人的运动空间去生成。有两种生成方法，分别为对控制空间的采样和对状态空间的采样。</p>
+<h4 id="控制空间采样与状态空间采样">2.1 控制空间采样与状态空间采样</h4>
+<p>控制采样的技术路线源自经典的运动学建模思想。这种方法将机器人的控制指令空间进行离散化，预设一组基础运动模式（如固定转向角、恒定速度等），通过前向积分生成候选路径。以差速驱动机器人为例，算法可能预设左转30度、直行、右转30度，三种基础控制指令，在规划时将这些指令按不同时长组合，形成扇形展开的候选路径集，如下图(a)所示。这种方法的优势在于物理可解释性强，易于求解。但其局限性同样显著：当环境障碍复杂时，由于缺乏目标导向，规划效率较低。</p>
+<center>
+<a href="2.png" class="gallery-item" style="box-shadow: none;"> <img src="2.png" width="80%"></a>
+</center>
+<p>状态采样则直接在目标状态空间（如位置、朝向）中离散化采样点，通过求解边界值问题(BVP)，得到连接当前状态与目标状态的可行轨迹，如上图(b)所示。这种方法的优势在于解空间覆盖度高，能够生成形态多样的候选路径，特别适合结构化道路中需要精确贴合车道线的场景。但代价是计算复杂度显著增加，反向轨迹求解可能涉及大量迭代优化，实时性面临挑战。</p>
+<h4 id="boundary-value-problem">2.2 Boundary Value Problem</h4>
+<center>
+<a href="3.png" class="gallery-item" style="box-shadow: none;"> <img src="3.png" width="90%"></a>
+</center>
+<p>OBVP（Optimal Boundary Value Problem，最优边界值问题）是最优控制中经典数值计算问题：两点边值问题。当采用基于状态空间的采样方式时，需要求解OBVP来生成任意两点之间符合运动学方程的最优轨迹。OBVP将轨迹规划问题转化为最优控制问题，通过Pontryagin极小值原理求解，得到满足边界条件的最优轨迹。</p>
+<p>具体求解步骤如下：</p>
+<center>
+<a href="4.png" class="gallery-item" style="box-shadow: none;"> <img src="4.png" width="80%"></a>
+</center>
+<center>
+<a href="5.png" class="gallery-item" style="box-shadow: none;"> <img src="5.png" width="80%"></a>
+</center>
 </div>
     </div>
 
@@ -277,6 +306,8 @@ Hybrid A则是State Lattice Planner的具体实现算法。它将传统A算法�
             
     
             <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/12/25/%E9%98%BF%E5%8D%A1%E6%9B%BC%E8%BD%AC%E5%90%91%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%9B%9B%E8%BD%AE%E8%BD%AC%E5%90%91%E6%A8%A1%E5%9E%8B/'>阿卡曼转向模型与四轮转向模型</a></span>
                 
 
                 

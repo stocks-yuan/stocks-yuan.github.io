@@ -207,19 +207,19 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-12-24</span> 
+                    <span>最近更新：2025-12-29</span> 
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：505</span>
+                     <span>字数总计：545</span>
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                    <span>阅读估时：1分钟</span>
+                    <span>阅读估时：2分钟</span>
                 
                 
                     
@@ -240,7 +240,7 @@
 <a href="1.png" class="gallery-item" style="box-shadow: none;"> <img src="1.png" width="80%"></a>
 </center>
 <h3 id="二移动机器人运动规划">二、移动机器人运动规划</h3>
-<p><strong>机器人运动规划(Robot Motion Planning)</strong>是一个计算问题，涉及找到一系列有效的配置，以使机器人从起点移动到终点。通常，它包括<strong>路径寻找(Path Finding)</strong>和<strong>轨迹生成(Trajectory Generation)</strong>。</p>
+<p><strong>机器人运动规划(Robot Motion Planning)</strong>是一个计算问题，涉及找到一系列有效的配置，以使机器人从起点移动到终点。通常，它包括<strong>路径寻找(Path Finding)</strong>和<strong>轨迹生成(Trajectory Generation)</strong>。学院派工程上的方法是将此问题分为前端（Path Finding）和后端（Trajectory Generation），前端主要解决环境复杂性，后端主要解决机器人运动学约束。</p>
 <h4 id="学院派运动规划">2.1 学院派运动规划</h4>
 <center>
 <a href="2.png" class="gallery-item" style="box-shadow: none;"> <img src="2.png" width="80%"></a>
@@ -251,8 +251,8 @@
 <li><p>基于搜索的路径寻找算法：</p>
 <ul>
 <li><p>Graph Search Basis:把搜索任务以拓扑图形式表示，然后用图搜索方法来做，如 DFS,BFS等。</p></li>
-<li><p>Dijkstra(简单的广度优先搜索) and A*(具有启发式的强指向性，速度比Dijkstra快)</p></li>
-<li><p>Jump Point Search(优化A*的路径对称性问题，只寻找跳点，速度更快)</p></li>
+<li><p><a href="https://stocks-yuan.github.io/2025/12/04/Dijkstra%E7%AE%97%E6%B3%95/">Dijkstra</a>(简单的广度优先搜索) and <a href="https://stocks-yuan.github.io/2025/12/05/A-star%E7%AE%97%E6%B3%95/">A*</a>(具有启发式的强指向性，速度比Dijkstra快)</p></li>
+<li><p><a href="https://stocks-yuan.github.io/2025/12/09/JPS%E7%AE%97%E6%B3%95/">Jump Point Search</a>(优化A*的路径对称性问题，只寻找跳点，速度更快)</p></li>
 </ul></li>
 <li><p>基于采样的路径寻找算法：</p>
 <ul>
@@ -264,11 +264,11 @@
 <ul>
 <li><p>State Lattice Search(在目标状态空间中离散化采样点，通过最优控制或数值优化反向求解最优控制输入和最优轨迹)</p></li>
 <li><p>Hybrid A<em>(在控制空间采样，结合连续状态空间搜索、运动约束考虑和轨迹优化等技术，弥补了普通A</em>算法的不足)</p></li>
-<li><p>Kinodynamic RRT*(不离散变量，离散状态，RRT框架)</p></li>
+<li><p>Kinodynamic RRT*(状态空间采样，不离散变量，离散状态，RRT框架)</p></li>
 </ul></li>
 </ol>
 <p><strong>Back-end: Trajectory Generation</strong></p>
-<p>轨迹生成(轨迹优化)：基于运动学、动力学和障碍物情况，根据前端生成的路径优化从起点到终点的运动状态轨迹。</p>
+<p>轨迹生成(轨迹优化)：根据前端生成的路径优化从起点到终点的运动轨迹。</p>
 <ul>
 <li><p>Minimum Snap Trajectory Generation（重点）：先用RRT*找到几何安全路径，根据这个路径的分段点作为路标点生成本方法的优化路径。</p></li>
 <li><p>Hard constrained Minimum-snap：硬约束</p></li>
