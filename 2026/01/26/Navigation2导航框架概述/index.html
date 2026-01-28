@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="Navigation2导航框架概述" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+    
+    
+
+    
+    
+
+
+
+    
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    Navigation2导航框架概述
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2026-01-26</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.2k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：4分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><p>参考资料：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/662085768">深度梳理：ROS2 Navigation2导航程序框架（一）</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/662142400">深度梳理：ROS2 Navigation2导航程序框架（二）</a></p></li>
+</ul>
+<h4 id="一navigation2框架图">一、Navigation2框架图</h4>
+<center>
+<a href="architectural_diagram.png" class="gallery-item" style="box-shadow: none;"> <img src="architectural_diagram.png" width="100%"></a>
+</center>
+<h4 id="二navigation2流程图">二、Navigation2流程图</h4>
+<center>
+<a href="1.png" class="gallery-item" style="box-shadow: none;"> <img src="1.png" width="100%"></a>
+</center>
+<h4 id="三各功能包作用">三、各功能包作用</h4>
+<h5 id="核心导航与控制">1.核心导航与控制</h5>
+<ol type="1">
+<li><p>nav2_bringup
+作用: 系统的“启动器”和“配置中心”。
+内容: 包含启动文件（Launch files）和默认参数文件（如 <code>nav2_params.yaml</code>）。它是用户最先接触和修改的地方。</p></li>
+<li><p>nav2_bt_navigator
+作用: 系统的“大脑”（决策层）。
+内容: 它加载并执行 行为树（Behavior Tree, BT） XML 文件。它负责协调整个导航流程（例：先规划 -&gt; 再控制 -&gt; 失败了就恢复），而不是死板地执行顺序代码。</p></li>
+<li><p>nav2_planner
+作用: 全局路径规划
+内容: 它是 Planner Server。它加载插件（默认是 nav2_navfn_planner）在静态地图上计算从 A 到 B 的最短路径。</p></li>
+<li><p>nav2_controller
+作用: 局部路径规划/避障
+内容: 它是 Controller Server。它加载插件（默认是 nav2_dwb_controller）来生成电机速度指令 (cmd_vel)，使机器人跟随路径并避免动态障碍物。</p></li>
+<li><p>nav2_recoveries
+作用: 系统的“急救包”。
+内容: 提供恢复行为插件，如旋转（Spin）、后退（BackUp）、清除代价地图（ClearCostmap）。当机器人卡住时被调用。</p></li>
+</ol>
+<h5 id="感知与地图">2.感知与地图</h5>
+<ol type="1">
+<li>nav2_costmap_2d
+作用: 系统的“眼睛”和“世界模型”。
+内容: 负责接收传感器数据（激光雷达、深度相机），将其转换为从上至下的 2D 栅格地图（Costmap）。它管理静态层、障碍物层和膨胀层。</li>
+</ol>
+<p>在典型的 Nav2 配置中，nav2_costmap_2d 会包含以下几层：</p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 30%">
+<col style="width: 20%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr>
+<th>层名称</th>
+<th>作用</th>
+<th>数据来源</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static Layer（静态层）</td>
+<td>加载静态地图（如 SLAM 提供的地图）</td>
+<td>.pgm / .yaml 地图文件</td>
+<td>表示固定障碍物（墙、家具等）</td>
+</tr>
+<tr>
+<td>Obstacle Layer（障碍物层</td>
+<td>根据传感器数据（激光雷达、深度相机等）标记动态障碍物</td>
+<td>/scan、PointCloud2</td>
+<td>实时更新，反映环境变化</td>
+</tr>
+<tr>
+<td>Inflation Layer（膨胀层）</td>
+<td>在障碍物周围生成安全缓冲区</td>
+<td>上一层的障碍物数据</td>
+<td>代价随距离衰减，防止机器人贴近障碍物</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p>nav2_map_server
+作用: 系统的“地图管理员”。
+内容: 负责加载静态地图文件（.yaml + .pgm），并将其发布给其他节点使用。也就是我们常说的 SLAM 建好的图。</p></li>
+<li><p>nav2_amcl
+作用: 系统的“定位系统”。
+内容: 实现了自适应蒙特卡洛定位（Adaptive Monte Carlo Localization）算法。它根据雷达数据和地图，计算机器人在地图中的概率位姿。</p></li>
+</ol>
+<h5 id="具体算法插件">3.具体算法插件</h5>
+<ol type="1">
+<li><p>nav2_navfn_planner
+作用: 基于 NavFn (Dijkstra/A*) 的全局规划器插件的具体实现。</p></li>
+<li><p>nav2_smac_planner (高级)
+作用: 更高级的全局规划器，支持 Hybrid-A*（适用于有非完整约束的汽车模型）和 State Lattice。</p></li>
+<li><p>nav2_dwb_controller
+作用: DWB (Dynamic Window Approach Based) 局部控制器插件的具体实现。</p></li>
+<li><p>nav2_regulated_pure_pursuit_controller (高级)
+作用: 纯追踪（Pure Pursuit）控制器的变种，适用于阿克曼转向（汽车）模型。</p></li>
+</ol>
+<h5 id="基础功能包与工具">4.基础功能包与工具</h5>
+<ol type="1">
+<li><p>nav2_lifecycle_manager
+作用: 系统的“管家”。
+内容: 管理所有 Nav2 节点的生命周期（Configuring -&gt; Active -&gt; Inactive -&gt; Finalized）。它确保系统按正确的顺序启动（例如：先加载地图，再启动定位，最后启动导航）。</p></li>
+<li><p>nav2_waypoint_follower
+作用: 多点巡航工具。
+内容: 允许用户发送一系列目标点，机器人会依次到达并执行特定任务。</p></li>
+<li><p>nav2_rviz_plugins
+作用: 可视化界面插件。
+内容: 为 RViz2 提供导航专用的面板（如“Start Navigation”按钮）和工具（如点击地图设置目标点）。</p></li>
+<li><p>nav2_core
+作用: 基类定义。
+内容: 定义了 Planner、Controller、Recovery 等插件必须遵守的 C++ 基类接口。这里没有实际逻辑，只有“契约”。</p></li>
+<li><p>nav2_msgs
+作用: 通信协议。
+内容: 定义了 Nav2 专用的 ROS 2 消息（Messages）和动作（Actions），如 <code>NavigateToPose.action</code>。</p></li>
+<li><p>nav2_util
+作用: 工具库。
+内容: 包含几何计算、节点管理等通用辅助代码。</p></li>
+</ol>
+<h5 id="行为树节点库behavior-tree-nodes">5.行为树节点库（Behavior Tree Nodes）</h5>
+<p>nav2_behavior_tree</p>
+<ul>
+<li><p>作用: 行为树的基础和标准节点库。</p></li>
+<li><p>内容: 既包含了与 BT.CPP 库的接口，也包含了大量预定义的行为树节点（例如：ComputePathToPose 动作节点，GoalReached 条件节点，PipelineSequence 控制节点）。</p></li>
+</ul>
+<h4 id="四nav2默认行为树">四、Nav2默认行为树</h4>
+<p><code>navigate_to_pose_w_replanning_and_recovery.xml</code> 行为树以1Hz定期重新规划全局路径，并且它还具有恢复操作。</p>
+<center>
+<a href="overall_bt.png" class="gallery-item" style="box-shadow: none;"> <img src="overall_bt.png" width="100%"></a>
+</center>
+<p><code>Navigation</code> 子树实际上主要包含导航行为：</p>
+<ul>
+<li><p>calculating a path</p></li>
+<li><p>follow path</p></li>
+<li><p>上述两种主要导航行为的恢复行为，如果 <code>Navigation</code> 子树中的两个主要行为有一个失败 (路径计算或路径跟随)，将尝试恢复整个系统。如果整个系统恢复仍然不够， <code>Navigation</code> 子树将返回 <code>FAILURE</code> 。系统将移动到 <code>Recovery</code> 子树，然后尝试清除所有系统级导航故障。</p></li>
+</ul>
+<p><code>Recovery</code> 子树包括系统故障恢复行为或者项目内部不易处理的恢复行为.</p>
+<p>导航子树和恢复子树：<a target="_blank" rel="noopener" href="http://dev.nav2.fishros.com/doc/behavior_trees/overview/detailed_behavior_tree_walkthrough.html">详细的行为树演练</a></p>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2026-01-26</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2026/01/27/Navigation2%E2%80%94%E2%80%94navfn-planner/'>Navigation2——navfn_planner</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2026/01/06/%E5%9F%BA%E4%BA%8E%E4%BC%BC%E7%84%B6%E5%9C%BA%E7%9A%84%E9%87%8D%E5%AE%9A%E4%BD%8D%EF%BC%88gki-globalLocation-ROS2%EF%BC%89/">基于似然场的重定位（gki_globalLocation_ros2）</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>
