@@ -319,7 +319,7 @@ mjx-container[display="true"] + br {
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2025-12-30</span> 
+                    <span>最近更新：2026-02-02</span> 
                 
                 
                     
@@ -331,7 +331,7 @@ mjx-container[display="true"] + br {
                     
                         &nbsp; | &nbsp;
                     
-                    <span>阅读估时：6分钟</span>
+                    <span>阅读估时：7分钟</span>
                 
                 
                     
@@ -350,14 +350,47 @@ mjx-container[display="true"] + br {
 1. <a target="_blank" rel="noopener" href="https://ai.stanford.edu/%7Eddolgov/papers/dolgov_gpp_stair08.pdf">Practical Search Techniques in Path Planning for Autonomous Driving</a>
 2. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/161660932">知乎：路径规划中的Hybrid A*算法</a></p>
 <h4 id="一算法简介">一、算法简介</h4>
-<p>Hybrid A<em>是将传统A</em>算法与状态晶格思想结合，在搜索过程中考虑机器人的连续状态（位置、速度、朝向），通过剪枝策略在每个栅格中只保留一个最优节点，大大提高了搜索效率。Hybrid A*的启发式函数设计也考虑了车辆的非完整性约束，使其更适合实际应用。</p>
+<p>Hybrid A* 是将传统A* 算法与状态晶格思想结合，在搜索过程中考虑机器人的连续状态（位置、速度、朝向），通过剪枝策略在每个栅格中只保留一个最优节点，大大提高了搜索效率。Hybrid A* 的启发式函数设计也考虑了车辆的非完整性约束，使其更适合实际应用。</p>
 <p>其他算法中常见问题：</p>
 <ul>
 <li><p>机器人的控制空间、轨迹空间都是连续的，而现存算法基本都是适用于离散情况的，所以生成的路径是不光滑的。</p></li>
 <li><p>不满足机器人非完整性约束。</p></li>
 </ul>
 <h4 id="二车辆非完整性约束">二、车辆非完整性约束</h4>
-<p>非完整性约束是指约束方程中含有系统位置坐标的微商（即速度项），且不能通过积分直接转化为不含坐标微商的约束类型。非完整性约束的核心特征是不可积分性。</p>
+<p>在机器人导航规划中，无论哪种模型需要考虑非完整性约束，只不过约束类型不同：</p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr>
+<th>模型</th>
+<th>非完整约束类型</th>
+<th>具体约束条件</th>
+<th>规划复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>差速模型</td>
+<td>单个速度约束</td>
+<td>不能直接横向移动</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>阿克曼模型</td>
+<td>多个几何+速度约束</td>
+<td>1.不能直接横向移动<br>2.最小转弯半径限制<br>3.转向角速度限制</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>不能直接横向移动</strong></li>
+</ol>
 <center>
 <a href="1.png" class="gallery-item" style="box-shadow: none;"> <img src="1.png" width="70%"></a>
 </center>

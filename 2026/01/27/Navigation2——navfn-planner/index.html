@@ -319,19 +319,19 @@ mjx-container[display="true"] + br {
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2026-01-27</span> 
+                    <span>最近更新：2026-02-03</span> 
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：985</span>
+                     <span>字数总计：1.1k</span>
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                    <span>阅读估时：3分钟</span>
+                    <span>阅读估时：4分钟</span>
                 
                 
                     
@@ -347,8 +347,17 @@ mjx-container[display="true"] + br {
     <div class="post-md">
         
         <div class=".article-gallery"><blockquote>
-<p><code>navfn_planner</code> 规划器没有考虑机器人模型，将机器人简化一个点</p>
+<p><code>navfn_planner</code> 规划器没有考虑机器人运动学模型，将机器人简化一个点，适合用于全向移动型机器人。</p>
 </blockquote>
+<h3 id="零效果展示">零、效果展示</h3>
+<center>
+<a href="result.png" class="gallery-item" style="box-shadow: none;"> <img src="result.png" width="80%"></a>
+</center>
+<p><code>navfn_planner</code> 规划器相比于 <code>smac_planner2D</code> 规划器的优势在于：</p>
+<ol type="1">
+<li><p><code>navfn_planner</code> 规划的路径相对平滑</p></li>
+<li><p><code>navfn_planner</code> 在自由空间规划的路径更优，<code>smac_planner2D</code> 在自由空间规划的路径更倾向于走膨胀边缘</p></li>
+</ol>
 <h3 id="一整体架构">一、整体架构</h3>
 <p><code>nav2_navfn_planner</code> 功能包采用两层架构：</p>
 <ol type="1">
@@ -445,6 +454,8 @@ mjx-container[display="true"] + br {
             
     
             <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2026/01/30/Navigation2%E2%80%94%E2%80%94nav2-costmap-2d/'>Navigation2——nav2_costmap_2d</a></span>
                 
 
                 

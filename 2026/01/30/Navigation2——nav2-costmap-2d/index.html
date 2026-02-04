@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="Navigation2——nav2_costmap_2d" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.jpg">
+    <title>Stocks</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+    
+    
+
+    
+    
+
+
+
+    
+        <style>
+            .paper-main{
+                max-width:  1200px;
+            }
+        </style>
+
+    
+    
+
+
+
+
+    
+    
+    <style>
+        body {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/img/bg3.png);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 50%; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.jpg" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">Stocks</a> 
+            <span class="description">嵌入式系统开发 | 机器人算法</span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">🏠 首页</a></li>
+            
+        
+            
+                <li><a href="/list/">📝文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">📌标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">📁分类</a></li>
+            
+        
+            
+                <li><a href="/about/">🌟关于</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    Navigation2——nav2_costmap_2d
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2026-02-02</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：1.2k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：5分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><h3 id="nav2_costmap_2d-功能包主要功能分析">nav2_costmap_2d 功能包主要功能分析</h3>
+<p><code>nav2_costmap_2d</code> 功能包是 Navigation2 中的核心组件，负责构建和维护机器人导航所需的 2D 代价地图。</p>
+<h4 id="核心架构概述">1. 核心架构概述</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────┐</span><br><span class="line">│                    Costmap2DROS                         │</span><br><span class="line">│  (ROS2 封装层 - LifecycleNode)                          │</span><br><span class="line">├─────────────────────────────────────────────────────────┤</span><br><span class="line">│                   LayeredCostmap                        │</span><br><span class="line">│  (分层代价地图管理器)                                    │</span><br><span class="line">├──────────┬──────────┬──────────┬───────────────────────┤</span><br><span class="line">│ StaticLayer │ ObstacleLayer │ InflationLayer │ ...    │</span><br><span class="line">│ (静态层)    │ (障碍物层)     │ (膨胀层)        │        │</span><br><span class="line">├──────────┴──────────┴──────────┴───────────────────────┤</span><br><span class="line">│                     Costmap2D                           │</span><br><span class="line">│  (底层2D代价地图数据结构)                                │</span><br><span class="line">└─────────────────────────────────────────────────────────┘</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="在-plannerserver-中的使用">2. 在 PlannerServer 中的使用</h4>
+<p>在 <a href="nav2_planner/src/planner_server.cpp">planner_server.cpp</a> 中，<code>costmap_ros_</code> 的使用流程展示了代价地图如何为路径规划服务。</p>
+<h5 id="构造函数中创建-costmap2dros">2.1 构造函数中创建 Costmap2DROS</h5>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PlannerServer::<span class="built_in">PlannerServer</span>()</span><br><span class="line">: nav2_util::<span class="built_in">LifecycleNode</span>(<span class="string">"nav2_planner"</span>, <span class="string">""</span>, <span class="literal">true</span>),</span><br><span class="line">  <span class="built_in">gp_loader_</span>(<span class="string">"nav2_core"</span>, <span class="string">"nav2_core::GlobalPlanner"</span>),</span><br><span class="line">  default_ids_{<span class="string">"GridBased"</span>},</span><br><span class="line">  default_types_{<span class="string">"nav2_navfn_planner/NavfnPlanner"</span>},</span><br><span class="line">  <span class="built_in">costmap_</span>(<span class="literal">nullptr</span>)</span><br><span class="line">{</span><br><span class="line">  <span class="comment">// 创建全局代价地图节点</span></span><br><span class="line">  costmap_ros_ = std::<span class="built_in">make_shared</span>&lt;nav2_costmap_2d::Costmap2DROS&gt;(</span><br><span class="line">    <span class="string">"global_costmap"</span>, std::string{<span class="built_in">get_namespace</span>()}, <span class="string">"global_costmap"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在独立线程中运行代价地图节点</span></span><br><span class="line">  costmap_thread_ = std::<span class="built_in">make_unique</span>&lt;nav2_util::NodeThread&gt;(costmap_ros_);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="配置阶段获取代价地图">2.2 配置阶段获取代价地图</h5>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">nav2_util::CallbackReturn</span></span><br><span class="line"><span class="function"><span class="title">PlannerServer::on_configure</span><span class="params">(<span class="type">const</span> rclcpp_lifecycle::State &amp; <span class="comment">/*state*/</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="comment">// 配置代价地图</span></span><br><span class="line">  costmap_ros_-&gt;<span class="built_in">configure</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取底层 Costmap2D 指针</span></span><br><span class="line">  costmap_ = costmap_ros_-&gt;<span class="built_in">getCostmap</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取 TF buffer 用于坐标变换</span></span><br><span class="line">  tf_ = costmap_ros_-&gt;<span class="built_in">getTfBuffer</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 将代价地图传递给规划器插件</span></span><br><span class="line">  planner-&gt;<span class="built_in">configure</span>(node, planner_ids_[i], tf_, costmap_ros_);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="核心类功能详解">3. 核心类功能详解</h4>
+<h5 id="costmap2dros---ros2-封装层">3.1 Costmap2DROS - ROS2 封装层</h5>
+<p><code>Costmap2DROS</code> 是代价地图的 ROS2 接口封装，继承自 <code>LifecycleNode</code>，定义在 <a href="nav2_costmap_2d/include/nav2_costmap_2d/costmap_2d_ros.hpp">costmap_2d_ros.hpp</a>：</p>
+<p><strong>主要职责：</strong></p>
+<ul>
+<li>管理代价地图的生命周期（配置、激活、失活、清理）</li>
+<li>处理 ROS2 话题订阅（传感器数据、机器人足迹）</li>
+<li>提供 TF 坐标变换服务</li>
+<li>发布代价地图可视化信息</li>
+</ul>
+<p><strong>核心接口：</strong>
+</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Costmap2DROS</span> : <span class="keyword">public</span> nav2_util::LifecycleNode</span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// 获取底层代价地图</span></span><br><span class="line">  <span class="function">Costmap2D * <span class="title">getCostmap</span><span class="params">()</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取机器人当前位姿</span></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">getRobotPose</span><span class="params">(geometry_msgs::msg::PoseStamped &amp; global_pose)</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取 TF buffer</span></span><br><span class="line">  <span class="function">std::shared_ptr&lt;tf2_ros::Buffer&gt; <span class="title">getTfBuffer</span><span class="params">()</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取分层代价地图</span></span><br><span class="line">  <span class="function">LayeredCostmap * <span class="title">getLayeredCostmap</span><span class="params">()</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 生命周期管理</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">start</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">stop</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">pause</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">resume</span><span class="params">()</span></span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h5 id="costmap2d---底层数据结构">3.2 Costmap2D - 底层数据结构</h5>
+<p><code>Costmap2D</code> 是实际存储代价值的数据结构，定义在 <a href="nav2_costmap_2d/include/nav2_costmap_2d/costmap_2d.hpp">costmap_2d.hpp</a>：</p>
+<p><strong>核心功能：</strong>
+</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Costmap2D</span></span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// 获取/设置单元格代价值</span></span><br><span class="line">  <span class="function"><span class="type">unsigned</span> <span class="type">char</span> <span class="title">getCost</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> mx, <span class="type">unsigned</span> <span class="type">int</span> my)</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">setCost</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> mx, <span class="type">unsigned</span> <span class="type">int</span> my, <span class="type">unsigned</span> <span class="type">char</span> cost)</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 世界坐标 &lt;-&gt; 地图坐标转换</span></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">worldToMap</span><span class="params">(<span class="type">double</span> wx, <span class="type">double</span> wy, <span class="type">unsigned</span> <span class="type">int</span> &amp; mx, <span class="type">unsigned</span> <span class="type">int</span> &amp; my)</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">mapToWorld</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> mx, <span class="type">unsigned</span> <span class="type">int</span> my, <span class="type">double</span> &amp; wx, <span class="type">double</span> &amp; wy)</span> <span class="type">const</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取地图尺寸信息</span></span><br><span class="line">  <span class="function"><span class="type">unsigned</span> <span class="type">int</span> <span class="title">getSizeInCellsX</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">unsigned</span> <span class="type">int</span> <span class="title">getSizeInCellsY</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">double</span> <span class="title">getResolution</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">double</span> <span class="title">getOriginX</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">  <span class="function"><span class="type">double</span> <span class="title">getOriginY</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取原始代价数组</span></span><br><span class="line">  <span class="function"><span class="type">unsigned</span> <span class="type">char</span> * <span class="title">getCharMap</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h5 id="layeredcostmap---分层管理器">3.3 LayeredCostmap - 分层管理器</h5>
+<p><code>LayeredCostmap</code> 管理多个代价地图层的组合，定义在 <a href="nav2_costmap_2d/include/nav2_costmap_2d/layered_costmap.hpp">layered_costmap.hpp</a>：</p>
+<p><strong>主要成员：</strong>
+</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LayeredCostmap</span></span><br><span class="line">{</span><br><span class="line">  <span class="comment">// 存储所有图层插件</span></span><br><span class="line">  std::vector&lt;std::shared_ptr&lt;Layer&gt;&gt; plugins_;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 是否为滚动窗口模式</span></span><br><span class="line">  <span class="type">bool</span> rolling_window_;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 机器人外形轮廓</span></span><br><span class="line">  std::vector&lt;geometry_msgs::msg::Point&gt; footprint_;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h4 id="代价值定义">4. 代价值定义</h4>
+<p>定义在 <a href="nav2_costmap_2d/include/nav2_costmap_2d/cost_values.hpp">cost_values.hpp</a>：</p>
+<table>
+<thead>
+<tr>
+<th>代价值</th>
+<th>常量名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>FREE_SPACE</td>
+<td>自由空间，可安全通行</td>
+</tr>
+<tr>
+<td>1-252</td>
+<td>-</td>
+<td>不同程度的代价（越高越危险）</td>
+</tr>
+<tr>
+<td>253</td>
+<td>INSCRIBED_INFLATED_OBSTACLE</td>
+<td>内切障碍物（接触机器人外接圆）</td>
+</tr>
+<tr>
+<td>254</td>
+<td>LETHAL_OBSTACLE</td>
+<td>致命障碍物（绝对不可通过）</td>
+</tr>
+<tr>
+<td>255</td>
+<td>NO_INFORMATION</td>
+<td>未知区域</td>
+</tr>
+</tbody>
+</table>
+<h4 id="插件层系统">5. 插件层系统</h4>
+<h5 id="默认插件配置">5.1 默认插件配置</h5>
+<p>在 <code>costmap_2d_ros.cpp</code> 中定义的默认插件：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">default_plugins_{<span class="string">"static_layer"</span>, <span class="string">"obstacle_layer"</span>, <span class="string">"inflation_layer"</span>},</span><br><span class="line">default_types_{</span><br><span class="line">  <span class="string">"nav2_costmap_2d::StaticLayer"</span>,</span><br><span class="line">  <span class="string">"nav2_costmap_2d::ObstacleLayer"</span>,</span><br><span class="line">  <span class="string">"nav2_costmap_2d::InflationLayer"</span>}</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="各层功能">5.2 各层功能</h5>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 33%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr>
+<th>图层</th>
+<th>源文件</th>
+<th>主要功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>StaticLayer</strong></td>
+<td><a href="nav2_costmap_2d/plugins/static_layer.cpp">static_layer.cpp</a></td>
+<td>处理静态地图数据（从 map_server 订阅）</td>
+</tr>
+<tr>
+<td><strong>ObstacleLayer</strong></td>
+<td><a href="nav2_costmap_2d/plugins/obstacle_layer.cpp">obstacle_layer.cpp</a></td>
+<td>处理传感器实时检测到的动态障碍物</td>
+</tr>
+<tr>
+<td><strong>InflationLayer</strong></td>
+<td><a href="nav2_costmap_2d/plugins/inflation_layer.cpp">inflation_layer.cpp</a></td>
+<td>对障碍物进行膨胀处理，增加安全边界</td>
+</tr>
+<tr>
+<td><strong>VoxelLayer</strong></td>
+<td><a href="nav2_costmap_2d/plugins/voxel_layer.cpp">voxel_layer.cpp</a></td>
+<td>3D 体素层，支持多层障碍物清除</td>
+</tr>
+<tr>
+<td><strong>RangeSensorLayer</strong></td>
+<td><a href="nav2_costmap_2d/plugins/range_sensor_layer.cpp">range_sensor_layer.cpp</a></td>
+<td>处理超声波等测距传感器数据</td>
+</tr>
+</tbody>
+</table>
+<h4 id="数据流图">6. 数据流图</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">                    ┌──────────────┐</span><br><span class="line">                    │  map_server  │</span><br><span class="line">                    │  (静态地图)   │</span><br><span class="line">                    └──────┬───────┘</span><br><span class="line">                           │</span><br><span class="line">                           ▼</span><br><span class="line">┌─────────────┐     ┌──────────────┐     ┌──────────────┐</span><br><span class="line">│ LaserScan   │────▶│              │     │              │</span><br><span class="line">├─────────────┤     │ Costmap2DROS │────▶│ PlannerServer│</span><br><span class="line">│ PointCloud  │────▶│              │     │              │</span><br><span class="line">└─────────────┘     └──────────────┘     └──────────────┘</span><br><span class="line">                           │</span><br><span class="line">                           ▼</span><br><span class="line">                    ┌──────────────┐</span><br><span class="line">                    │ /costmap     │</span><br><span class="line">                    │ (可视化发布)  │</span><br><span class="line">                    └──────────────┘</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="关键参数配置">7. 关键参数配置</h4>
+<p>在 <a href="nav2_costmap_2d/src/costmap_2d_ros.cpp">costmap_2d_ros.cpp</a> 中声明的主要参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resolution</code></td>
+<td>0.1</td>
+<td>地图分辨率（米/单元格）</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>5</td>
+<td>地图宽度（米）</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>5</td>
+<td>地图高度（米）</td>
+</tr>
+<tr>
+<td><code>rolling_window</code></td>
+<td>false</td>
+<td>滚动窗口模式（local_costmap 通常为 true）</td>
+</tr>
+<tr>
+<td><code>global_frame</code></td>
+<td>“map”</td>
+<td>全局坐标系</td>
+</tr>
+<tr>
+<td><code>robot_base_frame</code></td>
+<td>“base_link”</td>
+<td>机器人坐标系</td>
+</tr>
+<tr>
+<td><code>update_frequency</code></td>
+<td>5.0</td>
+<td>更新频率（Hz）</td>
+</tr>
+<tr>
+<td><code>publish_frequency</code></td>
+<td>1.0</td>
+<td>发布频率（Hz）</td>
+</tr>
+<tr>
+<td><code>footprint</code></td>
+<td>-</td>
+<td>机器人外形轮廓</td>
+</tr>
+</tbody>
+</table>
+<h5 id="local-costmap-vs-global-costmap">7.1 Local Costmap vs Global Costmap</h5>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Local Costmap</th>
+<th>Global Costmap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>坐标系</strong></td>
+<td><code>odom</code></td>
+<td><code>map</code></td>
+</tr>
+<tr>
+<td><strong>滚动窗口</strong></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><strong>尺寸</strong></td>
+<td>较小（如 3m×3m）</td>
+<td>较大（覆盖整个地图）</td>
+</tr>
+<tr>
+<td><strong>更新频率</strong></td>
+<td>较高（如 5Hz）</td>
+<td>较低（如 1Hz）</td>
+</tr>
+<tr>
+<td><strong>用途</strong></td>
+<td>局部避障</td>
+<td>全局路径规划</td>
+</tr>
+</tbody>
+</table>
+<h4 id="总结">8. 总结</h4>
+<p><code>nav2_costmap_2d</code> 功能包的核心价值在于：</p>
+<ol type="1">
+<li><strong>统一的环境表示</strong>：将多种传感器数据融合为统一的 2D 代价地图</li>
+<li><strong>分层架构设计</strong>：通过插件系统支持灵活的数据源组合</li>
+<li><strong>高效的坐标转换</strong>：提供世界坐标与地图坐标的双向转换</li>
+<li><strong>完整的生命周期管理</strong>：作为 ROS2 LifecycleNode 提供可控的状态管理</li>
+<li><strong>为导航服务</strong>：为 <code>PlannerServer</code>、<code>ControllerServer</code> 等上层模块提供可靠的环境代价信息</li>
+</ol>
+<p>通过 <code>Costmap2DROS</code> 封装，上层模块无需关心具体的传感器类型和数据格式，只需查询代价地图即可获得环境的安全性评估，这是 Navigation2 架构解耦的关键所在。</p>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2026-01-30</span>
+            
+                <span>该篇文章被 Stocks yuan</span>
+            
+            
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/ROS2/'>
+                            ROS2
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2026/01/27/Navigation2%E2%80%94%E2%80%94navfn-planner/">Navigation2——navfn_planner</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © 2025 stocks-yuan 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

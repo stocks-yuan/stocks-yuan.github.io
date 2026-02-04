@@ -207,7 +207,7 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2026-01-26</span> 
+                    <span>最近更新：2026-01-30</span> 
                 
                 
                     
@@ -250,25 +250,25 @@
 <h4 id="三各功能包作用">三、各功能包作用</h4>
 <h5 id="核心导航与控制">1.核心导航与控制</h5>
 <ol type="1">
-<li><p>nav2_bringup
+<li><p><strong>nav2_bringup</strong>
 作用: 系统的“启动器”和“配置中心”。
 内容: 包含启动文件（Launch files）和默认参数文件（如 <code>nav2_params.yaml</code>）。它是用户最先接触和修改的地方。</p></li>
-<li><p>nav2_bt_navigator
+<li><p><strong>nav2_bt_navigator</strong>
 作用: 系统的“大脑”（决策层）。
 内容: 它加载并执行 行为树（Behavior Tree, BT） XML 文件。它负责协调整个导航流程（例：先规划 -&gt; 再控制 -&gt; 失败了就恢复），而不是死板地执行顺序代码。</p></li>
-<li><p>nav2_planner
+<li><p><strong>nav2_planner</strong>
 作用: 全局路径规划
 内容: 它是 Planner Server。它加载插件（默认是 nav2_navfn_planner）在静态地图上计算从 A 到 B 的最短路径。</p></li>
-<li><p>nav2_controller
+<li><p><strong>nav2_controller</strong>
 作用: 局部路径规划/避障
 内容: 它是 Controller Server。它加载插件（默认是 nav2_dwb_controller）来生成电机速度指令 (cmd_vel)，使机器人跟随路径并避免动态障碍物。</p></li>
-<li><p>nav2_recoveries
+<li><p><strong>nav2_recoveries</strong>
 作用: 系统的“急救包”。
 内容: 提供恢复行为插件，如旋转（Spin）、后退（BackUp）、清除代价地图（ClearCostmap）。当机器人卡住时被调用。</p></li>
 </ol>
 <h5 id="感知与地图">2.感知与地图</h5>
 <ol type="1">
-<li>nav2_costmap_2d
+<li><strong>nav2_costmap_2d</strong>
 作用: 系统的“眼睛”和“世界模型”。
 内容: 负责接收传感器数据（激光雷达、深度相机），将其转换为从上至下的 2D 栅格地图（Costmap）。它管理静态层、障碍物层和膨胀层。</li>
 </ol>
@@ -310,47 +310,47 @@
 </tbody>
 </table>
 <ol start="2" type="1">
-<li><p>nav2_map_server
+<li><p><strong>nav2_map_server</strong>
 作用: 系统的“地图管理员”。
 内容: 负责加载静态地图文件（.yaml + .pgm），并将其发布给其他节点使用。也就是我们常说的 SLAM 建好的图。</p></li>
-<li><p>nav2_amcl
+<li><p><strong>nav2_amcl</strong>
 作用: 系统的“定位系统”。
 内容: 实现了自适应蒙特卡洛定位（Adaptive Monte Carlo Localization）算法。它根据雷达数据和地图，计算机器人在地图中的概率位姿。</p></li>
 </ol>
 <h5 id="具体算法插件">3.具体算法插件</h5>
 <ol type="1">
-<li><p>nav2_navfn_planner
+<li><p><strong>nav2_navfn_planner</strong>
 作用: 基于 NavFn (Dijkstra/A*) 的全局规划器插件的具体实现。</p></li>
-<li><p>nav2_smac_planner (高级)
+<li><p><strong>nav2_smac_planner (高级)</strong>
 作用: 更高级的全局规划器，支持 Hybrid-A*（适用于有非完整约束的汽车模型）和 State Lattice。</p></li>
-<li><p>nav2_dwb_controller
+<li><p><strong>nav2_dwb_controller</strong>
 作用: DWB (Dynamic Window Approach Based) 局部控制器插件的具体实现。</p></li>
-<li><p>nav2_regulated_pure_pursuit_controller (高级)
+<li><p><strong>nav2_regulated_pure_pursuit_controller (高级)</strong>
 作用: 纯追踪（Pure Pursuit）控制器的变种，适用于阿克曼转向（汽车）模型。</p></li>
 </ol>
 <h5 id="基础功能包与工具">4.基础功能包与工具</h5>
 <ol type="1">
-<li><p>nav2_lifecycle_manager
+<li><p><strong>nav2_lifecycle_manager</strong>
 作用: 系统的“管家”。
 内容: 管理所有 Nav2 节点的生命周期（Configuring -&gt; Active -&gt; Inactive -&gt; Finalized）。它确保系统按正确的顺序启动（例如：先加载地图，再启动定位，最后启动导航）。</p></li>
-<li><p>nav2_waypoint_follower
+<li><p><strong>nav2_waypoint_follower</strong>
 作用: 多点巡航工具。
 内容: 允许用户发送一系列目标点，机器人会依次到达并执行特定任务。</p></li>
-<li><p>nav2_rviz_plugins
+<li><p><strong>nav2_rviz_plugins</strong>
 作用: 可视化界面插件。
 内容: 为 RViz2 提供导航专用的面板（如“Start Navigation”按钮）和工具（如点击地图设置目标点）。</p></li>
-<li><p>nav2_core
+<li><p><strong>nav2_core</strong>
 作用: 基类定义。
 内容: 定义了 Planner、Controller、Recovery 等插件必须遵守的 C++ 基类接口。这里没有实际逻辑，只有“契约”。</p></li>
-<li><p>nav2_msgs
+<li><p><strong>nav2_msgs</strong>
 作用: 通信协议。
 内容: 定义了 Nav2 专用的 ROS 2 消息（Messages）和动作（Actions），如 <code>NavigateToPose.action</code>。</p></li>
-<li><p>nav2_util
+<li><p><strong>nav2_util</strong>
 作用: 工具库。
 内容: 包含几何计算、节点管理等通用辅助代码。</p></li>
 </ol>
 <h5 id="行为树节点库behavior-tree-nodes">5.行为树节点库（Behavior Tree Nodes）</h5>
-<p>nav2_behavior_tree</p>
+<p><strong>nav2_behavior_tree</strong></p>
 <ul>
 <li><p>作用: 行为树的基础和标准节点库。</p></li>
 <li><p>内容: 既包含了与 BT.CPP 库的接口，也包含了大量预定义的行为树节点（例如：ComputePathToPose 动作节点，GoalReached 条件节点，PipelineSequence 控制节点）。</p></li>
